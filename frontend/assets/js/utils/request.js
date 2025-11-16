@@ -1,5 +1,5 @@
 // assets/js/utils/request.js
-const API_BASE = "http://localhost:5000/api";
+const API_BASE = "http://localhost:3000/api";
 
 async function apiRequest(endpoint, method = "GET", data = null, requireAuth = true) {
   const headers = { "Content-Type": "application/json" };
