@@ -15,9 +15,9 @@ app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications', notificationRoutes);
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync({ force: true }).then(() => {
   console.log('Database synced');
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 }).catch(err => console.log(err));
