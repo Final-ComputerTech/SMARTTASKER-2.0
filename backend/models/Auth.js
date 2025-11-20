@@ -3,8 +3,8 @@ const sequelize = require('../config/db');
 const bcrypt = require('bcrypt');
 
 const Auth = sequelize.define('Auth', {
-  auth_id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
-  user_id: DataTypes.INTEGER,
+  auth_id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
+  user_id: { type: DataTypes.UUID, allowNull: false },
   password_hash: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -15,8 +15,8 @@ const Auth = sequelize.define('Auth', {
   },
   role: {
     type: DataTypes.STRING,
-    defaultValue: "Member",
-    validate: { isIn: { args: [["Admin","Manager","Member"]], msg: "Invalid role" } }
+    defaultValue: "member",
+    validate: { isIn: { args: [["admin","manager","member"]], msg: "Invalid role" } }
   },
   last_login: DataTypes.DATE
 }, {
