@@ -30,7 +30,38 @@ app.use('/api/notifications', notificationRoutes);
 
 const PORT = process.env.PORT || 3000;
 
-sequelize.sync({ alter: true }).then(() => {
-  console.log('Database synced');
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-}).catch(err => console.log(err));
+// Ensure timestamp columns exist with safe defaults to avoid MySQL strict-mode errors
+async function ensureTimestampColumns() {
+  const tables = ['Users', 'Auths', 'Tasks', 'Notifications'];
+  for (const table of tables) {
+    try {
+      const [rows] = await sequelize.query(`SHOW COLUMNS FROM \`${table}\` LIKE 'createdAt'`);
+      if (!rows || rows.length === 0) {
+        // Add createdAt and updatedAt with safe defaults
+        await sequelize.query(`ALTER TABLE \`${table}\` \
+          ADD COLUMN \`createdAt\` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, \
+          ADD COLUMN \`updatedAt\` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`);
+        console.log(`Added timestamp columns to ${table}`);
+      }
+    } catch (e) {
+      // If table doesn't exist yet, ignore error and continue
+      // Log unexpected errors for visibility
+      if (e && e.original && e.original.errno) {
+        // MySQL error - likely table missing; skip
+      } else {
+        console.warn(`Could not ensure timestamps for ${table}:`, e.message || e);
+      }
+    }
+  }
+}
+
+(async () => {
+  try {
+    await ensureTimestampColumns();
+    await sequelize.sync({ alter: true });
+    console.log('Database synced');
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  } catch (err) {
+    console.error(err);
+  }
+})();
