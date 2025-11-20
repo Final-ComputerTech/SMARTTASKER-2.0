@@ -1,0 +1,8 @@
+DB_NAME=smarttasker_2_0
+DB_USER=root
+DB_PASSWORD=12345
+DB_HOST=localhost
+DB_PORT=3306
+JWT_SECRET=your_jwt_secret
+
+
