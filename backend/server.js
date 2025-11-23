@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const sequelize = require('./config/db');
+const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
@@ -27,6 +28,12 @@ app.get('/api', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications', notificationRoutes);
+
+// 404 Handler (must come after all routes)
+app.use(notFoundHandler);
+
+// Global Error Handler (must come last)
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 
