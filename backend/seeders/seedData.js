@@ -1,199 +1,124 @@
-import mysql from "../seeders/mysql.js";
-import { v4 as uuid } from "uuid";
+const sequelize = require('../config/db');
+const bcrypt = require('bcrypt');
 
-async function runSeed() {
-    const connection = await mysql.createConnection({
-        host: "localhost",
-        user: "root",
-        password: "",
-        database: "smarttasker_2_0"
-    });
+async function seedDatabase() {
+  try {
+    console.log('Starting database seed...');
 
-    console.log("Seeding SmartTasker 2.0 Database...");
-
-    // --------------------------
-    // 1. USER
-    // --------------------------
-    const users = [
-        { id: uuid(), name: "Admin User", email: "admin@smarttasker.com" },
-        { id: uuid(), name: "Manager One", email: "manager1@smarttasker.com" },
-        { id: uuid(), name: "Member One", email: "member1@smarttasker.com" }
-    ];
-
-    for (const u of users) {
-        await connection.execute(
-            `INSERT INTO User (user_id, name, email) VALUES (?, ?, ?)`,
-            [u.id, u.name, u.email]
-        );
-    }
-
-    // --------------------------
-    // 2. AUTH
-    // --------------------------
-    const fakeHash = "$2a$10$abcdefghijklmnopqrstuv"; // fake bcrypt hash
-
-    const roles = ["admin", "manager", "member"];
-    for (let i = 0; i < users.length; i++) {
-        await connection.execute(
-            `INSERT INTO Auth (auth_id, user_id, password_hash, role) VALUES (?, ?, ?, ?)`,
-            [uuid(), users[i].id, fakeHash, roles[i]]
-        );
-    }
-
-    // --------------------------
-    // 3. PROJECT CATEGORY
-    // --------------------------
-    const categories = [
-        { id: uuid(), name: "Work" },
-        { id: uuid(), name: "Personal" },
-        { id: uuid(), name: "Shopping" },
-        { id: uuid(), name: "Family" }
-    ];
-
-    for (const c of categories) {
-        await connection.execute(
-            `INSERT INTO Project_Category (category_id, name) VALUES (?, ?)`,
-            [c.id, c.name]
-        );
-    }
-
-    // --------------------------
-    // 4. PROJECTS
-    // --------------------------
-    const workId = categories.find(c => c.name === "Work").id;
-    const shoppingId = categories.find(c => c.name === "Shopping").id;
-
-    const projects = [
-        { id: uuid(), category_id: workId, name: "SmartTasker Backend Development" },
-        { id: uuid(), category_id: shoppingId, name: "Shopping Plan" }
-    ];
-
-    for (const p of projects) {
-        await connection.execute(
-            `INSERT INTO Project (project_id, category_id, project_name) VALUES (?, ?, ?)`,
-            [p.id, p.category_id, p.name]
-        );
-    }
-
-    // --------------------------
-    // 5. PRIORITY
-    // --------------------------
-    const priorityList = ["Low", "Medium", "High", "Urgent"];
-    const priorities = priorityList.map(name => ({ id: uuid(), name }));
-
-    for (const p of priorities) {
-        await connection.execute(
-            `INSERT INTO Priority (priority_id, name) VALUES (?, ?)`,
-            [p.id, p.name]
-        );
-    }
-
-    // --------------------------
-    // 6. STATUS
-    // --------------------------
-    const statusList = ["Todo", "In Progress", "Done", "Overdue", "Failed"];
-    const statuses = statusList.map(name => ({ id: uuid(), name }));
-
-    for (const s of statuses) {
-        await connection.execute(
-            `INSERT INTO Status (status_id, name) VALUES (?, ?)`,
-            [s.id, s.name]
-        );
-    }
-
-    // --------------------------
-    // 7–8. Due Date & Reminder
-    // --------------------------
-    const due_dates = [
-        { id: uuid(), date: "2025-02-15", time: "14:00:00" },
-        { id: uuid(), date: "2025-02-20", time: "09:00:00" }
-    ];
-
-    for (const d of due_dates) {
-        await connection.execute(
-            `INSERT INTO Due_Date (due_date_id, date, time) VALUES (?, ?, ?)`,
-            [d.id, d.date, d.time]
-        );
-    }
-
-    const reminders = [
-        { id: uuid(), date: "2025-02-15", time: "13:00:00" },
-        { id: uuid(), date: "2025-02-20", time: "08:30:00" }
-    ];
-
-    for (const r of reminders) {
-        await connection.execute(
-            `INSERT INTO Reminder (reminder_id, date, time) VALUES (?, ?, ?)`,
-            [r.id, r.date, r.time]
-        );
-    }
-
-    // --------------------------
-    // 9. TASK
-    // --------------------------
-    const managerId = users.find(u => u.email === "manager1@smarttasker.com").id;
-    const sampleTaskId = uuid();
-
-    await connection.execute(
-        `INSERT INTO Task (
-            task_id, project_id, user_id, title, description,
-            priority_id, due_date_id, reminder_id, status_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
-        [
-            sampleTaskId,
-            projects[0].id,
-            managerId,
-            "Thiết kế Database SmartTasker",
-            "Tạo ERD, relationship, seed data, foreign keys.",
-            priorities.find(p => p.name === "High").id,
-            due_dates[0].id,
-            reminders[0].id,
-            statuses.find(s => s.name === "In Progress").id
-        ]
+    // 1. Create Users
+    const [users] = await sequelize.query(
+      `INSERT INTO Users (user_id, name, email, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), 'Admin User', 'admin@smarttasker.com', NOW(), NOW()),
+       (UUID(), 'Manager One', 'manager1@smarttasker.com', NOW(), NOW()),
+       (UUID(), 'Member One', 'member1@smarttasker.com', NOW(), NOW())`
     );
+    console.log('✓ Created 3 users');
 
-    // --------------------------
-    // 10. COLLABORATOR + Task_Collaborator
-    // --------------------------
-    const collaborators = [
-        { id: uuid(), name: "Hương Ly", email: "ly.collab@example.com" },
-        { id: uuid(), name: "Lan Anh", email: "lananh.collab@example.com" }
-    ];
+    // Get user IDs
+    const [userRows] = await sequelize.query(`SELECT user_id FROM Users LIMIT 3`);
+    const userIds = userRows.map(r => r.user_id);
 
-    for (const c of collaborators) {
-        await connection.execute(
-            `INSERT INTO Collaborator (collaborator_id, name, email) VALUES (?, ?, ?)`,
-            [c.id, c.name, c.email]
-        );
-
-        await connection.execute(
-            `INSERT INTO Task_Collaborator (task_id, collaborator_id) VALUES (?, ?)`,
-            [sampleTaskId, c.id]
-        );
-    }
-
-    // --------------------------
-    // 11. CHANGES
-    // --------------------------
-    await connection.execute(
-        `INSERT INTO Changes (change_id, task_id, user_id, description) VALUES (?, ?, ?, ?)`,
-        [uuid(), sampleTaskId, users[0].id, "Khởi tạo task lần đầu."]
+    // 2. Create Auth records
+    const plainPassword = 'password123';
+    const hashedPassword = await bcrypt.hash(plainPassword, 10);
+    
+    await sequelize.query(
+      `INSERT INTO Auths (auth_id, user_id, password_hash, role, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), ?, ?, 'admin', NOW(), NOW()),
+       (UUID(), ?, ?, 'manager', NOW(), NOW()),
+       (UUID(), ?, ?, 'member', NOW(), NOW())`,
+      { replacements: [userIds[0], hashedPassword, userIds[1], hashedPassword, userIds[2], hashedPassword] }
     );
+    console.log('✓ Created 3 auth records (password: password123)');
 
-    // --------------------------
-    // 12. CONVERSATION
-    // --------------------------
-    await connection.execute(
-        `INSERT INTO Conversation (conversation_id, task_id, created_by, message)
-         VALUES (?, ?, ?, ?)`,
-        [uuid(), sampleTaskId, users[0].id, "Nhớ update tiến độ nhé!"]
+    // 3. Create Project Categories
+    const [categories] = await sequelize.query(
+      `INSERT INTO ProjectCategories (category_id, name, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), 'Work', NOW(), NOW()),
+       (UUID(), 'Personal', NOW(), NOW()),
+       (UUID(), 'Shopping', NOW(), NOW()),
+       (UUID(), 'Family', NOW(), NOW())`
     );
+    console.log('✓ Created 4 project categories');
 
-    console.log("DONE: Seed data inserted successfully!");
+    const [categoryRows] = await sequelize.query(`SELECT category_id FROM ProjectCategories LIMIT 2`);
+    const categoryIds = categoryRows.map(r => r.category_id);
+
+    // 4. Create Projects
+    await sequelize.query(
+      `INSERT INTO Projects (project_id, category_id, project_name, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), ?, 'SmartTasker Backend Development', NOW(), NOW()),
+       (UUID(), ?, 'Shopping Plan', NOW(), NOW())`,
+      { replacements: [categoryIds[0], categoryIds[1]] }
+    );
+    console.log('✓ Created 2 projects');
+
+    // 5. Create Priorities
+    await sequelize.query(
+      `INSERT INTO Priorities (priority_id, name, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), 'Low', NOW(), NOW()),
+       (UUID(), 'Medium', NOW(), NOW()),
+       (UUID(), 'High', NOW(), NOW()),
+       (UUID(), 'Urgent', NOW(), NOW())`
+    );
+    console.log('✓ Created 4 priority levels');
+
+    // 6. Create Status
+    await sequelize.query(
+      `INSERT INTO Statuses (status_id, name, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), 'Todo', NOW(), NOW()),
+       (UUID(), 'In Progress', NOW(), NOW()),
+       (UUID(), 'Done', NOW(), NOW()),
+       (UUID(), 'Overdue', NOW(), NOW()),
+       (UUID(), 'Failed', NOW(), NOW())`
+    );
+    console.log('✓ Created 5 status types');
+
+    // 7. Create Due Dates
+    await sequelize.query(
+      `INSERT INTO DueDates (due_date_id, date, time, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), '2025-02-15', '14:00:00', NOW(), NOW()),
+       (UUID(), '2025-02-20', '09:00:00', NOW(), NOW())`
+    );
+    console.log('✓ Created 2 due dates');
+
+    // 8. Create Reminders
+    await sequelize.query(
+      `INSERT INTO Reminders (reminder_id, date, time, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), '2025-02-15', '13:00:00', NOW(), NOW()),
+       (UUID(), '2025-02-20', '08:30:00', NOW(), NOW())`
+    );
+    console.log('✓ Created 2 reminders');
+
+    // 9. Create Collaborators
+    await sequelize.query(
+      `INSERT INTO Collaborators (collaborator_id, name, email, createdAt, updatedAt) 
+       VALUES 
+       (UUID(), 'Hương Ly', 'ly.collab@example.com', NOW(), NOW()),
+       (UUID(), 'Lan Anh', 'lananh.collab@example.com', NOW(), NOW())`
+    );
+    console.log('✓ Created 2 collaborators');
+
+    console.log('\nDatabase seeding completed successfully!');
+    console.log('\nTest Credentials:');
+    console.log('  - Admin: admin@smarttasker.com / password123');
+    console.log('  - Manager: manager1@smarttasker.com / password123');
+    console.log('  - Member: member1@smarttasker.com / password123');
+    
     process.exit(0);
+  } catch (error) {
+    console.error('Seed Error:', error.message);
+    console.error(error);
+    process.exit(1);
+  }
 }
 
-runSeed().catch(err => {
-    console.error("SEED ERROR:", err);
-    process.exit(1);
-});
+seedDatabase();
