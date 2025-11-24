@@ -1,4 +1,3 @@
-// models/Priority.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -16,3 +15,4 @@ const Priority = sequelize.define(
 );
 
 module.exports = Priority;
+
