@@ -1,4 +1,3 @@
-// models/ProjectCategory.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -16,3 +15,4 @@ const ProjectCategory = sequelize.define(
 );
 
 module.exports = ProjectCategory;
+
