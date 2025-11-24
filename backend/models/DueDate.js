@@ -1,4 +1,3 @@
-// models/DueDate.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -13,3 +12,4 @@ const DueDate = sequelize.define(
 );
 
 module.exports = DueDate;
+
