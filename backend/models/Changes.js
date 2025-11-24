@@ -1,4 +1,3 @@
-// models/Changes.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -16,3 +15,4 @@ const Changes = sequelize.define(
 );
 
 module.exports = Changes;
+
