@@ -1,4 +1,3 @@
-// models/TaskCollaborator.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -9,3 +8,4 @@ const TaskCollaborator = sequelize.define('TaskCollaborator', {
 }, { timestamps: true });
 
 module.exports = TaskCollaborator;
+
