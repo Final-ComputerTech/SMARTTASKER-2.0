@@ -1,4 +1,3 @@
-// models/Collaborator.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -13,3 +12,4 @@ const Collaborator = sequelize.define(
 );
 
 module.exports = Collaborator;
+
