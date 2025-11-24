@@ -1,4 +1,3 @@
-// models/Project.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -12,3 +11,4 @@ const Project = sequelize.define('Project', {
 
 // Model-level helper: get count of tasks (we'll implement in service using association).
 module.exports = Project;
+
