@@ -1,4 +1,3 @@
-// models/Reminder.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -13,3 +12,4 @@ const Reminder = sequelize.define(
 );
 
 module.exports = Reminder;
+
