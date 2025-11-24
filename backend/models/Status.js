@@ -1,4 +1,3 @@
-// models/Status.js
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
 
@@ -15,3 +14,4 @@ const Status = sequelize.define(
 );
 
 module.exports = Status;
+
