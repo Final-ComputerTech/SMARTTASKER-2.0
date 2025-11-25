@@ -19,7 +19,7 @@ cron.schedule('*/1 * * * *', async () => {
           { reminder_at: { [Op.between]: [now, upcoming] } },
         ],
       },
-      include: [{ model: User, as: 'creator' }],
+      include: [{ model: User }],
     });
 
     for (const task of tasks) {

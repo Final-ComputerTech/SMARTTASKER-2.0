@@ -13,6 +13,11 @@ require('./cron/notificationCron');
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+const path = require('path');
+
+// Serve frontend static files from the repo `frontend` folder
+app.use(express.static(path.join(__dirname, '..', 'frontend')));
+app.get('/', (req, res) => res.sendFile(path.join(__dirname, '..', 'frontend', 'index.html')));
 
 // Health check endpoint
 app.get('/api', (req, res) => {
