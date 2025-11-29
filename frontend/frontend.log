@@ -1,0 +1,7 @@
+127.0.0.1 - - [29/Nov/2025 15:05:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [29/Nov/2025 15:06:36] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [29/Nov/2025 15:06:36] "GET /assets/css/style.css HTTP/1.1" 200 -
+127.0.0.1 - - [29/Nov/2025 15:06:36] "GET /assets/js/pages/login.js HTTP/1.1" 200 -
+127.0.0.1 - - [29/Nov/2025 15:06:36] "GET /assets/js/api/authApi.js HTTP/1.1" 200 -
+127.0.0.1 - - [29/Nov/2025 15:06:36] "GET /assets/js/utils/auth.js HTTP/1.1" 200 -
+127.0.0.1 - - [29/Nov/2025 15:06:36] "GET /assets/js/utils/request.js HTTP/1.1" 200 -
