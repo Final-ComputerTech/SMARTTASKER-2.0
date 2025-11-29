@@ -1,0 +1,114 @@
+/* Style.css – updated according to your project structure, with pink theme */
+
+:root {
+    --primary-pink: #ff4da6;
+    --primary-light: #ffe6f2;
+    --text-dark: #333;
+    --text-light: #666;
+  }
+  
+  body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background-color: var(--primary-light);
+    color: var(--text-dark);
+  }
+  
+  /* ===== HEADER ===== */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    background-color: white;
+    border-bottom: 2px solid var(--primary-pink);
+  }
+  
+  .header .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .header .logo-icon {
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-pink);
+    border-radius: 6px;
+  }
+  
+  .header .logo-text {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-pink);
+  }
+  
+  /* ===== SIDEBAR ===== */
+  .sidebar {
+    width: 250px;
+    min-height: 100vh;
+    background-color: white;
+    border-right: 2px solid var(--primary-pink);
+    padding: 2rem 1rem;
+  }
+  
+  .sidebar a {
+    display: block;
+    padding: 0.8rem 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    border-radius: 8px;
+    transition: 0.2s ease;
+  }
+  
+  .sidebar a:hover,
+  .sidebar a.active {
+    background-color: var(--primary-pink);
+    color: white;
+  }
+  
+  /* ===== MAIN CONTENT ===== */
+  .main {
+    padding: 2rem 3rem;
+  }
+  
+  .section-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: var(--primary-pink);
+  }
+  
+  .card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 1.5rem;
+  }
+  
+  .card h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-pink);
+  }
+  
+  /* ===== BUTTONS ===== */
+  .btn {
+    padding: 0.7rem 1.4rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.2s ease;
+  }
+  
+  .btn-primary {
+    background-color: var(--primary-pink);
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    opacity: 0.8;
+  }
+  
