@@ -71,3 +71,120 @@ body.login-page {
     padding: 2rem 1.5rem;
   }
 }
+/* ================= Dashboard Page ================= */
+
+/* Layout main content */
+body.layout {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f3f4f6;
+}
+
+/* Sidebar */
+#sidebar {
+  width: 220px;
+  background-color: #1f2937;
+  color: #fff;
+  flex-shrink: 0;
+  min-height: 100vh;
+}
+#sidebar .sidebar-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  padding: 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+#sidebar .sidebar-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#sidebar .sidebar-menu li a {
+  display: block;
+  padding: 0.75rem 1rem;
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+#sidebar .sidebar-menu li a:hover {
+  background-color: #374151;
+  border-radius: 6px;
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 2rem;
+}
+
+/* Header */
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+.main-header .page-title {
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+.header-actions button {
+  margin-left: 0.5rem;
+}
+
+/* Metric Cards */
+.metric-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+}
+.metric-card h5 {
+  margin-bottom: 0.5rem;
+  color: #3B82F6;
+}
+.metric-card span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  display: block;
+}
+
+/* Recent Tasks List */
+#recentTasks {
+  margin-top: 1rem;
+}
+#recentTasks .list-group-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+}
+#recentTasks .list-group-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Responsive for smaller screens */
+@media (max-width: 768px) {
+  #sidebar {
+    display: none; /* hoặc có thể làm collapse menu */
+  }
+  body.layout {
+    flex-direction: column;
+  }
+  .main-content {
+    padding: 1rem;
+  }
+  .row.g-3 {
+    flex-direction: column;
+  }
+}
