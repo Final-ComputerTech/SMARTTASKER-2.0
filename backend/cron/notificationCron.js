@@ -6,27 +6,32 @@ const Reminder = require('../models/Reminder'); // nếu bạn có model Reminde
 const notificationService = require('../services/notificationService');
 const { Op } = require('sequelize');
 
-// Ví dụ cron job chạy mỗi phút kiểm tra task sắp đến hạn hoặc quá hạn
+// Cron job: check reminders table for reminders in the next 2 minutes
 cron.schedule('*/1 * * * *', async () => {
   try {
     const now = new Date();
-    const upcoming = new Date(now.getTime() + 2 * 60000); // 2 phút tới
+    const upcoming = new Date(now.getTime() + 2 * 60000); // next 2 minutes
 
-    const tasks = await Task.findAll({
+    // Find reminders directly from Reminder model to avoid querying non-existent Task.due_date
+    const reminders = await Reminder.findAll({
       where: {
-        [Op.or]: [
-          { due_date: { [Op.between]: [now, upcoming] } },
-          { reminder_at: { [Op.between]: [now, upcoming] } },
-        ],
-      },
-      include: [{ model: User }],
+        reminder_at: { [Op.between]: [now, upcoming] }
+      }
     });
 
-    for (const task of tasks) {
-      await notificationService.sendTaskReminder(task);
+    let processed = 0;
+    for (const rem of reminders) {
+      try {
+        const task = await Task.findByPk(rem.task_id, { include: [User] });
+        if (!task) continue;
+        await notificationService.sendTaskReminder(task);
+        processed++;
+      } catch (innerErr) {
+        console.error('Error processing reminder', rem.reminder_id, innerErr.message || innerErr);
+      }
     }
 
-    console.log(`${tasks.length} notifications processed at ${now}`);
+    console.log(`${processed} notifications processed at ${now} (reminders found: ${reminders.length})`);
   } catch (error) {
     console.error('Error in notification cron:', error);
   }
