@@ -188,3 +188,18 @@ body.layout {
     flex-direction: column;
   }
 }
+/* ================= Notifications Page ================= */
+
+#notificationList .list-group-item {
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#notificationList .list-group-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+#notificationList .bg-light {
+  background-color: #e0f2fe !important; /* highlight cho notification chưa đọc */
+}
