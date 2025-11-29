@@ -20,16 +20,7 @@ const Auth = sequelize.define('Auth', {
   },
   last_login: DataTypes.DATE
 }, {
-  hooks: {
-    beforeCreate: async (auth) => {
-      auth.password_hash = await bcrypt.hash(auth.password_hash, 10);
-    },
-    beforeUpdate: async (auth) => {
-      if (auth.changed("password_hash")) {
-        auth.password_hash = await bcrypt.hash(auth.password_hash, 10);
-      }
-    }
-  }
+  // Password hashing is handled in the auth controller to avoid double-hashing.
 });
 
 // Helper method: so sánh mật khẩu login
