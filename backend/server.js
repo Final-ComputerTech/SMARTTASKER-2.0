@@ -35,6 +35,10 @@ app.get('/api', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications', notificationRoutes);
+// Mount user management routes (admin access)
+app.use('/api/users', require('./routes/UserRouters'));
+// User management routes (admin + profile endpoints)
+app.use('/api/users', require('./routes/UserRouters'));
 
 // 404 Handler (must come after all routes)
 app.use(notFoundHandler);

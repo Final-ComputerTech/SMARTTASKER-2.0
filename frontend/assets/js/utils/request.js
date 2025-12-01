@@ -1,9 +1,13 @@
 // assets/js/utils/request.js
-// Use relative `/api` when frontend is served from the backend (same origin).
-// If the frontend is served from a different origin (e.g. python simple server on port 8000),
-// fall back to the backend URL so API requests go to the Express server.
+// Use relative `/api` when the frontend is served by the backend (same origin).
+// If the frontend is served from a different origin/port (e.g. python simple server on port 8000
+// or opening files via `127.0.0.1:8000`), fall back to the backend absolute URL so requests reach
+// the Express server instead of the static server (which returns 405 for POSTs).
 const BACKEND_HOST = 'http://localhost:3000';
-const API_BASE = (window.location.hostname === 'localhost' && window.location.port && window.location.port !== '3000')
+// If the current page is served on a different port than the backend, use the backend host.
+// This uses port-detection (not hostname) so `127.0.0.1:8000`, `localhost:8000` and similar
+// will correctly fall back to the backend API.
+const API_BASE = (window.location.port && window.location.port !== '3000')
   ? `${BACKEND_HOST}/api`
   : '/api';
 

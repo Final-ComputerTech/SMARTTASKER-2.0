@@ -2,7 +2,8 @@
 const cron = require('node-cron');
 const Task = require('../models/Task');
 const User = require('../models/User');
-const Reminder = require('../models/Reminder'); // nếu bạn có model Reminder
+const Reminder = require('../models/Reminder');
+const Notification = require('../models/Notification');
 const notificationService = require('../services/notificationService');
 const { Op } = require('sequelize');
 
@@ -24,6 +25,17 @@ cron.schedule('*/1 * * * *', async () => {
       try {
         const task = await Task.findByPk(rem.task_id, { include: [User] });
         if (!task) continue;
+
+        // Persist an in-app notification for the task owner
+        try {
+          const userId = task.user_id || (task.User && task.User.user_id);
+          const message = `Reminder: ${task.title || 'Task'}`;
+          await Notification.create({ user_id: userId, task_id: task.task_id, message });
+        } catch (createErr) {
+          console.error('Failed to create DB notification', createErr.message || createErr);
+        }
+
+        // Send email notification (if SMTP configured)
         await notificationService.sendTaskReminder(task);
         processed++;
       } catch (innerErr) {

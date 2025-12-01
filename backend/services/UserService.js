@@ -1,13 +1,16 @@
 const User = require('../models/User.js');
 const Auth = require('../models/Auth.js');
+const bcrypt = require('bcrypt');
 
 module.exports = {
   async createUser({name,email,password,role}) {
     const existing = await User.findOne({ where: { email } });
-    if(existing) throw new Error("Email already exists");
+    if (existing) throw new Error("Email already exists");
 
     const user = await User.create({ name, email });
-    await Auth.create({ user_id: user.user_id, password_hash: password, role });
+    // Hash password before storing in Auth
+    const hashed = await bcrypt.hash(password, 10);
+    await Auth.create({ user_id: user.user_id, password_hash: hashed, role });
     return user.toPublicJSON();
   },
 

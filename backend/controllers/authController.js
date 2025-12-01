@@ -30,3 +30,50 @@ exports.login = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.getMe = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.user_id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    res.json(user.toPublicJSON());
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.updateMe = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.user_id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    const { name, email } = req.body;
+    await user.update({ name: name || user.name, email: email || user.email });
+    res.json(user.toPublicJSON());
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getMe = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.user_id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    const auth = await Auth.findOne({ where: { user_id: user.user_id } });
+    const publicUser = user.toPublicJSON();
+    publicUser.role = auth ? auth.role : 'member';
+    res.json(publicUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.updateMe = async (req, res) => {
+  try {
+    const user = await User.findByPk(req.user.user_id);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    const { name, email } = req.body;
+    await user.update({ name: name || user.name, email: email || user.email });
+    res.json(user.toPublicJSON());
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

@@ -2,7 +2,7 @@
     <h2 class="page-title">Dashboard</h2>
     <div class="header-actions d-flex align-items-center gap-2">
       <button class="btn btn-outline-secondary btn-sm">Profile</button>
-      <button class="btn btn-danger btn-sm" onclick="window.location.href='index.html';">Logout</button>
+      <button class="btn btn-danger btn-sm" onclick="(function(){localStorage.removeItem('st_token'); window.location.href='/index.html';})()">Logout</button>
     </div>
   </header>
   
