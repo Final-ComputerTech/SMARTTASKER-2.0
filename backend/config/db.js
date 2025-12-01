@@ -1,5 +1,7 @@
 const { Sequelize } = require('sequelize');
-require('dotenv').config(); // bắt buộc
+const path = require('path');
+// Ensure we load the backend .env file even when the process is started from repository root
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 const sequelize = new Sequelize(
   process.env.DB_NAME,

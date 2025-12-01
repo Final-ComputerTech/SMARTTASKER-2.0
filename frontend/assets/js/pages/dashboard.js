@@ -1,18 +1,23 @@
 import { taskApi } from '../api/taskApi.js';
 import { projectApi } from '../api/projectApi.js';
 import { notificationApi } from '../api/notificationApi.js';
-import { requireAuthRedirect } from '../utils/auth.js';
+import { requireAuthRedirect, getToken } from '../utils/auth.js';
 
+// Debug: log token presence before redirect check
+console.debug('dashboard: token present?', getToken());
 requireAuthRedirect();
 
 // ================= Load Metrics =================
 async function loadMetrics() {
   try {
-    const [projects, notifications, tasksResp] = await Promise.all([
-      projectApi.summary(),
-      notificationApi.list(),
-      taskApi.list('limit=100') // lấy tất cả tasks để tính toán
-    ]);
+    // Call APIs individually so one failing endpoint doesn't break the whole dashboard
+    let projects = { totalProjects: 0, projects: [] };
+    let notifications = { data: [] };
+    let tasksResp = { data: [] };
+
+    try { projects = await projectApi.summary(); } catch (e) { console.warn('project summary failed:', e.message || e); }
+    try { notifications = await notificationApi.list(); } catch (e) { console.warn('notifications list failed:', e.message || e); }
+    try { tasksResp = await taskApi.list('limit=100'); } catch (e) { console.warn('tasks list failed:', e.message || e); }
 
     const tasks = tasksResp.data || [];
 

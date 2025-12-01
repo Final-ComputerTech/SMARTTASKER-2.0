@@ -15,14 +15,24 @@ module.exports = {
   },
 
   async getUserById(id) {
-    const user = await User.findByPk(id, { include: [{ model: Auth, attributes: ['role'] }] });
+    const user = await User.findByPk(id);
     if(!user) throw new Error("User not found");
-    return user.toPublicJSON();
+    const auth = await Auth.findOne({ where: { user_id: id } });
+    const pub = user.toPublicJSON();
+    pub.role = auth ? auth.role : 'member';
+    return pub;
   },
 
   async getAllUsers() {
-    const users = await User.findAll({ include: [{ model: Auth, attributes: ['role'] }] });
-    return users.map(u => u.toPublicJSON());
+    const users = await User.findAll();
+    const results = [];
+    for (const u of users) {
+      const auth = await Auth.findOne({ where: { user_id: u.user_id } });
+      const pu = u.toPublicJSON();
+      pu.role = auth ? auth.role : 'member';
+      results.push(pu);
+    }
+    return results;
   },
 
   async updateUser(id, {name,email,role}) {

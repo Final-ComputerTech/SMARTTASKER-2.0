@@ -28,4 +28,13 @@ Auth.prototype.comparePassword = function (plain) {
   return bcrypt.compare(plain, this.password_hash);
 };
 
+// Associate Auth -> User
+try {
+  const User = require('./User');
+  Auth.belongsTo(User, { foreignKey: 'user_id' });
+  User.hasOne(Auth, { foreignKey: 'user_id' });
+} catch (e) {
+  // ignore circular import issues during model initialization
+}
+
 module.exports = Auth;

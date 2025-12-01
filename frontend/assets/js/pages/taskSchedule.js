@@ -23,6 +23,7 @@ function buildQueryParams() {
 
 function renderTaskList(tasks) {
   const el = document.getElementById('taskList');
+  if (!el) return; // page may not include a task list container
   el.innerHTML = '';
   tasks.forEach(t => {
     const item = document.createElement('div');
@@ -56,9 +57,13 @@ function renderCalendarEvents(tasks) {
   // For brevity, assume you have an element #miniCalendar and render clickable days.
 }
 
-document.getElementById('searchInput').addEventListener('input', (e) => {
-  state.query = e.target.value;
-  loadTasks();
-});
+// Attach search listener only if the input exists
+const _searchEl = typeof document !== 'undefined' ? document.getElementById('searchInput') : null;
+if (_searchEl) {
+  _searchEl.addEventListener('input', (e) => {
+    state.query = e.target.value;
+    loadTasks();
+  });
+}
 
 document.addEventListener('DOMContentLoaded', loadTasks);

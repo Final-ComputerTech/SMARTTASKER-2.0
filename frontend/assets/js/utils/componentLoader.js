@@ -1,7 +1,7 @@
 // ================= componentLoader.js =================
 
 // Hàm load 1 component vào div có id
-export async function loadComponent(id, url) {
+async function loadComponent(id, url) {
     const el = document.getElementById(id);
     if (!el) return;
     try {
@@ -13,10 +13,23 @@ export async function loadComponent(id, url) {
     }
   }
   
-  // Load các component mặc định khi DOM sẵn sàng
-  document.addEventListener('DOMContentLoaded', () => {
-    loadComponent('sidebar', 'assets/html/sidebar.html');
-    loadComponent('header', 'assets/html/header.html');
-    loadComponent('modalFilter', 'assets/html/modal-filter.html'); // nếu dùng modal
-  });
+  // Load các component mặc định when DOM is ready. If the script is imported
+  // after DOMContentLoaded fired (dynamic import), call immediately.
+  function loadAllComponents() {
+    // Components live under `/components` in this project
+    loadComponent('sidebar', 'components/sidebar.html');
+    loadComponent('header', 'components/header.html');
+    loadComponent('modalFilter', 'components/modal-filter.html'); // nếu dùng modal
+    console.debug('componentLoader: loadAllComponents invoked');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', loadAllComponents);
+  } else {
+    // DOM already ready — load immediately
+    loadAllComponents();
+  }
+
+  // Expose for other scripts or debugging
+  try { window.componentLoader = window.componentLoader || {}; window.componentLoader.loadAllComponents = loadAllComponents; window.componentLoader.loadComponent = loadComponent; } catch (e) {}
   

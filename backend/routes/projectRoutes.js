@@ -5,9 +5,10 @@ const { verifyToken } = require('../middleware/authMiddleware');
 const { createProjectRules, updateProjectRules } = require('../validators/projectValidator');
 
 router.get('/', verifyToken(), projectController.getProjects);
-router.post('/', verifyToken(['Admin','Manager']), createProjectRules, projectController.createProject);
+router.get('/summary', verifyToken(), projectController.summary);
+router.post('/', verifyToken(['admin','manager']), createProjectRules, projectController.createProject);
 router.get('/:id', verifyToken(), projectController.getProjectById);
-router.put('/:id', verifyToken(['Admin','Manager']), updateProjectRules, projectController.updateProject);
-router.delete('/:id', verifyToken(['Admin']), projectController.deleteProject);
+router.put('/:id', verifyToken(['admin','manager']), updateProjectRules, projectController.updateProject);
+router.delete('/:id', verifyToken(['admin']), projectController.deleteProject);
 
 module.exports = router;

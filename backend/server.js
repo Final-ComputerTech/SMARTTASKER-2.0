@@ -7,6 +7,8 @@ const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const userRoutes = require('./routes/UserRouters');
+const projectRoutes = require('./routes/projectRoutes');
 // scheduled jobs
 require('./cron/notificationCron');
 
@@ -35,6 +37,8 @@ app.get('/api', (req, res) => {
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/projects', projectRoutes);
 // Mount user management routes (admin access)
 app.use('/api/users', require('./routes/UserRouters'));
 // User management routes (admin + profile endpoints)
