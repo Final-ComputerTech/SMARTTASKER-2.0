@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Task Schedule</title>
+	<link rel="icon" href="/assets/icons/Profile.jpg">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -12,8 +13,23 @@
 <div id="header"></div>
 
 <section class="content-section mt-4">
-<h3>Task Schedule</h3>
-<p>Calendar coming soon...</p>
+<div class="row g-3">
+	<div class="col-md-4">
+		<div class="card p-3">
+			<h5>Mini Calendar</h5>
+			<div id="miniCalendar" style="min-height:280px;">Loading calendar...</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="card p-3">
+			<div class="d-flex justify-content-between mb-2">
+				<h5>Tasks</h5>
+				<input id="searchInput" class="form-control form-control-sm w-50" placeholder="Search tasks..." />
+			</div>
+			<div id="taskList" style="min-height:280px;">Loading tasks...</div>
+		</div>
+	</div>
+</div>
 </section>
 </main>
 <script src="assets/js/utils/componentLoader.js"></script>

@@ -5,6 +5,7 @@ const Priority = require('../models/Priority');
 const Status = require('../models/Status');
 const DueDate = require('../models/DueDate');
 const Reminder = require('../models/Reminder');
+const Changes = require('../models/Changes');
 
 exports.createTask = async (req, res) => {
   try {
@@ -19,6 +20,10 @@ exports.createTask = async (req, res) => {
       user_id: req.user.user_id
     };
     const task = await Task.create(payload);
+    // Log creation
+    try {
+      await Changes.create({ task_id: task.task_id, user_id: req.user.user_id, field: 'created', old_value: null, new_value: task.title });
+    } catch (e) { console.warn('Could not log create change', e.message || e); }
     const taskWithIncludes = await Task.findByPk(task.task_id, { include: [User, Project, Priority, Status, DueDate, Reminder] });
     res.status(201).json(taskWithIncludes);
   } catch (err) {
@@ -58,9 +63,19 @@ exports.updateTask = async (req, res) => {
     const task = await Task.findByPk(id);
     if (!task) return res.status(404).json({ error: 'Task not found' });
     if (req.user.role !== 'admin' && task.user_id !== req.user.user_id) return res.status(403).json({ error: 'Forbidden' });
+    const trackedFields = ['title', 'description', 'project_id', 'priority_id', 'status_id', 'due_date_id', 'reminder_id'];
     const updates = {};
-    ['title', 'description', 'project_id', 'priority_id', 'status_id', 'due_date_id', 'reminder_id'].forEach(k => { if (req.body[k] !== undefined) updates[k] = req.body[k]; });
+    trackedFields.forEach(k => { if (req.body[k] !== undefined) updates[k] = req.body[k]; });
+    // Prepare change entries
+    const changeEntries = [];
+    for (const k of Object.keys(updates)) {
+      const oldVal = task[k] === undefined || task[k] === null ? null : String(task[k]);
+      const newVal = updates[k] === undefined || updates[k] === null ? null : String(updates[k]);
+      if (oldVal !== newVal) changeEntries.push({ task_id: id, user_id: req.user.user_id, field: k, old_value: oldVal, new_value: newVal });
+    }
     await task.update(updates);
+    // Save change entries
+    try { for (const ce of changeEntries) await Changes.create(ce); } catch (e) { console.warn('Could not write change entries', e.message || e); }
     const updated = await Task.findByPk(id, { include: [User, Project, Priority, Status, DueDate, Reminder] });
     res.json(updated);
   } catch (err) {
@@ -74,8 +89,19 @@ exports.deleteTask = async (req, res) => {
     const task = await Task.findByPk(id);
     if (!task) return res.status(404).json({ error: 'Task not found' });
     if (req.user.role !== 'admin' && task.user_id !== req.user.user_id) return res.status(403).json({ error: 'Forbidden' });
+    try { await Changes.create({ task_id: id, user_id: req.user.user_id, field: 'deleted', old_value: task.title || null, new_value: null }); } catch (e) { console.warn('Could not log delete change', e.message || e); }
     await task.destroy();
     res.json({ success: true });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
+exports.getTaskChanges = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const changes = await Changes.findAll({ where: { task_id: id }, order: [['createdAt', 'DESC']] });
+    res.json({ data: changes });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

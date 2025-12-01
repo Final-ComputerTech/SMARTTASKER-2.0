@@ -1,9 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="utf-8">
+  <title>Task Detail</title>
+  <link rel="icon" href="/assets/icons/Profile.jpg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="layout">
+  <div id="sidebar"></div>
+  <main class="main-content">
+    <div id="header"></div>
+    <section class="content-section mt-4">
+      <div class="d-flex justify-content-between align-items-center mb-3 page-heading">
+        <img src="/assets/icons/Profile.jpg" class="page-icon" alt="Task" />
+        <h3 id="taskTitle">Task Detail</h3>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-8">
+          <div class="card p-3 mb-3">
+            <h5>Details</h5>
+            <div id="taskMeta" class="mb-2">Loading...</div>
+            <div id="taskDescription" class="text-muted"></div>
+          </div>
+
+          <div class="card p-3 mb-3">
+            <h5>Collaborators</h5>
+            <div id="collaborators">No collaborators yet</div>
+          </div>
+
+          <div class="card p-3">
+            <h5>Comments</h5>
+            <div id="commentsArea">Comments feature coming soon...</div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card p-3 mb-3">
+            <h6>Metadata</h6>
+            <div id="taskSideMeta">Loading...</div>
+          </div>
+
+          <div class="card p-3 mb-3">
+            <h6>Activity Log</h6>
+            <div class="d-flex justify-content-end mb-2">
+              <button id="refreshChangesBtn" class="btn btn-sm btn-outline-secondary">Refresh</button>
+            </div>
+            <div id="activityLog" style="max-height:320px; overflow:auto;">Loading...</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="assets/js/utils/componentLoader.js"></script>
+  <script type="module" src="assets/js/pages/taskDetail.js"></script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Settings</title>
+  <link rel="icon" href="/assets/icons/Profile.jpg">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>

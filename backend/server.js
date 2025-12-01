@@ -9,12 +9,27 @@ const taskRoutes = require('./routes/taskRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 const userRoutes = require('./routes/UserRouters');
 const projectRoutes = require('./routes/projectRoutes');
+const oauthRoutes = require('./routes/oauthRoutes');
+const dashboardRoutes = require('./routes/dashboardRoutes');
 // scheduled jobs
 require('./cron/notificationCron');
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+// Configure body parsing with reasonable limits (allow base64 avatar uploads)
+// Increased limits to allow larger base64 payloads from the frontend.
+// If you expect very large file uploads, consider switching to multipart/form-data.
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(bodyParser.raw({ limit: '50mb' }));
+app.use(bodyParser.text({ limit: '10mb' }));
+
+// Simple request logger to help debug route issues (will print method + URL)
+app.use((req, res, next) => {
+  try { console.log(`[req] ${req.method} ${req.originalUrl} - content-length: ${req.headers['content-length'] || 'n/a'}`); } catch (e) {}
+  next();
+});
+
 const path = require('path');
 
 // Serve frontend static files from the repo `frontend` folder
@@ -39,6 +54,10 @@ app.use('/api/tasks', taskRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/projects', projectRoutes);
+// OAuth status and placeholders
+app.use('/api/oauth', oauthRoutes);
+// Dashboard summary
+app.use('/api/dashboard', dashboardRoutes);
 // Mount user management routes (admin access)
 app.use('/api/users', require('./routes/UserRouters'));
 // User management routes (admin + profile endpoints)

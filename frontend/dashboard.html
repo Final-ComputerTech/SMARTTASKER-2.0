@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
+  <link rel="icon" href="/assets/icons/Profile.jpg">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
@@ -49,14 +50,59 @@
         </div>
       </div>
 
-      <!-- Recent Tasks -->
-      <h4 class="mt-4">Recent Tasks</h4>
-      <ul class="list-group" id="recentTasks">
-        <!-- JS sẽ render recent tasks ở đây -->
-      </ul>
+      <!-- Stats and Upcoming -->
+      <div class="row g-3 mt-4">
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>By Priority</h5>
+              <div class="d-flex justify-content-end mb-2">
+                <button id="priorityExportBtn" class="btn btn-sm btn-outline-secondary">Export PNG</button>
+              </div>
+              <canvas id="priorityChart" height="140"></canvas>
+              <div id="priorityStats" class="mt-2"></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>By Status</h5>
+              <div class="d-flex justify-content-end mb-2">
+                <button id="statusExportBtn" class="btn btn-sm btn-outline-secondary">Export PNG</button>
+              </div>
+              <canvas id="statusChart" height="140"></canvas>
+              <div id="statusStats" class="mt-2"></div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card p-3">
+            <h5>By Project</h5>
+              <div class="d-flex justify-content-end mb-2">
+                <button id="projectExportBtn" class="btn btn-sm btn-outline-secondary">Export PNG</button>
+              </div>
+              <canvas id="projectChart" height="140"></canvas>
+              <div id="projectStats" class="mt-2"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-3 mt-4">
+        <div class="col-md-6">
+          <div class="card p-3">
+            <h5>Upcoming Tasks (7 days)</h5>
+            <ul class="list-group" id="recentTasks"></ul>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card p-3">
+            <h5>Recent Changes</h5>
+            <div id="recentChanges" style="max-height:320px; overflow:auto;"></div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
+  <!-- Chart.js (UMD) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Component Loader + Dashboard JS -->
   <script type="module" src="assets/js/pages/dashboard.js"></script>
 </body>

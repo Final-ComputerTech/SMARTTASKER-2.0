@@ -1,7 +1,7 @@
 <header class="main-header d-flex align-items-center justify-content-between">
-    <h2 class="page-title">Dashboard</h2>
+    <h2 class="page-title" id="pageTitle"></h2>
     <div class="header-actions d-flex align-items-center gap-2">
-      <button class="btn btn-outline-secondary btn-sm">Profile</button>
+      <button class="btn btn-outline-secondary btn-sm" id="headerProfileBtn" onclick="window.location.href='/profile.html'">Profile</button>
       <button class="btn btn-danger btn-sm" onclick="(function(){localStorage.removeItem('st_token'); window.location.href='/index.html';})()">Logout</button>
     </div>
   </header>

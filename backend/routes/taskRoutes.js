@@ -15,6 +15,7 @@ const handleValidation = (req, res, next) => {
 router.get('/', verifyToken(), getTasksRules, handleValidation, taskController.getTask);
 router.post('/', verifyToken(), createTaskRules, handleValidation, taskController.createTask);
 router.get('/:id', verifyToken(), taskController.getTaskById);
+router.get('/:id/changes', verifyToken(), taskController.getTaskChanges);
 router.put('/:id', verifyToken(), updateTaskRules, handleValidation, taskController.updateTask);
 router.delete('/:id', verifyToken(), taskController.deleteTask);
 

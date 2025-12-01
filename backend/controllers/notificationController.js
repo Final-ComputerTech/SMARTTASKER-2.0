@@ -29,3 +29,15 @@ exports.markAsRead = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+exports.markAllRead = async (req, res) => {
+  try {
+    const where = {};
+    // non-admins only mark their own notifications
+    if (req.user.role !== 'admin') where.user_id = req.user.user_id;
+    const [updated] = await Notification.update({ read: true }, { where });
+    res.json({ success: true, updated });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

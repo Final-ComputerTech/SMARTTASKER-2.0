@@ -1,132 +1,360 @@
-[dotenv@17.2.3] injecting env (7) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.3] injecting env (7) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
 Database synced
 Server running on port 3000
-0 notifications processed at Mon Dec 01 2025 18:03:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:04:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:05:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:06:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:07:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:08:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:09:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:10:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:11:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:12:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:13:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:14:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:15:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:16:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:17:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:18:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 18:19:00 GMT+0700 (Indochina Time) (reminders found: 0)
-[2025-12-01T11:50:24.286Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:20:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.316Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:21:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.320Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:22:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.324Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:23:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.326Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:24:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.328Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:25:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.340Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:26:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.342Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:27:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.343Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:28:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.347Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:29:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.353Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:30:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.356Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:31:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.361Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:32:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.363Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:33:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.365Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:34:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.366Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:35:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.368Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:36:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.370Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:37:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.371Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:38:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.373Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:39:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.374Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:40:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.376Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:41:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.377Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:42:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.380Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:43:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.382Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:44:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.383Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:45:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.385Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:46:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.386Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:47:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.388Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:48:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.389Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:49:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T11:50:24.390Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:50:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.856Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:51:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.866Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:52:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.868Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:53:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.871Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:54:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.872Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:55:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.874Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:56:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.875Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:57:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.877Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:58:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.878Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 18:59:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.879Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:00:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.881Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:01:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.882Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:02:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.883Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:03:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.889Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:04:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.890Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:05:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:06:24.891Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:06:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-0 notifications processed at Mon Dec 01 2025 19:07:00 GMT+0700 (Indochina Time) (reminders found: 0)
-[2025-12-01T12:08:21.928Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:08:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-0 notifications processed at Mon Dec 01 2025 19:09:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:10:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:11:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:12:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:13:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:14:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:15:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:16:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:17:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:18:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:19:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:20:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:21:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:22:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:23:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:24:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:25:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:26:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:27:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:28:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:29:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:30:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:31:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:32:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:33:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:34:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:35:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:36:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:37:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:38:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 19:39:00 GMT+0700 (Indochina Time) (reminders found: 0)
-[2025-12-01T12:55:25.732Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:40:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.739Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:41:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.741Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:42:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.743Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:43:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.744Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:44:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.745Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:45:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.746Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:46:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.748Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:47:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.749Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:48:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.750Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:49:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.752Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:50:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.753Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:51:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.754Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:52:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.756Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:53:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.757Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:54:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T12:55:25.758Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:55:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-0 notifications processed at Mon Dec 01 2025 19:56:00 GMT+0700 (Indochina Time) (reminders found: 0)
-[2025-12-01T13:08:51.775Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:57:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.782Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:58:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.784Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 19:59:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.787Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:00:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.789Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:01:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.790Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:02:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.792Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:03:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.793Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:04:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.795Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:05:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.796Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:06:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.798Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:07:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-[2025-12-01T13:08:51.799Z] [PID: 43173] [32m[NODE-CRON][32m [33m[WARN][0m missed execution at Mon Dec 01 2025 20:08:00 GMT+0700 (Indochina Time)! Possible blocking IO or high CPU user at the same process used by node-cron.
-0 notifications processed at Mon Dec 01 2025 20:09:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 20:10:00 GMT+0700 (Indochina Time) (reminders found: 0)
-0 notifications processed at Mon Dec 01 2025 20:11:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 20:56:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 20:57:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 20:58:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 20:59:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:00:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:01:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:02:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:03:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:04:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:05:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:06:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:07:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:08:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:09:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:10:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:11:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:12:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:13:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:14:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:15:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:16:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:17:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:18:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:19:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:20:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:21:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:22:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:23:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:24:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:25:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:26:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:27:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:28:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:29:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:30:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:30:27.851Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:31:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:31:51.569Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:32:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:32:13.374Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+[2025-12-01T14:32:32.896Z] Error: {
+  message: 'Cannot GET /api/auth/me/avatar',
+  statusCode: 404,
+  path: '/api/auth/me/avatar',
+  method: 'GET',
+  stack: 'Error: Cannot GET /api/auth/me/avatar\n' +
+    '    at notFoundHandler (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/middleware/errorHandler.js:154:17)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:688:15\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:276:14)\n' +
+    '    at router.handle (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:186:3)\n' +
+    '    at router (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:60:12)'
+}
+0 notifications processed at Mon Dec 01 2025 21:33:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:33:42.982Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+[2025-12-01T14:33:58.527Z] Error: {
+  message: 'Cannot PUT /api/auth/me/avatar',
+  statusCode: 404,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'Error: Cannot PUT /api/auth/me/avatar\n' +
+    '    at notFoundHandler (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/middleware/errorHandler.js:154:17)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:688:15\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:276:14)\n' +
+    '    at router.handle (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:186:3)\n' +
+    '    at router (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:60:12)'
+}
+0 notifications processed at Mon Dec 01 2025 21:34:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:34:35.081Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:35:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:35:32.206Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:36:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:36:30.786Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:37:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:38:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:38:51.442Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:39:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:40:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:41:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:41:39.102Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:42:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:43:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:44:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:44:27.283Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:45:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:46:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:46:19.271Z] Error: {
+  message: 'Cannot PUT /api/auth/me/avatar',
+  statusCode: 404,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'Error: Cannot PUT /api/auth/me/avatar\n' +
+    '    at notFoundHandler (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/middleware/errorHandler.js:154:17)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:688:15\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:276:14)\n' +
+    '    at router.handle (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:186:3)\n' +
+    '    at router (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:60:12)'
+}
+[2025-12-01T14:46:34.430Z] Error: {
+  message: 'request entity too large',
+  statusCode: 413,
+  path: '/api/auth/me/avatar',
+  method: 'PUT',
+  stack: 'PayloadTooLargeError: request entity too large\n' +
+    '    at readStream (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:163:17)\n' +
+    '    at getRawBody (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/raw-body/index.js:116:12)\n' +
+    '    at read (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/read.js:74:3)\n' +
+    '    at jsonParser (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/body-parser/lib/types/json.js:125:5)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at cors (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/cors/lib/index.js:188:7)'
+}
+0 notifications processed at Mon Dec 01 2025 21:47:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:48:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:49:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:50:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:51:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:52:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T14:52:04.756Z] Error: {
+  message: 'Cannot POST /api/auth/me/avatar',
+  statusCode: 404,
+  path: '/api/auth/me/avatar',
+  method: 'POST',
+  stack: 'Error: Cannot POST /api/auth/me/avatar\n' +
+    '    at notFoundHandler (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/middleware/errorHandler.js:154:17)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:688:15\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:276:14)\n' +
+    '    at router.handle (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:186:3)\n' +
+    '    at router (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:60:12)'
+}
+[2025-12-01T14:52:35.149Z] Error: {
+  message: 'Cannot POST /api/auth/me/avatar',
+  statusCode: 404,
+  path: '/api/auth/me/avatar',
+  method: 'POST',
+  stack: 'Error: Cannot POST /api/auth/me/avatar\n' +
+    '    at notFoundHandler (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/middleware/errorHandler.js:154:17)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:688:15\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:276:14)\n' +
+    '    at router.handle (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:186:3)\n' +
+    '    at router (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:60:12)'
+}
+0 notifications processed at Mon Dec 01 2025 21:53:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:54:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:55:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:56:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:57:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:58:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 21:59:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 22:00:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 22:01:00 GMT+0700 (Indochina Time) (reminders found: 0)
+0 notifications processed at Mon Dec 01 2025 22:02:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[2025-12-01T15:02:16.260Z] Error: {
+  message: 'Cannot POST /api/auth/me/avatar',
+  statusCode: 404,
+  path: '/api/auth/me/avatar',
+  method: 'POST',
+  stack: 'Error: Cannot POST /api/auth/me/avatar\n' +
+    '    at notFoundHandler (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/middleware/errorHandler.js:154:17)\n' +
+    '    at Layer.handleRequest (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/lib/layer.js:152:17)\n' +
+    '    at trimPrefix (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:342:13)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:297:9\n' +
+    '    at processParams (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:582:12)\n' +
+    '    at next (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:291:5)\n' +
+    '    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backen0 notifications processed at Mon Dec 01 2025 22:03:00 GMT+0700 (Indochina Time) (reminders found: 0)
+ology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:276:14)\n' +
+    '    at router.handle (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:186:3)\n' +
+    '    at router (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/router/index.js:60:12)'
+}
+0 notifications processed at Mon Dec 01 2025 22:03:00 GMT+0700 (Indochina Time) (reminders found: 0)
