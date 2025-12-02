@@ -32,6 +32,16 @@ function buildQueryParams() {
   return parts.join('&');
 }
 
+// Map a priority name to a bootstrap color string for badge styling
+function mapPriorityToColor(name) {
+  if (!name) return 'secondary';
+  const n = String(name).toLowerCase();
+  if (n.includes('high') || n.includes('urgent') || n.includes('critical')) return 'danger';
+  if (n.includes('medium') || n.includes('normal')) return 'warning';
+  if (n.includes('low') || n.includes('minor')) return 'success';
+  return 'secondary';
+}
+
 function renderTaskList(tasks) {
   const el = document.getElementById('taskList');
   if (!el) return; // page may not include a task list container
@@ -60,8 +70,10 @@ function renderTaskList(tasks) {
 
 // minimal calendar renderer: mark days with dots
 function renderCalendarEvents(tasks) {
+  // Compact upcoming-7-days view (today + next 6 days)
   const mini = document.getElementById('miniCalendar');
   if (!mini) return;
+
   // Normalize tasks by YYYY-MM-DD
   const map = {};
   tasks.forEach(t => {
@@ -74,32 +86,27 @@ function renderCalendarEvents(tasks) {
     map[key].push(t);
   });
 
-  // Build a simple month view for the current month
-  const now = new Date();
-  const year = now.getFullYear();
-  const month = now.getMonth();
-  const first = new Date(year, month, 1);
-  const last = new Date(year, month + 1, 0);
-  const startWeekday = first.getDay(); // 0-6
+  const days = [];
+  const today = new Date();
+  for (let i = 0; i < 7; i++) {
+    const dt = new Date(today.getFullYear(), today.getMonth(), today.getDate() + i);
+    days.push(dt);
+  }
 
-  let html = '<div class="mini-calendar">';
-  html += '<div class="d-flex justify-content-between align-items-center mb-2"><strong>' + first.toLocaleString(undefined,{ month: 'long', year: 'numeric'}) + '</strong></div>';
-  html += '<div class="d-flex flex-wrap" style="gap:6px;">';
-  const weekDays = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-  weekDays.forEach(w => { html += `<div style="width:calc(100%/7);font-size:12px;text-align:center;">${w}</div>`; });
-  html += '</div>';
-  html += '<div class="calendar-grid" style="display:block;">';
-  // Add blanks for first week
-  for (let i=0;i<startWeekday;i++) { html += `<div style="width:calc(100%/7);display:inline-block;height:64px;vertical-align:top;padding:6px;"></div>`; }
-  for (let d=1; d<=last.getDate(); d++) {
-    const dt = new Date(year, month, d);
+  let html = '<div class="mini-calendar compact">';
+  html += '<div class="d-flex justify-content-between align-items-center mb-2"><strong>Upcoming 7 days</strong></div>';
+  html += '<div class="d-flex gap-2">';
+  days.forEach((dt, idx) => {
     const key = dt.toISOString().slice(0,10);
     const tasksOn = map[key] || [];
-    html += `<div class="calendar-day" data-day="${key}" style="width:calc(100%/7);display:inline-block;vertical-align:top;padding:6px;height:64px;box-sizing:border-box;">`;
-    html += `<div style="font-size:12px;">${d}</div>`;
-    if (tasksOn.length) html += `<div style="margin-top:6px"><span class="badge bg-primary">${tasksOn.length}</span></div>`;
+    const isToday = idx === 0;
+    const title = tasksOn.length ? tasksOn.map(t => t.title).join('\n') : 'No tasks';
+    html += `<div class="calendar-day ${isToday ? 'today' : ''}" data-day="${key}" title="${escapeHtml(title)}" style="flex:1;min-width:0;">`;
+    html += `<div class="day-label">${dt.toLocaleString(undefined,{ weekday: 'short' })}</div>`;
+    html += `<div class="day-num">${dt.getDate()}</div>`;
+    if (tasksOn.length) html += `<div class="day-badge"><span class="badge bg-primary">${tasksOn.length}</span></div>`;
     html += `</div>`;
-  }
+  });
   html += '</div></div>';
   mini.innerHTML = html;
 
@@ -110,6 +117,11 @@ function renderCalendarEvents(tasks) {
       showTasksForDate(day, map[day] || []);
     });
   });
+}
+
+// small helper for tooltip-safe content
+function escapeHtml(s) {
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
 function showTasksForDate(dateStr, tasksForDay) {

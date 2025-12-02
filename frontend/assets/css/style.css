@@ -141,6 +141,16 @@ body.layout {
 .chart-wrapper { height: 200px; max-height: 320px; position: relative; }
 .chart-wrapper canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
 
+/* Mini calendar compact styles */
+.mini-calendar.compact { background: #fff; padding: 8px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
+.mini-calendar.compact .d-flex { gap: 6px; }
+.mini-calendar .calendar-day { cursor: pointer; text-align: center; padding: 6px 4px; border-radius: 6px; }
+.mini-calendar .calendar-day .day-label { font-size: 11px; color: #6b7280; }
+.mini-calendar .calendar-day .day-num { font-size: 16px; font-weight: 600; margin-top: 2px; }
+.mini-calendar .calendar-day.today { background: linear-gradient(90deg, rgba(99,102,241,0.06), rgba(59,130,246,0.03)); border: 1px solid rgba(59,130,246,0.12); }
+.mini-calendar .calendar-day .day-badge { margin-top: 6px; }
+.mini-calendar .calendar-day:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+
 /* For lists inside cards, allow internal scrolling rather than growing the card */
 .card .scrollable { max-height: 320px; overflow-y: auto; }
 
