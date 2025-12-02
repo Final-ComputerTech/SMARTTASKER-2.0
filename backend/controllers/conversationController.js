@@ -4,9 +4,10 @@ const User = require('../models/User');
 exports.listForTask = async (req, res) => {
   try {
     const { id } = req.params;
-    const conv = await Conversation.findAll({ where: { task_id: id }, include: [User], order: [['createdAt', 'ASC']] });
+    const conv = await Conversation.findAll({ where: { task_id: id }, include: [{ model: User, as: 'User' }], order: [['createdAt', 'ASC']] });
     res.json({ data: conv });
   } catch (err) {
+    console.error('conversationController.listForTask error', err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -17,9 +18,10 @@ exports.createForTask = async (req, res) => {
     const { message } = req.body;
     if (!message) return res.status(400).json({ error: 'Message is required' });
     const conv = await Conversation.create({ task_id: id, user_id: req.user.user_id, message });
-    const created = await Conversation.findByPk(conv.conversation_id, { include: [User] });
+    const created = await Conversation.findByPk(conv.conversation_id, { include: [{ model: User, as: 'User' }] });
     res.status(201).json(created);
   } catch (err) {
+    console.error('conversationController.createForTask error', err);
     res.status(500).json({ error: err.message });
   }
 };
@@ -34,6 +36,7 @@ exports.delete = async (req, res) => {
     await conv.destroy();
     res.json({ success: true });
   } catch (err) {
+    console.error('conversationController.delete error', err);
     res.status(500).json({ error: err.message });
   }
 };

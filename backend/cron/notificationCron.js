@@ -23,7 +23,7 @@ cron.schedule('*/1 * * * *', async () => {
     let processed = 0;
     for (const rem of reminders) {
       try {
-        const task = await Task.findByPk(rem.task_id, { include: [User] });
+        const task = await Task.findByPk(rem.task_id, { include: [{ model: User }] });
         if (!task) continue;
 
         // Persist an in-app notification for the task owner

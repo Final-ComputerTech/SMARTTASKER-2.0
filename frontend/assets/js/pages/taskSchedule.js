@@ -5,11 +5,52 @@ import { apiRequest } from '../utils/request.js';
 requireAuthRedirect();
 
 const state = { filters: {}, page: 1, perPage: 20, query: '', view: 'weekly', sortBy: 'due', sortDir: 'asc', total: 0, selected: new Set(), currentDate: new Date() };
+// meta cache to map ids -> labels when association objects are missing
+const metaCache = { priorities: null, statuses: null, projects: null };
+
+async function ensureMetaCache() {
+  try {
+    if (!metaCache.priorities) {
+      const p = await apiRequest('meta/priorities', 'GET');
+      metaCache.priorities = Array.isArray(p) ? p : (p.data || p || []);
+    }
+  } catch (e) { metaCache.priorities = []; console.warn('Could not load priorities for mapping', e); }
+  try {
+    if (!metaCache.statuses) {
+      const s = await apiRequest('meta/statuses', 'GET');
+      metaCache.statuses = Array.isArray(s) ? s : (s.data || s || []);
+    }
+  } catch (e) { metaCache.statuses = []; console.warn('Could not load statuses for mapping', e); }
+  try {
+    if (!metaCache.projects) {
+      const pr = await apiRequest('projects', 'GET');
+      metaCache.projects = Array.isArray(pr) ? pr : (pr.data || pr || []);
+    }
+  } catch (e) { metaCache.projects = []; console.warn('Could not load projects for mapping', e); }
+}
+
+function lookupPriorityLabelById(id) {
+  if (!id) return '';
+  const p = (metaCache.priorities || []).find(x => x.priority_id === id);
+  return p ? (p.label || p.name || '') : '';
+}
+function lookupStatusLabelById(id) {
+  if (!id) return '';
+  const s = (metaCache.statuses || []).find(x => x.status_id === id);
+  return s ? (s.label || s.name || '') : '';
+}
+function lookupProjectNameById(id) {
+  if (!id) return '';
+  const pr = (metaCache.projects || []).find(x => x.project_id === id);
+  return pr ? (pr.project_name || pr.name || '') : '';
+}
 
 async function loadTasks() {
   try {
     const params = buildQueryParams();
     const res = await taskApi.list(params);
+    // ensure we have meta lookups available before rendering
+    await ensureMetaCache();
     // backend returns { total, page, pageSize, tasks: [...] }
     // some endpoints return { data: [...] } or raw array — normalize
     let tasks = [];
@@ -17,11 +58,24 @@ async function loadTasks() {
     else if (Array.isArray(res.tasks)) tasks = res.tasks;
     else if (Array.isArray(res.data)) tasks = res.data;
     else if (Array.isArray(res.tasks || res.data)) tasks = res.tasks || res.data;
-    renderTaskList(tasks || []);
-    renderTableView(tasks || []);
-    renderCalendarEvents(tasks || []);
+    // Normalize task objects by filling missing association objects from meta cache
+    const normalized = (tasks || []).map(t => {
+      const copy = Object.assign({}, t);
+      if ((!copy.Priority || Object.keys(copy.Priority).length===0) && copy.priority_id) copy.Priority = { label: lookupPriorityLabelById(copy.priority_id), priority_id: copy.priority_id };
+      if ((!copy.Status || Object.keys(copy.Status).length===0) && copy.status_id) copy.Status = { label: lookupStatusLabelById(copy.status_id), status_id: copy.status_id };
+      if ((!copy.Project || Object.keys(copy.Project).length===0) && copy.project_id) copy.Project = { project_name: lookupProjectNameById(copy.project_id), project_id: copy.project_id };
+      return copy;
+    });
+
+    renderTaskList(normalized);
+    renderTableView(normalized);
+    renderCalendarEvents(normalized);
+    // update search status indicator (debug helper)
+    const ss = document.getElementById('searchStatus');
+    if (ss) ss.textContent = `Query: "${state.query}" — ${normalized.length} tasks`;
   } catch (e) {
     console.error('Error loading tasks', e);
+    const ss = document.getElementById('searchStatus'); if (ss) ss.textContent = `Query: "${state.query}" — error`;
   }
 }
 
@@ -72,43 +126,90 @@ function renderTaskList(tasks) {
     const item = document.createElement('div');
     item.className = 'task-item card mb-2 p-2';
     const priorityName = t.priority?.name || t.Priority?.label || t.Priority?.name || '';
+    const id = String(t.task_id || t.id || '');
+    // add a checkbox for bulk selection in list view
+    const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'task-select-cb me-2'; cb.setAttribute('data-id', id);
+    cb.addEventListener('change', (e) => { if (e.target.checked) state.selected.add(id); else state.selected.delete(id); updateSelectionCount(); });
     const projectName = t.project?.project_name || t.Project?.project_name || '';
     const dueRaw = t.DueDate?.due_date || t.due_date || (t.due_date && t.due_date.date) || t.createdAt || t.created_at;
     const dueStr = dueRaw ? new Date(dueRaw).toLocaleString() : '';
+    // determine status icon
+    const statusLabel = (t.Status && (t.Status.label || t.Status.name)) || (t.status && (t.status.label || t.status.name)) || '';
+    const mapStatusToIcon = (label) => {
+      const s = String(label || '').toLowerCase();
+      if (s.includes('done') || s.includes('completed')) return '/assets/icons/done.png';
+      if (s.includes('in progress') || s.includes('progress')) return '/assets/icons/in-progress.png';
+      // default to to-do
+      return '/assets/icons/to-do.png';
+    };
+    const statusIcon = mapStatusToIcon(statusLabel);
+
     item.innerHTML = `
       <div class="d-flex justify-content-between">
-        <div>
-          <span class="badge bg-${mapPriorityToColor(priorityName)}">${priorityName}</span>
-          <a href="/task-detail.html?id=${t.task_id}"><strong>${t.title}</strong></a>
-          <div><small>${projectName}</small></div>
+        <div class="d-flex align-items-start">
+          <div class="me-2" style="margin-top:6px;"></div>
+          <div>
+            <div class="d-flex align-items-center mb-1">
+              <img src="${statusIcon}" alt="status" title="${escapeHtml(statusLabel||'to-do')}" style="width:18px;height:18px;margin-right:8px;"/>
+              <span class="badge bg-${mapPriorityToColor(priorityName)} me-2">${priorityName}</span>
+              <a href="/task-detail.html?id=${t.task_id}"><strong>${escapeHtml(t.title)}</strong></a>
+            </div>
+            <div><small>${escapeHtml(projectName)}</small></div>
+          </div>
         </div>
         <div>
           <small>${dueStr}</small>
         </div>
       </div>`;
-    el.appendChild(item);
+    // prepend checkbox
+    const left = document.createElement('div'); left.className = 'd-flex align-items-center mb-2'; left.appendChild(cb); left.appendChild(item);
+    el.appendChild(left);
+    updateSelectionCount();
   });
   }
+
+function updateSelectionCount() {
+  const controls = document.getElementById('taskControls');
+  if (!controls) return;
+  let badge = document.getElementById('selectedCount');
+  if (!badge) {
+    badge = document.createElement('div');
+    badge.id = 'selectedCount';
+    badge.className = 'small text-muted ms-3 align-self-center';
+    controls.insertBefore(badge, document.getElementById('paginationControls'));
+  }
+  const n = state.selected.size;
+  badge.innerText = n === 0 ? 'No tasks selected' : `${n} selected`;
+}
 
 // Render a table view with sorting, selection and pagination
 function renderTableView(tasks) {
   const cont = document.getElementById('taskTable');
   if (!cont) return;
-  // build table
+  // build table (use non-compact table and responsive wrapper)
   const table = document.createElement('table');
-  table.className = 'table table-striped table-sm';
+  table.className = 'table table-striped';
   const thead = document.createElement('thead');
   const headerRow = document.createElement('tr');
   const headers = [ {k:'select', t:'', sortable:false}, {k:'title', t:'Title', sortable:true}, {k:'project', t:'Project', sortable:true}, {k:'priority', t:'Priority', sortable:true}, {k:'status', t:'Status', sortable:true}, {k:'due', t:'Due date', sortable:true}, {k:'updated', t:'Last updated', sortable:true}, {k:'actions', t:'Actions', sortable:false} ];
   headers.forEach(h => {
     const th = document.createElement('th');
-    th.style.whiteSpace = 'nowrap';
+    // allow wrapping for most columns to avoid truncation on narrow screens
+    th.style.whiteSpace = (h.k === 'select' || h.k === 'actions') ? 'nowrap' : 'normal';
+    // prefer wider title column so inline editing has space
+    if (h.k === 'title') { th.style.width = '40%'; th.style.minWidth = '220px'; }
+    if (h.k === 'project') { th.style.width = '15%'; }
+    if (h.k === 'priority') { th.style.width = '10%'; }
+    if (h.k === 'status') { th.style.width = '8%'; }
+    if (h.k === 'due') { th.style.width = '12%'; }
+    if (h.k === 'updated') { th.style.width = '10%'; }
     if (h.k === 'select') {
       const cb = document.createElement('input'); cb.type='checkbox'; cb.id='selectAllCb';
-      cb.addEventListener('change', (e) => {
-        const checked = e.target.checked;
-        cont.querySelectorAll('input.task-select-cb').forEach(i => { i.checked = checked; const id = i.getAttribute('data-id'); if (checked) state.selected.add(id); else state.selected.delete(id); });
-      });
+        cb.addEventListener('change', (e) => {
+          const checked = e.target.checked;
+          cont.querySelectorAll('input.task-select-cb').forEach(i => { i.checked = checked; const id = i.getAttribute('data-id'); if (checked) state.selected.add(id); else state.selected.delete(id); });
+          updateSelectionCount();
+        });
       th.appendChild(cb);
     } else {
       th.textContent = h.t;
@@ -143,31 +244,103 @@ function renderTableView(tasks) {
     const id = String(t.task_id || t.id || '');
     // select
     const tdSel = document.createElement('td');
-    const cb = document.createElement('input'); cb.type='checkbox'; cb.className='task-select-cb'; cb.setAttribute('data-id', id);
-    cb.addEventListener('change', (e) => { if (e.target.checked) state.selected.add(id); else state.selected.delete(id); });
-    tdSel.appendChild(cb);
+    const cbSel = document.createElement('input'); cbSel.type='checkbox'; cbSel.className='task-select-cb'; cbSel.setAttribute('data-id', id);
+    cbSel.addEventListener('change', (e) => { if (e.target.checked) state.selected.add(id); else state.selected.delete(id); updateSelectionCount(); });
+    tdSel.appendChild(cbSel);
     tr.appendChild(tdSel);
     // title
-    const tdTitle = document.createElement('td'); tdTitle.innerHTML = `<a href="/task-detail.html?id=${id}">${escapeHtml(t.title || '')}</a>`; tr.appendChild(tdTitle);
+    const tdTitle = document.createElement('td'); tdTitle.style.minWidth = '220px'; tdTitle.style.width = '40%'; tdTitle.innerHTML = `<a href="/task-detail.html?id=${id}">${escapeHtml(t.title || '')}</a>`; tr.appendChild(tdTitle);
     // project
-    const tdProj = document.createElement('td'); tdProj.textContent = t.project?.project_name || t.Project?.project_name || ''; tr.appendChild(tdProj);
-    // priority
-    const tdPr = document.createElement('td'); tdPr.innerHTML = `<span class="badge bg-${mapPriorityToColor(t.priority?.name || t.Priority?.label || '')}">${escapeHtml(t.priority?.name || t.Priority?.label || '')}</span>`; tr.appendChild(tdPr);
-    // status
-    const tdSt = document.createElement('td'); tdSt.textContent = t.status?.name || t.Status?.label || ''; tr.appendChild(tdSt);
+    const tdProj = document.createElement('td'); tdProj.style.width = '15%'; tdProj.textContent = t.project?.project_name || t.Project?.project_name || ''; tr.appendChild(tdProj);
+    // priority (editable select)
+    const tdPr = document.createElement('td');
+    const prSelect = document.createElement('select');
+    prSelect.className = 'form-select';
+    prSelect.style.minWidth = '140px';
+    // populate options from metaCache (ensureMetaCache ran before)
+    const priOptions = Array.isArray(metaCache.priorities) ? metaCache.priorities : [];
+    const currentPrId = t.priority_id || (t.Priority && (t.Priority.priority_id || t.Priority.id));
+    // empty option
+    const emptyPr = document.createElement('option'); emptyPr.value = ''; emptyPr.textContent = '—'; prSelect.appendChild(emptyPr);
+    priOptions.forEach(p => {
+      const opt = document.createElement('option'); opt.value = p.priority_id || p.id || '';
+      const label = p.label || p.name || '';
+      // lightweight emoji mapping
+      let emoji = '🔹';
+      const ln = String(label || '').toLowerCase();
+      if (ln.includes('high') || ln.includes('urgent') || ln.includes('critical')) emoji = '🔥';
+      else if (ln.includes('medium') || ln.includes('normal')) emoji = '⚠️';
+      else if (ln.includes('low') || ln.includes('minor')) emoji = '🟢';
+      opt.textContent = `${emoji} ${label}`.trim();
+      if (String(opt.value) === String(currentPrId)) opt.selected = true;
+      prSelect.appendChild(opt);
+    });
+    prSelect.addEventListener('change', async (ev) => {
+      const val = ev.target.value;
+      prSelect.disabled = true;
+      try {
+        await taskApi.update(id, { priority_id: val || null });
+      } catch (err) {
+        alert('Failed to update priority: ' + (err.message || err));
+      } finally { prSelect.disabled = false; }
+    });
+    tdPr.appendChild(prSelect);
+    tr.appendChild(tdPr);
+    // status (editable select)
+    const tdSt = document.createElement('td');
+    const stSelect = document.createElement('select');
+    stSelect.className = 'form-select';
+    stSelect.style.minWidth = '140px';
+    const stOptions = Array.isArray(metaCache.statuses) ? metaCache.statuses : [];
+    const currentStId = t.status_id || (t.Status && (t.Status.status_id || t.Status.id));
+    const emptySt = document.createElement('option'); emptySt.value = ''; emptySt.textContent = '—'; stSelect.appendChild(emptySt);
+    stOptions.forEach(s => {
+      const opt = document.createElement('option'); opt.value = s.status_id || s.id || '';
+      const label = s.label || s.name || '';
+      let emoji = '📝';
+      const ln = String(label || '').toLowerCase();
+      if (ln.includes('done') || ln.includes('completed')) emoji = '✅';
+      else if (ln.includes('in progress') || ln.includes('progress')) emoji = '⏳';
+      else if (ln.includes('blocked')) emoji = '⛔';
+      opt.textContent = `${emoji} ${label}`.trim();
+      if (String(opt.value) === String(currentStId)) opt.selected = true;
+      stSelect.appendChild(opt);
+    });
+    stSelect.addEventListener('change', async (ev) => {
+      const val = ev.target.value;
+      stSelect.disabled = true;
+      try {
+        await taskApi.update(id, { status_id: val || null });
+      } catch (err) {
+        alert('Failed to update status: ' + (err.message || err));
+      } finally { stSelect.disabled = false; }
+    });
+    tdSt.appendChild(stSelect);
+    tr.appendChild(tdSt);
     // due
     const dueRaw = t.DueDate?.due_date || t.due_date || t.createdAt || t.created_at;
     const tdDue = document.createElement('td'); tdDue.textContent = dueRaw ? new Date(dueRaw).toLocaleString() : ''; tr.appendChild(tdDue);
     // updated
     const tdUpd = document.createElement('td'); tdUpd.textContent = t.updatedAt ? new Date(t.updatedAt).toLocaleString() : (t.updated_at ? new Date(t.updated_at).toLocaleString() : ''); tr.appendChild(tdUpd);
     // actions
-    const tdAct = document.createElement('td'); tdAct.innerHTML = `<button class="btn btn-sm btn-link" data-id="${id}" data-action="view">View</button> <button class="btn btn-sm btn-link" data-id="${id}" data-action="edit">Edit</button> <button class="btn btn-sm btn-link text-danger" data-id="${id}" data-action="delete">Delete</button>`; tr.appendChild(tdAct);
+    const tdAct = document.createElement('td');
+    const viewBtn = document.createElement('button'); viewBtn.className='btn btn-sm btn-link'; viewBtn.textContent='View'; viewBtn.addEventListener('click', () => window.location.href = `/task-detail.html?id=${id}`);
+    const editBtn = document.createElement('button'); editBtn.className='btn btn-sm btn-link'; editBtn.textContent='Edit'; editBtn.addEventListener('click', () => enterRowEdit(tr, t));
+    const delBtn = document.createElement('button'); delBtn.className='btn btn-sm btn-link text-danger'; delBtn.textContent='Delete'; delBtn.addEventListener('click', async () => {
+      if (!confirm('Delete this task?')) return;
+      try { await taskApi.delete(id); alert('Deleted'); loadTasks(); } catch (err) { alert('Delete failed: ' + (err.message || err)); }
+    });
+    tdAct.appendChild(viewBtn); tdAct.appendChild(document.createTextNode(' ')); tdAct.appendChild(editBtn); tdAct.appendChild(document.createTextNode(' ')); tdAct.appendChild(delBtn);
+    tr.appendChild(tdAct);
     tbody.appendChild(tr);
   });
 
   table.appendChild(tbody);
   cont.innerHTML = '';
-  cont.appendChild(table);
+  // wrap table in a responsive container to allow horizontal scroll if needed
+  const wrapper = document.createElement('div'); wrapper.className = 'table-responsive';
+  wrapper.appendChild(table);
+  cont.appendChild(wrapper);
 
   // actions handler
   cont.querySelectorAll('button[data-action]').forEach(b => {
@@ -175,7 +348,7 @@ function renderTableView(tasks) {
       const id = b.getAttribute('data-id');
       const action = b.getAttribute('data-action');
       if (action === 'view') return window.location.href = `/task-detail.html?id=${id}`;
-      if (action === 'edit') return alert('Edit not implemented in this UI');
+      if (action === 'edit') return window.location.href = `/task-detail.html?id=${id}&edit=1`;
       if (action === 'delete') {
         if (!confirm('Delete this task?')) return;
         try { await taskApi.delete(id); alert('Deleted'); loadTasks(); } catch (err) { alert('Delete failed: ' + (err.message || err)); }
@@ -189,6 +362,70 @@ function renderTableView(tasks) {
 function toggleSort(k) {
   if (state.sortBy === k) state.sortDir = state.sortDir === 'asc' ? 'desc' : 'asc'; else { state.sortBy = k; state.sortDir = 'asc'; }
   loadTasks();
+}
+
+function toLocalDatetimeValue(dateInput) {
+  if (!dateInput) return '';
+  const d = new Date(dateInput);
+  if (isNaN(d.getTime())) return '';
+  const pad = (n) => String(n).padStart(2, '0');
+  return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+}
+
+async function enterRowEdit(tr, task) {
+  if (!tr || tr.dataset.editing === '1') return;
+  tr.dataset.editing = '1';
+  const id = String(task.task_id || task.id || '');
+  // cell indexes: 0=select,1=title,2=project,3=priority,4=status,5=due,6=updated,7=actions
+  const tdTitle = tr.children[1];
+  const tdProj = tr.children[2];
+  const tdDue = tr.children[5];
+  const tdAct = tr.children[7];
+  // backup original content
+  const origTitle = tdTitle.innerHTML;
+  const origProj = tdProj.innerHTML;
+  const origDue = tdDue.innerHTML;
+
+  // title input
+  tdTitle.innerHTML = '';
+  const titleInput = document.createElement('input'); titleInput.type = 'text'; titleInput.className = 'form-control'; titleInput.value = task.title || '';
+  tdTitle.appendChild(titleInput);
+
+  // project select
+  tdProj.innerHTML = '';
+  const projSelect = document.createElement('select'); projSelect.className = 'form-select'; projSelect.style.minWidth = '160px';
+  const projects = Array.isArray(metaCache.projects) ? metaCache.projects : [];
+  const emptyOpt = document.createElement('option'); emptyOpt.value = ''; emptyOpt.textContent = '—'; projSelect.appendChild(emptyOpt);
+  projects.forEach(p => { const opt = document.createElement('option'); opt.value = p.project_id || p.id || ''; opt.textContent = p.project_name || p.name || ''; if (String(opt.value) === String(task.project_id || (task.Project && (task.Project.project_id || task.Project.id)))) opt.selected = true; projSelect.appendChild(opt); });
+  tdProj.appendChild(projSelect);
+
+  // due date input (datetime-local)
+  tdDue.innerHTML = '';
+  const dueInput = document.createElement('input'); dueInput.type = 'datetime-local'; dueInput.className = 'form-control'; dueInput.value = toLocalDatetimeValue(task.DueDate?.due_date || task.due_date || task.createdAt || task.created_at || '');
+  tdDue.appendChild(dueInput);
+
+  // actions: replace with Save/Cancel
+  tdAct.innerHTML = '';
+  const saveBtn = document.createElement('button'); saveBtn.className = 'btn btn-sm btn-primary me-1'; saveBtn.textContent = 'Save';
+  const cancelBtn = document.createElement('button'); cancelBtn.className = 'btn btn-sm btn-outline-secondary'; cancelBtn.textContent = 'Cancel';
+  tdAct.appendChild(saveBtn); tdAct.appendChild(cancelBtn);
+
+  cancelBtn.addEventListener('click', () => { tr.dataset.editing = '0'; tdTitle.innerHTML = origTitle; tdProj.innerHTML = origProj; tdDue.innerHTML = origDue; tdAct.innerHTML = `<button class="btn btn-sm btn-link" data-id="${id}" data-action="view">View</button> <button class="btn btn-sm btn-link" data-id="${id}" data-action="edit">Edit</button> <button class="btn btn-sm btn-link text-danger" data-id="${id}" data-action="delete">Delete</button>`; loadTasks(); });
+
+  saveBtn.addEventListener('click', async () => {
+    saveBtn.disabled = true; cancelBtn.disabled = true;
+    const payload = { title: titleInput.value || null };
+    const projVal = projSelect.value; if (projVal) payload.project_id = projVal; else payload.project_id = null;
+    const dueVal = dueInput.value; if (dueVal) payload.due_date = new Date(dueVal).toISOString(); else payload.due_date = null;
+    try {
+      await taskApi.update(id, payload);
+      tr.dataset.editing = '0';
+      loadTasks();
+    } catch (err) {
+      alert('Failed to save: ' + (err.message || err));
+      saveBtn.disabled = false; cancelBtn.disabled = false;
+    }
+  });
 }
 
 function renderPagination() {
@@ -343,17 +580,6 @@ function showTasksForDate(dateStr, tasksForDay) {
     el.appendChild(item);
   });
 }
-// Attach search listener only if the input exists
-
-// Attach search listener only if the input exists
-const _searchEl = typeof document !== 'undefined' ? document.getElementById('searchInput') : null;
-if (_searchEl) {
-  _searchEl.addEventListener('input', (e) => {
-    state.query = e.target.value;
-    loadTasks();
-  });
-}
-
 document.addEventListener('DOMContentLoaded', loadTasks);
 
 // Initialize UI bindings
@@ -362,6 +588,17 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('viewDaily')?.addEventListener('click', () => { state.view='daily'; loadTasks(); });
   document.getElementById('viewWeekly')?.addEventListener('click', () => { state.view='weekly'; loadTasks(); });
   document.getElementById('viewMonthly')?.addEventListener('click', () => { state.view='monthly'; loadTasks(); });
+  // search input (debounced)
+  const searchEl = document.getElementById('searchInput');
+  if (searchEl) {
+    const debounce = (fn, wait = 300) => {
+      let t = null;
+      return (...args) => { clearTimeout(t); t = setTimeout(() => fn.apply(this, args), wait); };
+    };
+    searchEl.addEventListener('input', debounce((e) => { state.query = e.target.value; state.page = 1; loadTasks(); fetchSuggestions(state.query); }, 300));
+    // hide suggestions on escape
+    searchEl.addEventListener('keydown', (ev) => { if (ev.key === 'Escape') hideSuggestions(); });
+  }
   // small new task button in mini calendar
   document.getElementById('openNewTaskBtnSmall')?.addEventListener('click', () => document.dispatchEvent(new CustomEvent('openNewTask', { detail: {} })));
   // apply/clear filters
@@ -432,23 +669,91 @@ async function loadFilterOptions() {
     // priorities/statuses via meta endpoints
     const pri = await apiRequest('meta/priorities', 'GET');
     const priorities = Array.isArray(pri) ? pri : (pri.data || pri || []);
-    const selP = document.getElementById('filterPriority'); if (selP && Array.isArray(priorities)) {
-      priorities.forEach(p => { const opt = document.createElement('option'); opt.value = p.priority_id; opt.textContent = p.label || p.name; selP.appendChild(opt); });
+    const selP = document.getElementById('filterPriority');
+    const bulkPr = document.getElementById('bulkPrioritySelect');
+    // helper to choose an emoji + color for priorities
+    const priorityEmojiColor = (name) => {
+      const n = String(name || '').toLowerCase();
+      if (n.includes('high') || n.includes('urgent') || n.includes('critical')) return {emoji: '🔥', color: 'red'};
+      if (n.includes('medium') || n.includes('normal')) return {emoji: '⚠️', color: 'orange'};
+      if (n.includes('low') || n.includes('minor')) return {emoji: '🟢', color: 'green'};
+      return {emoji: '🔹', color: 'gray'};
+    };
+    if (Array.isArray(priorities)) {
+      priorities.forEach(p => {
+        const label = p.label || p.name || '';
+        const meta = priorityEmojiColor(label);
+        const text = `${meta.emoji} ${label}`.trim();
+        if (selP) {
+          const opt = document.createElement('option'); opt.value = p.priority_id; opt.textContent = text; try { opt.style.color = meta.color; } catch(_) {};
+          selP.appendChild(opt);
+        }
+        if (bulkPr) {
+          const opt2 = document.createElement('option'); opt2.value = p.priority_id; opt2.textContent = text; try { opt2.style.color = meta.color; } catch(_) {};
+          bulkPr.appendChild(opt2);
+        }
+      });
     }
-    // populate bulk priority select as well
-    const bulkPr = document.getElementById('bulkPrioritySelect'); if (bulkPr && Array.isArray(priorities)) {
-      priorities.forEach(p => { const opt = document.createElement('option'); opt.value = p.priority_id; opt.textContent = p.label || p.name; bulkPr.appendChild(opt); });
+    // fallback: if API returned empty, try metaCache (populated by loadTasks)
+    if ((!Array.isArray(priorities) || priorities.length === 0) && Array.isArray(metaCache.priorities) && metaCache.priorities.length) {
+      metaCache.priorities.forEach(p => {
+        const label = p.label || p.name || '';
+        const meta = priorityEmojiColor(label);
+        const text = `${meta.emoji} ${label}`.trim();
+        if (selP) {
+          const opt = document.createElement('option'); opt.value = p.priority_id; opt.textContent = text; try { opt.style.color = meta.color; } catch(_) {};
+          selP.appendChild(opt);
+        }
+        if (bulkPr) {
+          const opt2 = document.createElement('option'); opt2.value = p.priority_id; opt2.textContent = text; try { opt2.style.color = meta.color; } catch(_) {};
+          bulkPr.appendChild(opt2);
+        }
+      });
     }
   } catch (e) { console.warn('Could not load filter priorities', e); }
   try {
     const st = await apiRequest('meta/statuses', 'GET');
     const statuses = Array.isArray(st) ? st : (st.data || st || []);
-    const selS = document.getElementById('filterStatus'); if (selS && Array.isArray(statuses)) {
-      statuses.forEach(s => { const opt = document.createElement('option'); opt.value = s.status_id; opt.textContent = s.label || s.name; selS.appendChild(opt); });
+    const selS = document.getElementById('filterStatus');
+    const bulkSt = document.getElementById('bulkStatusSelect');
+    // helper to choose emoji + color for statuses
+    const statusEmojiColor = (name) => {
+      const s = String(name || '').toLowerCase();
+      if (s.includes('done') || s.includes('completed')) return {emoji: '✅', color: 'green'};
+      if (s.includes('in progress') || s.includes('progress')) return {emoji: '⏳', color: 'orange'};
+      if (s.includes('blocked') || s.includes('blocked')) return {emoji: '⛔', color: 'red'};
+      return {emoji: '📝', color: 'blue'};
+    };
+    if (Array.isArray(statuses)) {
+      statuses.forEach(s => {
+        const label = s.label || s.name || '';
+        const meta = statusEmojiColor(label);
+        const text = `${meta.emoji} ${label}`.trim();
+        if (selS) {
+          const opt = document.createElement('option'); opt.value = s.status_id; opt.textContent = text; try { opt.style.color = meta.color; } catch(_) {};
+          selS.appendChild(opt);
+        }
+        if (bulkSt) {
+          const opt2 = document.createElement('option'); opt2.value = s.status_id; opt2.textContent = text; try { opt2.style.color = meta.color; } catch(_) {};
+          bulkSt.appendChild(opt2);
+        }
+      });
     }
-    // populate bulk status select as well
-    const bulkSt = document.getElementById('bulkStatusSelect'); if (bulkSt && Array.isArray(statuses)) {
-      statuses.forEach(s => { const opt = document.createElement('option'); opt.value = s.status_id; opt.textContent = s.label || s.name; bulkSt.appendChild(opt); });
+    // fallback: if API returned empty, try metaCache
+    if ((!Array.isArray(statuses) || statuses.length === 0) && Array.isArray(metaCache.statuses) && metaCache.statuses.length) {
+      metaCache.statuses.forEach(s => {
+        const label = s.label || s.name || '';
+        const meta = statusEmojiColor(label);
+        const text = `${meta.emoji} ${label}`.trim();
+        if (selS) {
+          const opt = document.createElement('option'); opt.value = s.status_id; opt.textContent = text; try { opt.style.color = meta.color; } catch(_) {};
+          selS.appendChild(opt);
+        }
+        if (bulkSt) {
+          const opt2 = document.createElement('option'); opt2.value = s.status_id; opt2.textContent = text; try { opt2.style.color = meta.color; } catch(_) {};
+          bulkSt.appendChild(opt2);
+        }
+      });
     }
   } catch (e) { console.warn('Could not load filter statuses', e); }
   try {
@@ -457,8 +762,91 @@ async function loadFilterOptions() {
     const selPr = document.getElementById('filterProject'); if (selPr && Array.isArray(projects)) {
       projects.forEach(p => { const opt = document.createElement('option'); opt.value = p.project_id; opt.textContent = p.project_name || p.name; selPr.appendChild(opt); });
     }
+    // fallback: use metaCache.projects when API returned none
+    if ((!Array.isArray(projects) || projects.length === 0) && Array.isArray(metaCache.projects) && metaCache.projects.length) {
+      const selPr2 = document.getElementById('filterProject');
+      metaCache.projects.forEach(p => { const opt = document.createElement('option'); opt.value = p.project_id; opt.textContent = p.project_name || p.name; if (selPr2) selPr2.appendChild(opt); });
+    }
   } catch (e) { console.warn('Could not load filter projects', e); }
 }
+
+// Suggestions: fetch a small list of tasks for the current query and show clickable suggestions
+async function fetchSuggestions(q) {
+  const box = document.getElementById('searchSuggestions');
+  if (!box) return;
+  if (!q || String(q).trim() === '') { box.style.display = 'none'; box.innerHTML = ''; return; }
+  try {
+    // request a reasonable candidate set from the API then refine client-side
+    const res = await taskApi.list(`search=${encodeURIComponent(q)}&limit=50`);
+    let tasks = [];
+    if (Array.isArray(res)) tasks = res;
+    else if (Array.isArray(res.tasks)) tasks = res.tasks;
+    else if (Array.isArray(res.data)) tasks = res.data;
+    const ql = String(q).toLowerCase();
+    // scoring: lower is better
+    const scored = (tasks || []).map(t => {
+      const title = String(t.title || '').toLowerCase();
+      const proj = String((t.Project && (t.Project.project_name || t.Project.name)) || (t.project && t.project.project_name) || '').toLowerCase();
+      let score = 999;
+      if (title === ql) score = 0;
+      else if (title.startsWith(ql)) score = 1;
+      else if (title.includes(' ' + ql)) score = 2;
+      else if (title.includes(ql)) score = 3;
+      else if (proj.startsWith(ql)) score = 10;
+      else if (proj.includes(ql)) score = 11;
+      return { t, score };
+    }).filter(x => x.score < 999).sort((a,b) => a.score - b.score).slice(0,6).map(x => x.t);
+    renderSearchSuggestions(scored || []);
+  } catch (err) {
+    console.warn('Suggestion fetch failed', err);
+    box.style.display = 'none'; box.innerHTML = '';
+  }
+}
+
+function renderSearchSuggestions(tasks) {
+  const box = document.getElementById('searchSuggestions');
+  if (!box) return;
+  box.innerHTML = '';
+  if (!tasks || tasks.length === 0) { box.style.display = 'none'; return; }
+  const ql = String(state.query || '').toLowerCase();
+  tasks.forEach(t => {
+    const id = t.task_id || t.id || '';
+    const title = t.title || '(no title)';
+    const proj = (t.Project && (t.Project.project_name || t.Project.name)) || (t.project && t.project.project_name) || '';
+    // highlight match in title or project
+    const hl = (text) => {
+      if (!ql) return escapeHtml(text);
+      const idx = String(text || '').toLowerCase().indexOf(ql);
+      if (idx === -1) return escapeHtml(text);
+      const start = escapeHtml(text.slice(0, idx));
+      const match = escapeHtml(text.slice(idx, idx + ql.length));
+      const end = escapeHtml(text.slice(idx + ql.length));
+      return `${start}<mark style="background:rgba(255,235,59,0.5);padding:0 2px;border-radius:2px">${match}</mark>${end}`;
+    };
+    const item = document.createElement('button');
+    item.className = 'list-group-item list-group-item-action';
+    item.type = 'button';
+    item.innerHTML = `<div class="d-flex justify-content-between align-items-start"><div><strong>${hl(title)}</strong><div class="small text-muted">${hl(proj)}</div></div><small class="text-muted">${t.DueDate?.due_date ? new Date(t.DueDate.due_date || t.DueDate?.due_date).toLocaleDateString() : ''}</small></div>`;
+    item.addEventListener('click', () => {
+      // navigate to task detail when suggestion clicked
+      window.location.href = `/task-detail.html?id=${id}`;
+    });
+    box.appendChild(item);
+  });
+  box.style.display = 'block';
+}
+
+function hideSuggestions() {
+  const box = document.getElementById('searchSuggestions'); if (!box) return; box.style.display = 'none'; box.innerHTML = '';
+}
+
+// hide suggestions on outside click
+document.addEventListener('click', (ev) => {
+  const wrap = document.getElementById('searchWrap');
+  const box = document.getElementById('searchSuggestions');
+  if (!wrap || !box) return;
+  if (!wrap.contains(ev.target)) { hideSuggestions(); }
+});
 
 // Bulk apply handlers (dropdown + apply buttons)
 document.addEventListener('DOMContentLoaded', () => {
@@ -468,7 +856,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (state.selected.size === 0) return alert('No tasks selected');
     if (!confirm('Apply status to selected tasks?')) return;
     for (const id of Array.from(state.selected)) { try { await taskApi.update(id, { status_id: val }); } catch (e) { console.warn('bulk apply status failed', id, e); } }
-    state.selected.clear(); loadTasks();
+    state.selected.clear(); updateSelectionCount(); loadTasks();
   });
   document.getElementById('applyBulkPriority')?.addEventListener('click', async () => {
     const val = document.getElementById('bulkPrioritySelect')?.value;
@@ -476,6 +864,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (state.selected.size === 0) return alert('No tasks selected');
     if (!confirm('Apply priority to selected tasks?')) return;
     for (const id of Array.from(state.selected)) { try { await taskApi.update(id, { priority_id: val }); } catch (e) { console.warn('bulk apply priority failed', id, e); } }
-    state.selected.clear(); loadTasks();
+    state.selected.clear(); updateSelectionCount(); loadTasks();
   });
 });

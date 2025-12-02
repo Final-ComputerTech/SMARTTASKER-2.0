@@ -99,9 +99,38 @@ async function ensureTimestampColumns() {
   }
 }
 
+// Ensure core meta data exists: priorities and statuses
+async function ensureCoreMeta() {
+  try {
+    const Priority = require('./models/Priority');
+    const Status = require('./models/Status');
+    const pri = await Priority.findAll();
+    if (!pri || pri.length === 0) {
+      await Priority.bulkCreate([
+        { label: 'Low', level: 1 },
+        { label: 'Medium', level: 2 },
+        { label: 'High', level: 3 }
+      ]);
+      console.log('Inserted default priorities');
+    }
+    const st = await Status.findAll();
+    if (!st || st.length === 0) {
+      await Status.bulkCreate([
+        { label: 'To Do' },
+        { label: 'In Progress' },
+        { label: 'Done' }
+      ]);
+      console.log('Inserted default statuses');
+    }
+  } catch (e) {
+    console.warn('Could not ensure core meta:', e.message || e);
+  }
+}
+
 (async () => {
   try {
     await ensureTimestampColumns();
+    await ensureCoreMeta();
     await sequelize.sync({ alter: true });
     console.log('Database synced');
     app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

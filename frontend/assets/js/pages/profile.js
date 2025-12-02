@@ -1,5 +1,6 @@
 import { authProfileApi, authPasswordApi } from '../api/authApi.js';
 import { requireAuthRedirect, clearToken } from '../utils/auth.js';
+import { apiUpload } from '../utils/request.js';
 
 requireAuthRedirect();
 
@@ -105,19 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
         blob = file;
       }
 
-      const API_BASE = (window.location.port && window.location.port !== '3000') ? 'http://localhost:3000/api' : '/api';
       const fd = new FormData();
       // ensure filename ends with .jpg when blob is from canvas
       const baseName = file.name.replace(/\.[^/.]+$/, '');
       const filename = blob instanceof File ? file.name : `${baseName}.jpg`;
       fd.append('avatar', blob, filename);
-      const resp = await fetch(`${API_BASE}/auth/me/avatar`, {
-        method: 'POST',
-        headers: { 'Authorization': 'Bearer ' + localStorage.getItem('st_token') },
-        body: fd
-      });
-      const json = await resp.json();
-      if (!resp.ok) throw new Error(json.error || json.message || 'Upload failed');
+      // Use centralized apiUpload helper which attaches auth and disables cache
+      const json = await apiUpload('auth/me/avatar', fd);
       // reload profile so all fields (and avatar path) reflect the saved state
       await loadProfile();
       alert('Avatar uploaded');

@@ -24,6 +24,28 @@ async function loadTask() {
   if (!id) return window.location.href = '/task-schedule.html';
   try {
     const task = await taskApi.get(id);
+    // If association objects are missing, try to enrich from meta endpoints
+    try {
+      if ((!task.Priority || Object.keys(task.Priority).length === 0) && task.priority_id) {
+        const pr = await apiRequest('meta/priorities', 'GET');
+        const priorities = Array.isArray(pr) ? pr : (pr.data || pr || []);
+        const found = priorities.find(p => p.priority_id === task.priority_id);
+        if (found) task.Priority = found;
+      }
+      if ((!task.Status || Object.keys(task.Status).length === 0) && task.status_id) {
+        const st = await apiRequest('meta/statuses', 'GET');
+        const statuses = Array.isArray(st) ? st : (st.data || st || []);
+        const foundS = statuses.find(s => s.status_id === task.status_id);
+        if (foundS) task.Status = foundS;
+      }
+      if ((!task.Project || Object.keys(task.Project).length === 0) && task.project_id) {
+        const prj = await apiRequest('projects', 'GET');
+        const projects = Array.isArray(prj) ? prj : (prj.data || prj || []);
+        const foundP = projects.find(p => p.project_id === task.project_id);
+        if (foundP) task.Project = foundP;
+      }
+    } catch (e) { console.warn('Could not enrich task metadata', e); }
+
     renderTask(task);
     await loadChanges(id);
     await loadComments(id);
@@ -56,12 +78,20 @@ function renderTask(t) {
 }
 
 async function loadChanges(taskId) {
+  const btn = document.getElementById('refreshChangesBtn');
+  if (btn) { btn.disabled = true; const prev = btn.innerText; btn.innerText = 'Loading...'; }
   try {
-    const res = await taskApi.changes(taskId);
+    const res = await apiRequest(`tasks/${taskId}/changes?_=${Date.now()}`, 'GET');
+    console.log('loadChanges response for', taskId, res);
     renderChanges(res.data || []);
+    // show last-updated timestamp
+    const stamp = document.getElementById('changesLastUpdated') || (() => { const s = document.createElement('div'); s.id = 'changesLastUpdated'; s.className = 'small text-muted mt-1'; const container = document.getElementById('activityLog'); if (container && container.parentElement) container.parentElement.insertBefore(s, container.nextSibling); return s; })();
+    if (stamp) stamp.innerText = 'Last updated: ' + new Date().toLocaleTimeString();
   } catch (e) {
-    console.warn('Could not load changes', e);
-    const el = document.getElementById('activityLog'); if (el) el.innerText = 'No activity available';
+    console.error('Could not load changes', e);
+    const el = document.getElementById('activityLog'); if (el) el.innerText = 'Could not load activity: ' + (e.message || e);
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerText = 'Refresh'; }
   }
 }
 
@@ -87,13 +117,23 @@ document.addEventListener('DOMContentLoaded', loadTask);
 // ---------------- Conversations (comments) ----------------
 let _commentsPoll = null;
 async function loadComments(taskId) {
+  const btn = document.getElementById('refreshCommentsBtn');
+  if (btn) { btn.disabled = true; const prev = btn.innerText; btn.innerText = 'Loading...'; }
   try {
-    const json = await apiRequest(`tasks/${taskId}/conversations`, 'GET');
+    const json = await apiRequest(`tasks/${taskId}/conversations?_=${Date.now()}`, 'GET');
+    console.log('loadComments response for', taskId, json);
     renderComments(json.data || json || []);
+    const stamp = document.getElementById('commentsLastUpdated') || (() => { const s = document.createElement('div'); s.id = 'commentsLastUpdated'; s.className = 'small text-muted mt-1'; const container = document.getElementById('commentsList'); if (container && container.parentElement) container.parentElement.insertBefore(s, container.nextSibling); return s; })();
+    if (stamp) stamp.innerText = 'Last updated: ' + new Date().toLocaleTimeString();
     // start polling
     if (_commentsPoll) clearInterval(_commentsPoll);
     _commentsPoll = setInterval(() => loadComments(taskId), 8000);
-  } catch (e) { console.warn('Could not load comments', e); }
+  } catch (e) {
+    console.error('Could not load comments', e);
+    const el = document.getElementById('commentsList'); if (el) el.innerText = 'Could not load comments: ' + (e.message || e);
+  } finally {
+    if (btn) { btn.disabled = false; btn.innerText = 'Refresh'; }
+  }
 }
 
 function renderComments(list) {
@@ -252,9 +292,47 @@ document.getElementById('duplicateTaskBtn')?.addEventListener('click', async () 
 
 document.getElementById('editTaskBtn')?.addEventListener('click', async () => {
   const id = getParam('id'); if (!id) return;
-  const newTitle = prompt('Edit title:', document.getElementById('taskTitle')?.innerText || '');
-  if (newTitle === null) return;
-  try { await taskApi.update(id, { title: newTitle }); alert('Updated'); loadTask(); } catch (e) { alert('Update failed: ' + (e.message || e)); }
+  try {
+    const t = await taskApi.get(id);
+    const currentTitle = t.title || document.getElementById('taskTitle')?.innerText || '';
+    const newTitle = prompt('Edit title:', currentTitle);
+    if (newTitle === null) return;
+
+    // Fetch selectable options
+    const projects = await apiRequest('projects', 'GET');
+    const priorities = await apiRequest('meta/priorities', 'GET');
+    const statuses = await apiRequest('meta/statuses', 'GET');
+
+    // helper to build selection prompt
+    const buildPrompt = (label, list, idKey, nameKey, currentId) => {
+      let text = `${label}:\n`;
+      text += `0) Leave unchanged\n`;
+      list.forEach((it, idx) => { const n = it[nameKey] || it.label || it.project_name || it.name || `item${idx+1}`; text += `${idx+1}) ${n} (id: ${it[idKey]})\n`; });
+      text += `\nEnter the number to select (or 0 to keep current).`;
+      return { text, list };
+    };
+
+    const pPrompt = buildPrompt('Project', projects || [], 'project_id', 'project_name', t.project_id);
+    const prPrompt = buildPrompt('Priority', priorities || [], 'priority_id', 'label', t.priority_id);
+    const sPrompt = buildPrompt('Status', statuses || [], 'status_id', 'label', t.status_id);
+
+    const pChoice = prompt(pPrompt.text, '0');
+    if (pChoice === null) return;
+    const prChoice = prompt(prPrompt.text, '0');
+    if (prChoice === null) return;
+    const sChoice = prompt(sPrompt.text, '0');
+    if (sChoice === null) return;
+
+    const updates = {};
+    if (newTitle !== currentTitle) updates.title = newTitle;
+    const pIdx = parseInt(pChoice, 10); if (!isNaN(pIdx) && pIdx > 0 && projects && projects[pIdx-1]) updates.project_id = projects[pIdx-1].project_id;
+    const prIdx = parseInt(prChoice, 10); if (!isNaN(prIdx) && prIdx > 0 && priorities && priorities[prIdx-1]) updates.priority_id = priorities[prIdx-1].priority_id;
+    const sIdx = parseInt(sChoice, 10); if (!isNaN(sIdx) && sIdx > 0 && statuses && statuses[sIdx-1]) updates.status_id = statuses[sIdx-1].status_id;
+
+    if (Object.keys(updates).length === 0) { alert('No changes made'); return; }
+    await taskApi.update(id, updates);
+    alert('Updated'); loadTask();
+  } catch (e) { alert('Update failed: ' + (e.message || e)); }
 });
 
 document.getElementById('completeTaskBtn')?.addEventListener('click', async () => {

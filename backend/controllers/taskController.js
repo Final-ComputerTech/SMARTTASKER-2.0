@@ -127,6 +127,7 @@ exports.getTaskChanges = async (req, res) => {
     const changes = await Changes.findAll({ where: { task_id: id }, order: [['createdAt', 'DESC']] });
     res.json({ data: changes });
   } catch (err) {
+    console.error('taskController.getTaskChanges error', err);
     res.status(500).json({ error: err.message });
   }
 };

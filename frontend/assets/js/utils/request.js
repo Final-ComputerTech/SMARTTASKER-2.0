@@ -18,6 +18,8 @@ async function apiRequest(endpoint, method = "GET", data = null, requireAuth = t
     if (token) headers["Authorization"] = `Bearer ${token}`;
   }
   const options = { method, headers };
+  // prevent aggressive browser caching for API calls
+  options.cache = 'no-store';
   if (data) options.body = JSON.stringify(data);
 
   const resp = await fetch(`${API_BASE}/${endpoint}`, options);
@@ -37,7 +39,7 @@ async function apiUpload(endpoint, formData, requireAuth = true, method = 'POST'
     const token = localStorage.getItem('st_token');
     if (token) headers['Authorization'] = `Bearer ${token}`;
   }
-  const options = { method, headers, body: formData };
+  const options = { method, headers, body: formData, cache: 'no-store' };
   const resp = await fetch(`${API_BASE}/${endpoint}`, options);
   const text = await resp.text();
   let json = {};
