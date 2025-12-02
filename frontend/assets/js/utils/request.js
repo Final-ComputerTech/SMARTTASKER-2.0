@@ -31,4 +31,22 @@ async function apiRequest(endpoint, method = "GET", data = null, requireAuth = t
   return json;
 }
 
-export { apiRequest };
+async function apiUpload(endpoint, formData, requireAuth = true, method = 'POST') {
+  const headers = {};
+  if (requireAuth) {
+    const token = localStorage.getItem('st_token');
+    if (token) headers['Authorization'] = `Bearer ${token}`;
+  }
+  const options = { method, headers, body: formData };
+  const resp = await fetch(`${API_BASE}/${endpoint}`, options);
+  const text = await resp.text();
+  let json = {};
+  try { json = text ? JSON.parse(text) : {}; } catch (e) { throw new Error('Invalid JSON'); }
+  if (!resp.ok) {
+    const err = json.error || json.message || 'API error';
+    throw new Error(err);
+  }
+  return json;
+}
+
+export { apiRequest, apiUpload, API_BASE };

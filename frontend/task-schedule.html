@@ -17,6 +17,14 @@
 	<div class="col-md-4">
 		<div class="card p-3">
 			<h5>Mini Calendar</h5>
+			<div class="mb-2 d-flex gap-2 align-items-center">
+			  <div class="btn-group" role="group" aria-label="View selector">
+			    <button id="viewDaily" class="btn btn-sm btn-outline-secondary">Daily</button>
+			    <button id="viewWeekly" class="btn btn-sm btn-outline-secondary active">Weekly</button>
+			    <button id="viewMonthly" class="btn btn-sm btn-outline-secondary">Monthly</button>
+			  </div>
+			  <button id="openNewTaskBtnSmall" class="btn btn-sm btn-primary">+ New</button>
+			</div>
 			<div id="miniCalendar" style="min-height:280px;">Loading calendar...</div>
 		</div>
 	</div>
@@ -29,7 +37,43 @@
 					<input id="searchInput" class="form-control form-control-sm w-50" placeholder="Search tasks..." />
 				</div>
 			</div>
-			<div id="taskList" style="min-height:280px;">Loading tasks...</div>
+			<div class="row mb-2 g-2">
+			  <div class="col-md-3">
+			    <select id="filterPriority" class="form-select form-select-sm"><option value="">All Priorities</option></select>
+			  </div>
+			  <div class="col-md-3">
+			    <select id="filterStatus" class="form-select form-select-sm"><option value="">All Statuses</option></select>
+			  </div>
+			  <div class="col-md-3">
+			    <select id="filterProject" class="form-select form-select-sm"><option value="">All Projects</option></select>
+			  </div>
+			  <div class="col-md-3 d-flex gap-2">
+			    <input id="filterFrom" type="date" class="form-control form-control-sm" />
+			    <input id="filterTo" type="date" class="form-control form-control-sm" />
+			  </div>
+			</div>
+			<div class="d-flex justify-content-between align-items-center mb-2">
+			  <div>
+			    <label class="form-check-label me-2"><input id="filterMine" type="checkbox" class="form-check-input me-1"/> My tasks only</label>
+			    <label class="form-check-label me-2"><input id="filterAttachments" type="checkbox" class="form-check-input me-1"/> Has attachments</label>
+			    <label class="form-check-label"><input id="filterOverdue" type="checkbox" class="form-check-input me-1"/> Overdue</label>
+			  </div>
+			  <div>
+			    <button id="applyFilters" class="btn btn-sm btn-outline-secondary">Apply</button>
+			    <button id="clearFilters" class="btn btn-sm btn-outline-secondary">Clear</button>
+			  </div>
+			</div>
+			<div id="taskControls" class="mb-2 d-flex justify-content-between align-items-center">
+			  <div class="d-flex gap-2 align-items-center">
+			    <select id="bulkStatusSelect" class="form-select form-select-sm" style="width:180px;"><option value="">Bulk: Set status</option></select>
+			    <button id="applyBulkStatus" class="btn btn-sm btn-outline-secondary">Apply</button>
+			    <select id="bulkPrioritySelect" class="form-select form-select-sm" style="width:180px;"><option value="">Bulk: Set priority</option></select>
+			    <button id="applyBulkPriority" class="btn btn-sm btn-outline-secondary">Apply</button>
+			    <button id="bulkDelete" class="btn btn-sm btn-danger">Delete</button>
+			  </div>
+			  <div id="paginationControls"></div>
+			</div>
+			<div id="taskTable">Loading tasks...</div>
 		</div>
 	</div>
 </div>

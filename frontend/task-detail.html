@@ -23,6 +23,12 @@
             <h5>Details</h5>
             <div id="taskMeta" class="mb-2">Loading...</div>
             <div id="taskDescription" class="text-muted"></div>
+            <div class="mt-3 d-flex gap-2">
+              <button id="editTaskBtn" class="btn btn-sm btn-outline-primary">Edit</button>
+              <button id="completeTaskBtn" class="btn btn-sm btn-success">Mark Completed</button>
+              <button id="duplicateTaskBtn" class="btn btn-sm btn-outline-secondary">Duplicate</button>
+              <button id="deleteTaskBtn" class="btn btn-sm btn-outline-danger">Delete</button>
+            </div>
           </div>
 
           <div class="card p-3 mb-3">
@@ -32,7 +38,38 @@
 
           <div class="card p-3">
             <h5>Comments</h5>
-            <div id="commentsArea">Comments feature coming soon...</div>
+            <div id="commentsArea">
+              <div id="commentsList" style="max-height:320px;overflow:auto;margin-bottom:8px;">Loading comments...</div>
+              <div class="d-flex gap-2">
+                <textarea id="commentInput" class="form-control form-control-sm" placeholder="Write a comment..." rows="2"></textarea>
+                <div class="d-flex flex-column">
+                  <button id="postCommentBtn" class="btn btn-sm btn-primary mb-2">Post</button>
+                  <button id="refreshCommentsBtn" class="btn btn-sm btn-outline-secondary">Refresh</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-3 mb-3">
+            <h5>Attachments</h5>
+            <div id="attachmentsArea">
+              <div id="attachmentsList">No attachments</div>
+              <div class="mt-2">
+                <input id="attachmentInput" type="file" multiple />
+                <button id="uploadAttachmentsBtn" class="btn btn-sm btn-primary mt-1">Upload</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-3 mb-3">
+            <h5>Subtasks</h5>
+            <div id="subtasksArea">
+              <div id="subtaskList">No subtasks</div>
+              <div class="d-flex gap-2 mt-2">
+                <input id="subtaskInput" class="form-control form-control-sm" placeholder="New subtask" />
+                <button id="addSubtaskBtn" class="btn btn-sm btn-outline-primary">Add</button>
+              </div>
+            </div>
           </div>
         </div>
 

@@ -5,5 +5,7 @@ const { verifyToken } = require('../middleware/authMiddleware');
 
 router.get('/priorities', verifyToken(), metaController.priorities);
 router.get('/statuses', verifyToken(), metaController.statuses);
+// Create status (any authenticated user)
+router.post('/statuses', verifyToken(), metaController.createStatus);
 
 module.exports = router;

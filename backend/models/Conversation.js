@@ -1,5 +1,6 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../config/db');
+const User = require('./User');
 
 const Conversation = sequelize.define(
   'Conversation',
@@ -11,6 +12,9 @@ const Conversation = sequelize.define(
   },
   { timestamps: true, tableName: 'conversations', underscored: true }
 );
+
+// register association so `include: [User]` works in controllers
+Conversation.belongsTo(User, { foreignKey: 'user_id', as: 'User' });
 
 module.exports = Conversation;
 

@@ -19,4 +19,15 @@ exports.statuses = async (req, res) => {
   }
 };
 
+exports.createStatus = async (req, res) => {
+  try {
+    const { label } = req.body;
+    if (!label || !String(label).trim()) return res.status(400).json({ error: 'label is required' });
+    const created = await Status.create({ label: String(label).trim() });
+    res.status(201).json(created);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = exports;

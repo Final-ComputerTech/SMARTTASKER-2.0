@@ -114,8 +114,8 @@
     </section>
   </main>
 
-  <!-- Chart.js (UMD) -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Chart.js (UMD) - explicit versioned build so source map resolves to CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js" crossorigin="anonymous"></script>
   <!-- Component Loader + Dashboard JS -->
   <script type="module" src="assets/js/pages/dashboard.js"></script>
 </body>

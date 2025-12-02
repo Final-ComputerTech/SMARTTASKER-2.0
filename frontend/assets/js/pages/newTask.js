@@ -133,6 +133,28 @@ import { apiRequest } from '../utils/request.js';
     if (titleEl) titleEl.focus();
   }
 
+  // Allow other modules to open the New Task modal with a prefilled date
+  document.addEventListener('openNewTask', (e) => {
+    try {
+      createModal();
+      const modal = document.getElementById('newTaskModal');
+      if (!modal) return;
+      const { date } = (e && e.detail) || {};
+      if (date) {
+        // convert yyyy-mm-dd to datetime-local value at 09:00
+        let dt = new Date(date);
+        if (!isNaN(dt.getTime())) {
+          // set time to 09:00 local by default
+          dt.setHours(9,0,0,0);
+          const local = dt.toISOString().slice(0,16);
+          const input = document.getElementById('nt_due_date');
+          if (input) input.value = local;
+        }
+      }
+      openModal();
+    } catch (err) { console.warn('openNewTask handler error', err); }
+  });
+
   function closeModal() {
     const modal = document.getElementById('newTaskModal');
     if (!modal) return;

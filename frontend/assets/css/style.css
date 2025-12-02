@@ -151,6 +151,17 @@ body.layout {
 .mini-calendar .calendar-day .day-badge { margin-top: 6px; }
 .mini-calendar .calendar-day:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
 
+/* Monthly grid layout */
+.mini-calendar.monthly { padding: 10px; }
+.mini-calendar.monthly .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+.mini-calendar.monthly .calendar-weekdays { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; margin-bottom: 6px; }
+.mini-calendar.monthly .calendar-weekdays .weekday { font-size: 11px; color: #6b7280; text-align: center; }
+.mini-calendar.monthly .calendar-day { padding: 8px 6px; min-height: 72px; display:flex; flex-direction:column; align-items:flex-start; justify-content:space-between; text-align:left; }
+.mini-calendar.monthly .calendar-day .day-num { font-size: 13px; font-weight:600; }
+.mini-calendar.monthly .calendar-day.other-month { opacity: 0.45; }
+.mini-calendar.monthly .calendar-day .day-badge { align-self:flex-end; }
+.mini-calendar.monthly { max-height: 420px; overflow-y: auto; }
+
 /* For lists inside cards, allow internal scrolling rather than growing the card */
 .card .scrollable { max-height: 320px; overflow-y: auto; }
 
