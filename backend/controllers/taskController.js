@@ -6,6 +6,7 @@ const Status = require('../models/Status');
 const DueDate = require('../models/DueDate');
 const Reminder = require('../models/Reminder');
 const Changes = require('../models/Changes');
+const Notification = require('../models/Notification');
 
 exports.createTask = async (req, res) => {
   try {
@@ -15,7 +16,6 @@ exports.createTask = async (req, res) => {
       project_id: req.body.project_id || null,
       priority_id: req.body.priority_id || null,
       status_id: req.body.status_id || null,
-      due_date_id: req.body.due_date_id || null,
       reminder_id: req.body.reminder_id || null,
       user_id: req.user.user_id
     };
@@ -24,6 +24,30 @@ exports.createTask = async (req, res) => {
     try {
       await Changes.create({ task_id: task.task_id, user_id: req.user.user_id, field: 'created', old_value: null, new_value: task.title });
     } catch (e) { console.warn('Could not log create change', e.message || e); }
+    // Notification for creator
+    try {
+      await Notification.create({ user_id: req.user.user_id, task_id: task.task_id, message: `Task \"${task.title}\" created.` });
+    } catch (e) { console.warn('Could not create notification', e.message || e); }
+
+    // If a due_date was provided, create a DueDate row and link it
+    if (req.body.due_date) {
+      try {
+        const due = await DueDate.create({ task_id: task.task_id, due_date: req.body.due_date });
+        try {
+          await task.update({ due_date_id: due.due_date_id });
+        } catch (e) { console.warn('Could not update task with due_date_id', e.message || e); }
+        try {
+          await Changes.create({ task_id: task.task_id, user_id: req.user.user_id, field: 'due_date', old_value: null, new_value: String(req.body.due_date) });
+        } catch (e) { console.warn('Could not log due_date change', e.message || e); }
+        // Notification for due date
+        try {
+          await Notification.create({ user_id: req.user.user_id, task_id: task.task_id, message: `Due date set for task \"${task.title}\": ${String(req.body.due_date)}` });
+        } catch (e) { console.warn('Could not create due date notification', e.message || e); }
+      } catch (e) {
+        console.warn('Could not create due date', e.message || e);
+      }
+    }
+
     const taskWithIncludes = await Task.findByPk(task.task_id, { include: [User, Project, Priority, Status, DueDate, Reminder] });
     res.status(201).json(taskWithIncludes);
   } catch (err) {

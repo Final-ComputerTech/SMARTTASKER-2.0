@@ -3,7 +3,6 @@ const { QueryTypes } = require('sequelize');
 
 exports.summary = async (req, res) => {
   try {
-    // Totals by status
     const statuses = await sequelize.query(
       `SELECT s.label as status, COUNT(*) as count FROM Tasks t
        LEFT JOIN statuses s ON t.status_id = s.status_id
@@ -11,7 +10,6 @@ exports.summary = async (req, res) => {
       { type: QueryTypes.SELECT }
     );
 
-    // Totals by priority
     const priorities = await sequelize.query(
       `SELECT p.label as priority, COUNT(*) as count FROM Tasks t
        LEFT JOIN priorities p ON t.priority_id = p.priority_id
@@ -19,7 +17,6 @@ exports.summary = async (req, res) => {
       { type: QueryTypes.SELECT }
     );
 
-    // Totals by project
     const projects = await sequelize.query(
       `SELECT pr.project_name as project, COUNT(*) as count FROM Tasks t
        LEFT JOIN Projects pr ON t.project_id = pr.project_id
@@ -27,7 +24,6 @@ exports.summary = async (req, res) => {
       { type: QueryTypes.SELECT }
     );
 
-    // Upcoming tasks due within next 7 days (not completed)
     const upcoming = await sequelize.query(
       `SELECT t.task_id, t.title, pr.project_name as project, p.label as priority, s.label as status, d.due_date
        FROM Tasks t
@@ -44,7 +40,6 @@ exports.summary = async (req, res) => {
       { type: QueryTypes.SELECT }
     );
 
-    // Overdue count
     const overdueRes = await sequelize.query(
       `SELECT COUNT(*) as count FROM Tasks t
        LEFT JOIN due_dates d ON t.due_date_id = d.due_date_id
@@ -55,7 +50,6 @@ exports.summary = async (req, res) => {
 
     const overdueCount = overdueRes && overdueRes[0] ? parseInt(overdueRes[0].count, 10) : 0;
 
-    // Category counts (Todo, In Progress, Done, Overdue, Failed)
     const categoryRes = await sequelize.query(
       `SELECT
          SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE 'todo%' OR LOWER(COALESCE(s.label,'')) LIKE 'to do%' THEN 1 ELSE 0 END) as todo,
@@ -72,18 +66,19 @@ exports.summary = async (req, res) => {
 
     const categoryCounts = (categoryRes && categoryRes[0]) ? categoryRes[0] : { todo:0, in_progress:0, done:0, failed:0, overdue:0, total:0 };
 
-    // Recent changes
     const recentChanges = await sequelize.query(
-      `SELECT c.change_id, c.task_id, c.user_id, c.field, c.old_value, c.new_value, c.createdAt
+      `SELECT c.change_id, c.task_id, c.user_id, c.field, c.old_value, c.new_value, c.created_at as createdAt
        FROM changes c
-       ORDER BY c.createdAt DESC
+       ORDER BY c.created_at DESC
        LIMIT 20`,
       { type: QueryTypes.SELECT }
     );
 
     res.json({ statuses, priorities, projects, upcoming, overdueCount, recentChanges, categoryCounts });
   } catch (err) {
-    console.error('dashboard.summary error', err);
+    console.error('dashboardV2.summary error', err);
     res.status(500).json({ error: err.message });
   }
 };
+
+module.exports = exports;

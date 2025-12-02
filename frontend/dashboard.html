@@ -50,36 +50,49 @@
         </div>
       </div>
 
-      <!-- Stats and Upcoming -->
-      <div class="row g-3 mt-4">
-        <div class="col-md-4">
-          <div class="card p-3">
-            <h5>By Priority</h5>
+      <!-- dashboard-stats.html -->
+      <div class="container mt-4">
+        <div class="row g-3">
+          <!-- By Priority -->
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="card p-3">
+              <h5>By Priority</h5>
               <div class="d-flex justify-content-end mb-2">
                 <button id="priorityExportBtn" class="btn btn-sm btn-outline-secondary">Export PNG</button>
               </div>
-              <canvas id="priorityChart" height="140"></canvas>
+              <div class="chart-wrapper">
+                <canvas id="priorityChart"></canvas>
+              </div>
               <div id="priorityStats" class="mt-2"></div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card p-3">
-            <h5>By Status</h5>
+
+          <!-- By Status -->
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="card p-3">
+              <h5>By Status</h5>
               <div class="d-flex justify-content-end mb-2">
                 <button id="statusExportBtn" class="btn btn-sm btn-outline-secondary">Export PNG</button>
               </div>
-              <canvas id="statusChart" height="140"></canvas>
+              <div class="chart-wrapper">
+                <canvas id="statusChart"></canvas>
+              </div>
               <div id="statusStats" class="mt-2"></div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card p-3">
-            <h5>By Project</h5>
+
+          <!-- By Project -->
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="card p-3">
+              <h5>By Project</h5>
               <div class="d-flex justify-content-end mb-2">
                 <button id="projectExportBtn" class="btn btn-sm btn-outline-secondary">Export PNG</button>
               </div>
-              <canvas id="projectChart" height="140"></canvas>
+              <div class="chart-wrapper">
+                <canvas id="projectChart"></canvas>
+              </div>
               <div id="projectStats" class="mt-2"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -94,7 +107,7 @@
         <div class="col-md-6">
           <div class="card p-3">
             <h5>Recent Changes</h5>
-            <div id="recentChanges" style="max-height:320px; overflow:auto;"></div>
+            <div id="recentChanges" class="scrollable"></div>
           </div>
         </div>
       </div>

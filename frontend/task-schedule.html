@@ -24,7 +24,10 @@
 		<div class="card p-3">
 			<div class="d-flex justify-content-between mb-2">
 				<h5>Tasks</h5>
-				<input id="searchInput" class="form-control form-control-sm w-50" placeholder="Search tasks..." />
+				<div class="d-flex gap-2">
+					<button id="openNewTaskBtn" class="btn btn-sm btn-primary">New Task</button>
+					<input id="searchInput" class="form-control form-control-sm w-50" placeholder="Search tasks..." />
+				</div>
 			</div>
 			<div id="taskList" style="min-height:280px;">Loading tasks...</div>
 		</div>
@@ -33,6 +36,7 @@
 </section>
 </main>
 <script src="assets/js/utils/componentLoader.js"></script>
+<script type="module" src="assets/js/pages/newTask.js"></script>
 <script type="module" src="assets/js/pages/taskSchedule.js"></script>
 </body>
 </html>

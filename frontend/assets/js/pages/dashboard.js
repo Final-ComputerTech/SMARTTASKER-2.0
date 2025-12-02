@@ -24,6 +24,7 @@ async function loadMetrics() {
     const upcoming = summary.upcoming || [];
     const overdueCount = summary.overdueCount || 0;
     const recentChanges = summary.recentChanges || [];
+    const categoryCounts = summary.categoryCounts || null;
 
     const totalTasks = categoryCounts && categoryCounts.total ? parseInt(categoryCounts.total, 10) : statuses.reduce((s, row) => s + (parseInt(row.count, 10) || 0), 0);
     const completed = statuses.reduce((s, row) => {

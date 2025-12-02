@@ -127,6 +127,23 @@ body.layout {
   padding: 2rem;
 }
 
+/* Prevent cards from overflowing the layout and ensure content wraps */
+.main-content { overflow-x: hidden; }
+.card { word-wrap: break-word; overflow: hidden; }
+
+/* Ensure metric cards have consistent height */
+.metric-card { min-height: 110px; display: flex; flex-direction: column; justify-content: center; }
+
+/* Chart containers: fix height and constrain overflow so charts don't stretch cards */
+.card canvas { width: 100% !important; height: 200px !important; max-height: 320px; display: block; }
+
+/* explicit wrapper for charts to maintain layout stability */
+.chart-wrapper { height: 200px; max-height: 320px; position: relative; }
+.chart-wrapper canvas { position: absolute; inset: 0; width: 100% !important; height: 100% !important; }
+
+/* For lists inside cards, allow internal scrolling rather than growing the card */
+.card .scrollable { max-height: 320px; overflow-y: auto; }
+
 /* Header */
 .main-header {
   display: flex;

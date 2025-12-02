@@ -11,6 +11,7 @@ const userRoutes = require('./routes/UserRouters');
 const projectRoutes = require('./routes/projectRoutes');
 const oauthRoutes = require('./routes/oauthRoutes');
 const dashboardRoutes = require('./routes/dashboardRoutes');
+const metaRoutes = require('./routes/metaRoutes');
 // scheduled jobs
 require('./cron/notificationCron');
 
@@ -58,6 +59,8 @@ app.use('/api/projects', projectRoutes);
 app.use('/api/oauth', oauthRoutes);
 // Dashboard summary
 app.use('/api/dashboard', dashboardRoutes);
+// Meta endpoints for client-side selects (priorities, statuses)
+app.use('/api/meta', metaRoutes);
 // Mount user management routes (admin access)
 app.use('/api/users', require('./routes/UserRouters'));
 // User management routes (admin + profile endpoints)

@@ -67,3 +67,8 @@ if (_searchEl) {
 }
 
 document.addEventListener('DOMContentLoaded', loadTasks);
+
+// Reload tasks when a new task is created via the modal
+document.addEventListener('task:created', () => {
+  loadTasks();
+});
