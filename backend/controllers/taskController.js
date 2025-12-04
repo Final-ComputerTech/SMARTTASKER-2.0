@@ -5,8 +5,10 @@ const Priority = require('../models/Priority');
 const Status = require('../models/Status');
 const DueDate = require('../models/DueDate');
 const Reminder = require('../models/Reminder');
+const Attachment = require('../models/Attachment');
 const Changes = require('../models/Changes');
 const Notification = require('../models/Notification');
+const { Op } = require('sequelize');
 
 exports.createTask = async (req, res) => {
   try {
@@ -48,7 +50,7 @@ exports.createTask = async (req, res) => {
       }
     }
 
-    const taskWithIncludes = await Task.findByPk(task.task_id, { include: [User, Project, Priority, Status, DueDate, Reminder] });
+    const taskWithIncludes = await Task.findByPk(task.task_id, { include: [User, Project, Priority, Status, DueDate, Reminder, { model: Attachment, as: 'Attachments' }] });
     res.status(201).json(taskWithIncludes);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -57,15 +59,68 @@ exports.createTask = async (req, res) => {
 
 exports.getTask = async (req, res) => {
   try {
-    const { page = 1, limit = 20 } = req.query;
+    const { page = 1, limit = 20, search, priority, status, project, from, to, mine, attachments, overdue, sort_by, order } = req.query;
     const offset = (page - 1) * limit;
     const where = {};
-    // non-admin users see only their tasks
+
+    // default access: non-admin users see only their tasks
     if (req.user.role !== 'admin') where.user_id = req.user.user_id;
-    const { count, rows } = await Task.findAndCountAll({ where, include: [User, Project, Priority, Status, DueDate, Reminder], limit: parseInt(limit, 10), offset });
+    // explicit "mine" filter (overrides admin view)
+    if (mine === 'true' || mine === '1') where.user_id = req.user.user_id;
+
+    // simple equality filters
+    if (priority) where.priority_id = priority;
+    if (status) where.status_id = status;
+    if (project) where.project_id = project;
+
+    // text search (title or description)
+    if (search) {
+      where[Op.or] = [
+        { title: { [Op.like]: `%${search}%` } },
+        { description: { [Op.like]: `%${search}%` } }
+      ];
+    }
+
+    // Build includes dynamically so we can add where clauses for DueDate/Attachment if needed
+    const includes = [User, Project, Priority, Status, Reminder];
+    // due date filters (from/to are expected to be ISO date strings)
+    const dueWhere = {};
+    if (from) dueWhere.due_date = { ...(dueWhere.due_date || {}), [Op.gte]: new Date(from) };
+    if (to) dueWhere.due_date = { ...(dueWhere.due_date || {}), [Op.lte]: new Date(to) };
+    if (overdue === 'true' || overdue === '1') {
+      dueWhere.due_date = { ...(dueWhere.due_date || {}), [Op.lt]: new Date() };
+    }
+    if (Object.keys(dueWhere).length > 0) {
+      includes.push({ model: DueDate, where: dueWhere, required: overdue === 'true' || overdue === '1' });
+    } else {
+      includes.push(DueDate);
+    }
+
+    // attachments filter: require tasks that have at least one attachment
+    if (attachments === 'true' || attachments === '1') {
+      includes.push({ model: Attachment, as: 'Attachments', required: true });
+    } else {
+      includes.push({ model: Attachment, as: 'Attachments' });
+    }
+
+    // sorting
+    let orderArr = [['createdAt', 'DESC']];
+    if (sort_by) {
+      const dir = (order && order.toUpperCase() === 'ASC') ? 'ASC' : 'DESC';
+      orderArr = [[sort_by, dir]];
+    }
+
+    // Diagnostic: log includes shape to help debug alias errors
+    try {
+      console.debug('taskController.getTask includes:', includes.map(i => ({ model: i.model ? i.model.name || i.model.toString() : (i.name || i), as: i.as || null, required: i.required || false })));
+    } catch (e) { console.debug('Could not stringify includes', e); }
+
+    const { count, rows } = await Task.findAndCountAll({ where, include: includes, limit: parseInt(limit, 10), offset, order: orderArr });
     res.json({ total: count, page: parseInt(page, 10), pageSize: rows.length, tasks: rows });
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error('taskController.getTask error', err && err.stack ? err.stack : err);
+    // expose error message for frontend, but include a hint to check server logs for details
+    res.status(500).json({ error: (err && err.message) ? err.message : 'Server error' });
   }
 };
 
@@ -100,7 +155,7 @@ exports.updateTask = async (req, res) => {
     await task.update(updates);
     // Save change entries
     try { for (const ce of changeEntries) await Changes.create(ce); } catch (e) { console.warn('Could not write change entries', e.message || e); }
-    const updated = await Task.findByPk(id, { include: [User, Project, Priority, Status, DueDate, Reminder] });
+    const updated = await Task.findByPk(id, { include: [User, Project, Priority, Status, DueDate, Reminder, { model: Attachment, as: 'Attachments' }] });
     res.json(updated);
   } catch (err) {
     res.status(500).json({ error: err.message });

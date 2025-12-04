@@ -73,6 +73,8 @@ async function loadTasks() {
     // update search status indicator (debug helper)
     const ss = document.getElementById('searchStatus');
     if (ss) ss.textContent = `Query: "${state.query}" — ${normalized.length} tasks`;
+    // update total for pagination
+    try { state.total = res && (res.total || res.count || 0); } catch (e) { state.total = normalized.length; }
   } catch (e) {
     console.error('Error loading tasks', e);
     const ss = document.getElementById('searchStatus'); if (ss) ss.textContent = `Query: "${state.query}" — error`;
@@ -82,8 +84,17 @@ async function loadTasks() {
 function buildQueryParams() {
   const parts = [];
   if (state.query) parts.push(`search=${encodeURIComponent(state.query)}`);
-  if (state.filters.priority) parts.push(`priority=${state.filters.priority}`);
-  if (state.filters.status) parts.push(`status=${state.filters.status}`);
+  if (state.filters.priority) parts.push(`priority=${encodeURIComponent(state.filters.priority)}`);
+  if (state.filters.status) parts.push(`status=${encodeURIComponent(state.filters.status)}`);
+  if (state.filters.project) parts.push(`project=${encodeURIComponent(state.filters.project)}`);
+  if (state.filters.from) parts.push(`from=${encodeURIComponent(state.filters.from)}`);
+  if (state.filters.to) parts.push(`to=${encodeURIComponent(state.filters.to)}`);
+  if (state.filters.mine) parts.push(`mine=true`);
+  if (state.filters.attachments) parts.push(`attachments=true`);
+  if (state.filters.overdue) parts.push(`overdue=true`);
+  // sorting
+  if (state.sortBy) parts.push(`sort_by=${encodeURIComponent(state.sortBy)}`);
+  if (state.sortDir) parts.push(`order=${encodeURIComponent(state.sortDir)}`);
   parts.push(`page=${state.page}&limit=${state.perPage}`);
   return parts.join('&');
 }
@@ -180,6 +191,18 @@ function updateSelectionCount() {
   }
   const n = state.selected.size;
   badge.innerText = n === 0 ? 'No tasks selected' : `${n} selected`;
+  // enable/disable bulk action controls based on selection
+  const applyBulkStatusBtn = document.getElementById('applyBulkStatus');
+  const applyBulkPriorityBtn = document.getElementById('applyBulkPriority');
+  const bulkDeleteBtn = document.getElementById('bulkDelete');
+  const bulkStatusSel = document.getElementById('bulkStatusSelect');
+  const bulkPrioritySel = document.getElementById('bulkPrioritySelect');
+  const enabled = n > 0;
+  if (applyBulkStatusBtn) applyBulkStatusBtn.disabled = !enabled;
+  if (applyBulkPriorityBtn) applyBulkPriorityBtn.disabled = !enabled;
+  if (bulkDeleteBtn) bulkDeleteBtn.disabled = !enabled;
+  if (bulkStatusSel) bulkStatusSel.disabled = !enabled;
+  if (bulkPrioritySel) bulkPrioritySel.disabled = !enabled;
 }
 
 // Render a table view with sorting, selection and pagination
@@ -245,6 +268,8 @@ function renderTableView(tasks) {
     // select
     const tdSel = document.createElement('td');
     const cbSel = document.createElement('input'); cbSel.type='checkbox'; cbSel.className='task-select-cb'; cbSel.setAttribute('data-id', id);
+    // restore checkbox state from selection set
+    try { cbSel.checked = state.selected.has(id); } catch (e) {}
     cbSel.addEventListener('change', (e) => { if (e.target.checked) state.selected.add(id); else state.selected.delete(id); updateSelectionCount(); });
     tdSel.appendChild(cbSel);
     tr.appendChild(tdSel);
@@ -341,6 +366,15 @@ function renderTableView(tasks) {
   const wrapper = document.createElement('div'); wrapper.className = 'table-responsive';
   wrapper.appendChild(table);
   cont.appendChild(wrapper);
+
+  // keep header select-all checkbox in sync (checked if all visible rows are selected)
+  const selectAll = document.getElementById('selectAllCb');
+  if (selectAll) {
+    const rowChecks = Array.from(cont.querySelectorAll('input.task-select-cb'));
+    selectAll.checked = rowChecks.length > 0 && rowChecks.every(c => c.checked);
+    // update selectAll disabled state when no rows
+    selectAll.disabled = rowChecks.length === 0;
+  }
 
   // actions handler
   cont.querySelectorAll('button[data-action]').forEach(b => {
