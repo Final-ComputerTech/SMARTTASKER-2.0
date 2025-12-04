@@ -7,6 +7,8 @@ const { createProjectRules, updateProjectRules } = require('../validators/projec
 router.get('/', verifyToken(), projectController.getProjects);
 router.get('/summary', verifyToken(), projectController.summary);
 router.post('/', verifyToken(['admin','manager']), createProjectRules, projectController.createProject);
+router.post('/:id/collaborators', verifyToken(['admin','manager']), projectController.addCollaborator);
+router.delete('/:id/collaborators/:userId', verifyToken(['admin','manager']), projectController.removeCollaborator);
 router.get('/:id', verifyToken(), projectController.getProjectById);
 router.put('/:id', verifyToken(['admin','manager']), updateProjectRules, projectController.updateProject);
 router.delete('/:id', verifyToken(['admin']), projectController.deleteProject);

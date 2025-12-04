@@ -10,3 +10,7 @@ export const taskApi = {
   // for calendar:
   calendar: (from, to) => apiRequest(`tasks/calendar?from=${from}&to=${to}`, 'GET', null, true)
 };
+
+// assign/unassign users to tasks
+taskApi.assign = (taskId, payload) => apiRequest(`tasks/${taskId}/assign`, 'POST', payload, true);
+taskApi.unassign = (taskId, userId) => apiRequest(`tasks/${taskId}/assign/${userId}`, 'DELETE', null, true);

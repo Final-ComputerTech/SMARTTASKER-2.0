@@ -45,10 +45,53 @@ function lookupProjectNameById(id) {
   return pr ? (pr.project_name || pr.name || '') : '';
 }
 
+function lookupProjectInfoById(id) {
+  if (!id) return null;
+  return (metaCache.projects || []).find(x => String(x.project_id) === String(id) || String(x.id) === String(id)) || null;
+}
+
+// Determine if a task is "orphan": no collaborators, no project assignment, and not open to everyone
+function isOrphanTask(t) {
+  try {
+    // collaborators can be provided as array or count
+    const hasCollaborators = (Array.isArray(t.Collaborators) && t.Collaborators.length > 0) || (Array.isArray(t.collaborators) && t.collaborators.length > 0) || (t.collaborator_count && Number(t.collaborator_count) > 0) || (t.collaborators_count && Number(t.collaborators_count) > 0);
+    if (hasCollaborators) return false;
+    // project presence
+    const hasProject = !!(t.project_id || (t.Project && (t.Project.project_id || t.Project.id)));
+    if (hasProject) {
+      // if project exists, check project-level permission for 'everyone'
+      const p = lookupProjectInfoById(t.project_id || (t.Project && (t.Project.project_id || t.Project.id)));
+      if (p) {
+        const perm = String(p.user_permission || p.permission || '').toLowerCase();
+        if (perm === 'everyone' || perm === 'public') return false;
+      }
+      // if project exists but no 'everyone' permission, consider it not orphan w.r.t project (we only mark orphan when no project)
+      return false;
+    }
+    // no collaborators and no project -> orphan
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
 async function loadTasks() {
   try {
     const params = buildQueryParams();
-    const res = await taskApi.list(params);
+    console.debug('loadTasks: query params ->', params);
+    const resRaw = await taskApi.list(params);
+    console.debug('loadTasks: API response ->', resRaw);
+    // Defensive parsing: some backends return unexpected shapes (null, string, or error object)
+    let res = resRaw;
+    if (!res) {
+      console.warn('loadTasks: API returned empty response');
+      res = [];
+    } else if (typeof res === 'string') {
+      try { res = JSON.parse(res); } catch (err) { console.warn('loadTasks: response not JSON', err); res = []; }
+    } else if (typeof res === 'object' && (res.error || res.message) && !Array.isArray(res)) {
+      console.error('loadTasks: API returned error payload', res.error || res.message, res);
+      const ss = document.getElementById('searchStatus'); if (ss) ss.textContent = `Query: "${state.query}" — API error`; return;
+    }
     // ensure we have meta lookups available before rendering
     await ensureMetaCache();
     // backend returns { total, page, pageSize, tasks: [...] }
@@ -59,13 +102,18 @@ async function loadTasks() {
     else if (Array.isArray(res.data)) tasks = res.data;
     else if (Array.isArray(res.tasks || res.data)) tasks = res.tasks || res.data;
     // Normalize task objects by filling missing association objects from meta cache
-    const normalized = (tasks || []).map(t => {
+    let normalized = (tasks || []).map(t => {
       const copy = Object.assign({}, t);
       if ((!copy.Priority || Object.keys(copy.Priority).length===0) && copy.priority_id) copy.Priority = { label: lookupPriorityLabelById(copy.priority_id), priority_id: copy.priority_id };
       if ((!copy.Status || Object.keys(copy.Status).length===0) && copy.status_id) copy.Status = { label: lookupStatusLabelById(copy.status_id), status_id: copy.status_id };
       if ((!copy.Project || Object.keys(copy.Project).length===0) && copy.project_id) copy.Project = { project_name: lookupProjectNameById(copy.project_id), project_id: copy.project_id };
       return copy;
     });
+
+    // client-side orphan filter (when user checks the Orphan tasks checkbox)
+    if (state.filters.orphan) {
+      normalized = normalized.filter(isOrphanTask);
+    }
 
     renderTaskList(normalized);
     renderTableView(normalized);
@@ -92,6 +140,7 @@ function buildQueryParams() {
   if (state.filters.mine) parts.push(`mine=true`);
   if (state.filters.attachments) parts.push(`attachments=true`);
   if (state.filters.overdue) parts.push(`overdue=true`);
+  if (state.filters.type) parts.push(`type=${encodeURIComponent(state.filters.type)}`);
   // sorting
   if (state.sortBy) parts.push(`sort_by=${encodeURIComponent(state.sortBy)}`);
   if (state.sortDir) parts.push(`order=${encodeURIComponent(state.sortDir)}`);
@@ -140,8 +189,20 @@ function renderTaskList(tasks) {
     const id = String(t.task_id || t.id || '');
     // add a checkbox for bulk selection in list view
     const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'task-select-cb me-2'; cb.setAttribute('data-id', id);
+    try { cb.checked = state.selected.has(id); } catch (e) {}
     cb.addEventListener('change', (e) => { if (e.target.checked) state.selected.add(id); else state.selected.delete(id); updateSelectionCount(); });
-    const projectName = t.project?.project_name || t.Project?.project_name || '';
+    const projectName = t.project?.project_name || t.Project?.project_name || lookupProjectNameById(t.project_id || (t.Project && (t.Project.project_id || t.Project.id))) || '';
+    const projectInfo = lookupProjectInfoById(t.project_id || (t.Project && (t.Project.project_id || t.Project.id)));
+    let projectHtml = escapeHtml(projectName || '');
+    if (projectInfo) {
+      const isGroup = projectInfo.is_group || projectInfo.type === 'group' || projectInfo.team_id;
+      projectHtml += ` <span class="badge bg-${isGroup ? 'info' : 'secondary'} ms-1">${isGroup ? 'Group' : 'Individual'}</span>`;
+      if (projectInfo.user_permission) {
+        const perm = String(projectInfo.user_permission || '').toLowerCase();
+        const permColor = perm.includes('owner') ? 'primary' : perm.includes('write') || perm.includes('edit') ? 'warning' : perm.includes('read') ? 'success' : 'secondary';
+        projectHtml += ` <span class="badge bg-${permColor} ms-1">${escapeHtml(projectInfo.user_permission)}</span>`;
+      }
+    }
     const dueRaw = t.DueDate?.due_date || t.due_date || (t.due_date && t.due_date.date) || t.createdAt || t.created_at;
     const dueStr = dueRaw ? new Date(dueRaw).toLocaleString() : '';
     // determine status icon
@@ -165,7 +226,7 @@ function renderTaskList(tasks) {
               <span class="badge bg-${mapPriorityToColor(priorityName)} me-2">${priorityName}</span>
               <a href="/task-detail.html?id=${t.task_id}"><strong>${escapeHtml(t.title)}</strong></a>
             </div>
-            <div><small>${escapeHtml(projectName)}</small></div>
+            <div><small>${projectHtml}${isOrphanTask(t) ? ' <span class="badge bg-danger ms-1">Unassigned</span>' : ''}</small></div>
           </div>
         </div>
         <div>
@@ -175,8 +236,9 @@ function renderTaskList(tasks) {
     // prepend checkbox
     const left = document.createElement('div'); left.className = 'd-flex align-items-center mb-2'; left.appendChild(cb); left.appendChild(item);
     el.appendChild(left);
-    updateSelectionCount();
   });
+  // update selection badge once after rendering the list
+  updateSelectionCount();
   }
 
 function updateSelectionCount() {
@@ -187,7 +249,19 @@ function updateSelectionCount() {
     badge = document.createElement('div');
     badge.id = 'selectedCount';
     badge.className = 'small text-muted ms-3 align-self-center';
-    controls.insertBefore(badge, document.getElementById('paginationControls'));
+    const paginationEl = document.getElementById('paginationControls');
+    // Prefer inserting before paginationControls only when it's actually a child of `controls`.
+    // Use a strict parentNode check and robust try/catch fallback to avoid DOM NotFoundError
+    try {
+      if (paginationEl && paginationEl.parentNode === controls) {
+        controls.insertBefore(badge, paginationEl);
+      } else {
+        controls.appendChild(badge);
+      }
+    } catch (insErr) {
+      console.warn('Could not insert selectedCount before paginationControls, appending instead', insErr);
+      try { controls.appendChild(badge); } catch (_) { /* swallow */ }
+    }
   }
   const n = state.selected.size;
   badge.innerText = n === 0 ? 'No tasks selected' : `${n} selected`;
@@ -218,7 +292,7 @@ function renderTableView(tasks) {
   headers.forEach(h => {
     const th = document.createElement('th');
     // allow wrapping for most columns to avoid truncation on narrow screens
-    th.style.whiteSpace = (h.k === 'select' || h.k === 'actions') ? 'nowrap' : 'normal';
+  th.style.whiteSpace = (h.k === 'select' || h.k === 'actions') ? 'nowrap' : 'normal';
     // prefer wider title column so inline editing has space
     if (h.k === 'title') { th.style.width = '40%'; th.style.minWidth = '220px'; }
     if (h.k === 'project') { th.style.width = '15%'; }
@@ -236,6 +310,13 @@ function renderTableView(tasks) {
       th.appendChild(cb);
     } else {
       th.textContent = h.t;
+      // Ensure the Project header looks and behaves as a sortable clickable column
+      if (h.k === 'project') {
+        th.style.whiteSpace = 'normal';
+        th.style.width = '15%';
+        th.style.cursor = 'pointer';
+        th.title = 'Sort by project';
+      }
       if (h.sortable) {
         th.style.cursor = 'pointer';
         th.addEventListener('click', () => { toggleSort(h.k); });
@@ -275,8 +356,24 @@ function renderTableView(tasks) {
     tr.appendChild(tdSel);
     // title
     const tdTitle = document.createElement('td'); tdTitle.style.minWidth = '220px'; tdTitle.style.width = '40%'; tdTitle.innerHTML = `<a href="/task-detail.html?id=${id}">${escapeHtml(t.title || '')}</a>`; tr.appendChild(tdTitle);
-    // project
-    const tdProj = document.createElement('td'); tdProj.style.width = '15%'; tdProj.textContent = t.project?.project_name || t.Project?.project_name || ''; tr.appendChild(tdProj);
+    // project (show name + individual/group + permission badge when available)
+    const tdProj = document.createElement('td'); tdProj.style.width = '15%';
+    const projName = t.project?.project_name || t.Project?.project_name || lookupProjectNameById(t.project_id || (t.Project && (t.Project.project_id || t.Project.id))) || '';
+    const projInfo = lookupProjectInfoById(t.project_id || (t.Project && (t.Project.project_id || t.Project.id)));
+    let projHtml = escapeHtml(projName || '');
+    if (projInfo) {
+      // group vs individual indicator
+      const isGroup = projInfo.is_group || projInfo.type === 'group' || projInfo.team_id;
+      projHtml += ` <span class="badge bg-${isGroup ? 'info' : 'secondary'} ms-1">${isGroup ? 'Group' : 'Individual'}</span>`;
+      // user permission (if provided by backend in meta)
+      if (projInfo.user_permission) {
+        const perm = String(projInfo.user_permission || '').toLowerCase();
+        const permColor = perm.includes('owner') ? 'primary' : perm.includes('write') || perm.includes('edit') ? 'warning' : perm.includes('read') ? 'success' : 'secondary';
+        projHtml += ` <span class="badge bg-${permColor} ms-1">${escapeHtml(projInfo.user_permission)}</span>`;
+      }
+    }
+    tdProj.innerHTML = projHtml;
+    tr.appendChild(tdProj);
     // priority (editable select)
     const tdPr = document.createElement('td');
     const prSelect = document.createElement('select');
@@ -645,6 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
     state.filters.mine = document.getElementById('filterMine')?.checked || false;
     state.filters.attachments = document.getElementById('filterAttachments')?.checked || false;
     state.filters.overdue = document.getElementById('filterOverdue')?.checked || false;
+    state.filters.orphan = document.getElementById('filterOrphan')?.checked || false;
     state.page = 1;
     loadTasks();
   });
@@ -657,6 +755,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('filterMine').checked = false;
     document.getElementById('filterAttachments').checked = false;
     document.getElementById('filterOverdue').checked = false;
+    document.getElementById('filterOrphan') && (document.getElementById('filterOrphan').checked = false);
     state.filters = {};
     state.page = 1;
     loadTasks();
@@ -696,6 +795,12 @@ document.addEventListener('DOMContentLoaded', () => {
 // Reload tasks when a new task is created via the modal
 document.addEventListener('task:created', () => {
   loadTasks();
+});
+
+// When a new project is created elsewhere, refresh project filters and tasks
+document.addEventListener('project:created', () => {
+  try { loadFilterOptions().catch(() => {}); } catch (_) {}
+  try { loadTasks(); } catch (_) {}
 });
 
 async function loadFilterOptions() {
@@ -793,13 +898,30 @@ async function loadFilterOptions() {
   try {
     const pr = await apiRequest('projects', 'GET');
     const projects = Array.isArray(pr) ? pr : (pr.data || pr || []);
-    const selPr = document.getElementById('filterProject'); if (selPr && Array.isArray(projects)) {
-      projects.forEach(p => { const opt = document.createElement('option'); opt.value = p.project_id; opt.textContent = p.project_name || p.name; selPr.appendChild(opt); });
+    // populate metaCache.projects so task rendering can lookup project names
+    if (Array.isArray(projects) && projects.length) metaCache.projects = projects;
+    const selPr = document.getElementById('filterProject');
+    if (selPr && Array.isArray(projects)) {
+      projects.forEach(p => {
+        const opt = document.createElement('option'); opt.value = p.project_id || p.id || '';
+        const isGroup = p.is_group || p.type === 'group' || p.team_id;
+        const prefix = isGroup ? '👥 ' : '👤 ';
+        opt.textContent = `${prefix}${p.project_name || p.name || ''}`;
+        // attach raw data attributes for potential future use
+        try { opt.dataset.isGroup = isGroup ? '1' : '0'; } catch(_) {}
+        selPr.appendChild(opt);
+      });
     }
     // fallback: use metaCache.projects when API returned none
     if ((!Array.isArray(projects) || projects.length === 0) && Array.isArray(metaCache.projects) && metaCache.projects.length) {
       const selPr2 = document.getElementById('filterProject');
-      metaCache.projects.forEach(p => { const opt = document.createElement('option'); opt.value = p.project_id; opt.textContent = p.project_name || p.name; if (selPr2) selPr2.appendChild(opt); });
+      metaCache.projects.forEach(p => {
+        const opt = document.createElement('option'); opt.value = p.project_id || p.id || '';
+        const isGroup = p.is_group || p.type === 'group' || p.team_id;
+        const prefix = isGroup ? '👥 ' : '👤 ';
+        opt.textContent = `${prefix}${p.project_name || p.name || ''}`;
+        if (selPr2) selPr2.appendChild(opt);
+      });
     }
   } catch (e) { console.warn('Could not load filter projects', e); }
 }

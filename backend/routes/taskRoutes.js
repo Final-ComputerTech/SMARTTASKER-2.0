@@ -21,6 +21,9 @@ router.get('/:id/changes', verifyToken(), taskController.getTaskChanges);
 router.get('/:id/conversations', verifyToken(), conversationController.listForTask);
 router.post('/:id/conversations', verifyToken(), conversationController.createForTask);
 router.delete('/conversations/:conversationId', verifyToken(), conversationController.delete);
+// task assignment endpoints
+router.post('/:id/assign', verifyToken(), taskController.assignUserToTask);
+router.delete('/:id/assign/:userId', verifyToken(), taskController.unassignUserFromTask);
 // Reminders endpoints
 const reminderController = require('../controllers/reminderController');
 router.get('/:id/reminders', verifyToken(), reminderController.listForTask);

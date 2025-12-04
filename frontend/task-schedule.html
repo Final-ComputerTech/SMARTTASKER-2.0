@@ -34,6 +34,7 @@
 				<h5>Tasks</h5>
 				<div class="d-flex gap-2">
 										<button id="openNewTaskBtn" class="btn btn-sm btn-primary">New Task</button>
+										<button id="openNewProjectBtn" class="btn btn-sm btn-outline-primary">New Project</button>
 										<div id="searchWrap" style="position:relative; width:50%;">
 											<input id="searchInput" class="form-control form-control-sm" placeholder="Search tasks..." />
 											<div id="searchSuggestions" class="list-group" style="position:absolute;z-index:2050;left:0;right:0;display:none;max-height:260px;overflow:auto;"></div>
@@ -56,11 +57,12 @@
 			  </div>
 			</div>
 			<div class="d-flex justify-content-between align-items-center mb-2">
-			  <div>
-			    <label class="form-check-label me-2"><input id="filterMine" type="checkbox" class="form-check-input me-1"/> My tasks only</label>
-			    <label class="form-check-label me-2"><input id="filterAttachments" type="checkbox" class="form-check-input me-1"/> Has attachments</label>
-			    <label class="form-check-label"><input id="filterOverdue" type="checkbox" class="form-check-input me-1"/> Overdue</label>
-			  </div>
+							<div>
+								<label class="form-check-label me-2"><input id="filterMine" type="checkbox" class="form-check-input me-1"/> My tasks only</label>
+								<label class="form-check-label me-2"><input id="filterAttachments" type="checkbox" class="form-check-input me-1"/> Has attachments</label>
+								<label class="form-check-label me-2"><input id="filterOverdue" type="checkbox" class="form-check-input me-1"/> Overdue</label>
+								<label class="form-check-label"><input id="filterOrphan" type="checkbox" class="form-check-input me-1"/> Orphan tasks</label>
+							</div>
 			  <div>
 			    <button id="applyFilters" class="btn btn-sm btn-outline-secondary">Apply</button>
 			    <button id="clearFilters" class="btn btn-sm btn-outline-secondary">Clear</button>
@@ -68,19 +70,14 @@
 			</div>
 			<div id="taskControls" class="mb-2 d-flex justify-content-between align-items-center">
 			  <div class="d-flex gap-2 align-items-center">
-			    <select id="bulkStatusSelect" class="form-select form-select-sm" style="width:180px;"><option value="">Bulk: Set status</option></select>
-			    <button id="applyBulkStatus" class="btn btn-sm btn-outline-secondary">Apply</button>
-			    <select id="bulkPrioritySelect" class="form-select form-select-sm" style="width:180px;"><option value="">Bulk: Set priority</option></select>
-			    <button id="applyBulkPriority" class="btn btn-sm btn-outline-secondary">Apply</button>
-			    <button id="bulkDelete" class="btn btn-sm btn-danger">Delete</button>
+			
 			  </div>
 			  <div class="d-flex align-items-center">
 			    <div id="searchStatus" class="small text-muted me-3">Query</div>
 			    <div id="paginationControls"></div>
 			  </div>
 			</div>
-						<!-- task table moved below to full width row -->
-						<div id="taskList" class="mb-2">Loading tasks...</div>
+						
 		</div>
 	</div>
 </div>
@@ -95,8 +92,40 @@
 		</div>
 </section>
 </main>
+<!-- New Project Modal -->
+<div class="modal fade" id="newProjectModal" tabindex="-1" aria-hidden="true" style="display:none;">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">Create New Project</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="mb-2">
+					<label class="form-label">Project name</label>
+					<input id="newProjectName" class="form-control" />
+				</div>
+				<div class="mb-2">
+					<label class="form-label">Description (optional)</label>
+					<textarea id="newProjectDesc" class="form-control" rows="3"></textarea>
+				</div>
+				<div class="mb-2">
+					<label class="form-label">Tasks (one per line)</label>
+					<textarea id="newProjectTasks" class="form-control" rows="6" placeholder="Enter one task title per line"></textarea>
+					<div class="form-text">When you create the project, each line will become a new task assigned to this project.</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				<button id="createProjectBtn" type="button" class="btn btn-primary">Create Project</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <script src="assets/js/utils/componentLoader.js"></script>
 <script type="module" src="assets/js/pages/newTask.js"></script>
+<script type="module" src="assets/js/pages/projectCreate.js"></script>
 <script type="module" src="assets/js/pages/taskSchedule.js"></script>
 </body>
 </html>
