@@ -4,9 +4,34 @@
       <li><a href="dashboard.html">Dashboard</a></li>
       <li><a href="task-schedule.html">Task Schedule</a></li>
       <li><a href="projects.html">Projects</a></li>
-      <li><a href="notifications.html">Notifications</a></li>
+      <li><a href="notifications.html">Notifications <span id="notifBadge" style="display:inline-block;margin-left:6px;"></span></a></li>
       <li><a href="settings.html">Settings</a></li>
       <li><a href="users.html">Users</a></li>
     </ul>
+    <script>
+      (function(){
+        try {
+          const token = localStorage.getItem('st_token');
+          if (!token) return;
+          const apiBase = (window.location.port && window.location.port !== '3000') ? 'http://localhost:3000/api' : '/api';
+          fetch(`${apiBase}/notifications/unread-count`, { headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } }).then(r => r.json()).then(json => {
+            const badgeEl = document.getElementById('notifBadge'); if (!badgeEl) return;
+            const unread = json && (json.unread_count || 0);
+            const important = json && (json.important_count || 0);
+            const overdueTasks = json && (json.overdue_tasks_count || 0);
+            const noStatus = json && (json.no_status_tasks_count || 0);
+            if (unread > 0) {
+              badgeEl.innerHTML = `<span class="badge" style="background:${important>0?'#dc3545':'#0dcaf0'};color:white;padding:2px 6px;border-radius:999px;">${unread}</span>`;
+              let title = `You have ${unread} unread notifications`;
+              const extras = [];
+              if (overdueTasks > 0) extras.push(`${overdueTasks} overdue task${overdueTasks>1?'s':''}`);
+              if (noStatus > 0) extras.push(`${noStatus} task${noStatus>1?'s':''} without status`);
+              if (extras.length) title += ' • ' + extras.join(' • ');
+              badgeEl.title = title;
+            } else { badgeEl.innerHTML = ''; badgeEl.title = ''; }
+          }).catch(()=>{});
+        } catch(e) {}
+      })();
+    </script>
   </aside>
   

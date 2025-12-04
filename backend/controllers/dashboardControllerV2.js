@@ -49,10 +49,10 @@ exports.summary = async (req, res) => {
       replacements = { userId };
     }
     const statuses = await sequelize.query(
-      `SELECT s.label as status, COUNT(*) as count FROM Tasks t
+      `SELECT COALESCE(s.label, 'No status') as status, COUNT(*) as count FROM Tasks t
        LEFT JOIN statuses s ON t.status_id = s.status_id
        WHERE ${accessWhere}
-       GROUP BY s.label`,
+       GROUP BY COALESCE(s.label, 'No status')`,
       { type: QueryTypes.SELECT, replacements }
     );
 
@@ -72,47 +72,110 @@ exports.summary = async (req, res) => {
       { type: QueryTypes.SELECT, replacements }
     );
 
-    const upcoming = await sequelize.query(
-      `SELECT t.task_id, t.title, pr.project_name as project, p.label as priority, s.label as status, d.due_date
-       FROM Tasks t
-       LEFT JOIN due_dates d ON t.due_date_id = d.due_date_id
-       LEFT JOIN Projects pr ON t.project_id = pr.project_id
-       LEFT JOIN priorities p ON t.priority_id = p.priority_id
-       LEFT JOIN statuses s ON t.status_id = s.status_id
-       WHERE d.due_date IS NOT NULL
-         AND d.due_date >= NOW()
-         AND d.due_date <= DATE_ADD(NOW(), INTERVAL 7 DAY)
-         AND (s.label IS NULL OR s.label NOT IN ('Done','Completed'))
-         AND ${accessWhere}
-       ORDER BY d.due_date ASC
-       LIMIT 20`,
-      { type: QueryTypes.SELECT, replacements }
-    );
+    // Try modern due_dates.due_date first. If the DB uses the legacy Due_Date(date,time) schema
+    // the primary query will fail due to missing columns; in that case fall back to the legacy query.
+    let upcoming;
+    try {
+      upcoming = await sequelize.query(
+        `SELECT t.task_id, t.title, pr.project_name as project, p.label as priority, s.label as status, d.due_date
+         FROM Tasks t
+         LEFT JOIN due_dates d ON t.due_date_id = d.due_date_id
+         LEFT JOIN Projects pr ON t.project_id = pr.project_id
+         LEFT JOIN priorities p ON t.priority_id = p.priority_id
+         LEFT JOIN statuses s ON t.status_id = s.status_id
+         WHERE d.due_date IS NOT NULL
+           AND d.due_date >= NOW()
+           AND d.due_date <= DATE_ADD(NOW(), INTERVAL 7 DAY)
+           AND (s.label IS NULL OR s.label NOT IN ('Done','Completed'))
+           AND ${accessWhere}
+         ORDER BY d.due_date ASC
+         LIMIT 20`,
+        { type: QueryTypes.SELECT, replacements }
+      );
+    } catch (e) {
+      // Fallback to legacy Due_Date table (columns: date, time) and coerce to datetime
+      upcoming = await sequelize.query(
+        `SELECT t.task_id, t.title, pr.project_name as project, p.label as priority, s.label as status,
+           STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') as due_date
+         FROM Tasks t
+         LEFT JOIN Due_Date dd ON t.due_date_id = dd.due_date_id
+         LEFT JOIN Projects pr ON t.project_id = pr.project_id
+         LEFT JOIN priorities p ON t.priority_id = p.priority_id
+         LEFT JOIN statuses s ON t.status_id = s.status_id
+         WHERE STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') IS NOT NULL
+           AND STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') >= NOW()
+           AND STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') <= DATE_ADD(NOW(), INTERVAL 7 DAY)
+           AND (s.label IS NULL OR s.label NOT IN ('Done','Completed'))
+           AND ${accessWhere}
+         ORDER BY STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') ASC
+         LIMIT 20`,
+        { type: QueryTypes.SELECT, replacements }
+      );
+    }
 
-    const overdueRes = await sequelize.query(
-      `SELECT COUNT(*) as count FROM Tasks t
-       LEFT JOIN due_dates d ON t.due_date_id = d.due_date_id
-       LEFT JOIN statuses s ON t.status_id = s.status_id
-       WHERE d.due_date IS NOT NULL AND d.due_date < NOW() AND (s.label IS NULL OR s.label NOT IN ('Done','Completed')) AND ${accessWhere}`,
-      { type: QueryTypes.SELECT, replacements }
-    );
+    let overdueRes;
+    try {
+      overdueRes = await sequelize.query(
+        `SELECT COUNT(*) as count FROM Tasks t
+         LEFT JOIN due_dates d ON t.due_date_id = d.due_date_id
+         LEFT JOIN statuses s ON t.status_id = s.status_id
+         WHERE d.due_date IS NOT NULL
+           AND d.due_date < NOW()
+           AND (s.label IS NULL OR LOWER(s.label) NOT IN ('done','completed'))
+           AND ${accessWhere}`,
+        { type: QueryTypes.SELECT, replacements }
+      );
+    } catch (e) {
+      overdueRes = await sequelize.query(
+        `SELECT COUNT(*) as count FROM Tasks t
+         LEFT JOIN Due_Date dd ON t.due_date_id = dd.due_date_id
+         LEFT JOIN statuses s ON t.status_id = s.status_id
+         WHERE STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') IS NOT NULL
+           AND STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') < NOW()
+           AND (s.label IS NULL OR LOWER(s.label) NOT IN ('done','completed'))
+           AND ${accessWhere}`,
+        { type: QueryTypes.SELECT, replacements }
+      );
+    }
 
     const overdueCount = overdueRes && overdueRes[0] ? parseInt(overdueRes[0].count, 10) : 0;
 
-    const categoryRes = await sequelize.query(
-      `SELECT
+    let categoryRes;
+    try {
+      categoryRes = await sequelize.query(
+        `SELECT
          SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE 'todo%' OR LOWER(COALESCE(s.label,'')) LIKE 'to do%' THEN 1 ELSE 0 END) as todo,
          SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE '%in progress%' OR LOWER(COALESCE(s.label,'')) = 'in_progress' THEN 1 ELSE 0 END) as in_progress,
          SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE 'done%' OR LOWER(COALESCE(s.label,'')) LIKE 'completed%' THEN 1 ELSE 0 END) as done,
          SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE 'failed%' THEN 1 ELSE 0 END) as failed,
-         SUM(CASE WHEN d.due_date IS NOT NULL AND d.due_date < NOW() AND (s.label IS NULL OR LOWER(s.label) NOT IN ('done','completed')) THEN 1 ELSE 0 END) as overdue,
+         SUM(CASE WHEN d.due_date IS NOT NULL
+                 AND d.due_date < NOW()
+                 AND (s.label IS NULL OR LOWER(s.label) NOT IN ('done','completed')) THEN 1 ELSE 0 END) as overdue,
          COUNT(*) as total
        FROM Tasks t
        LEFT JOIN statuses s ON t.status_id = s.status_id
        LEFT JOIN due_dates d ON t.due_date_id = d.due_date_id
        WHERE ${accessWhere}`,
-      { type: QueryTypes.SELECT, replacements }
-    );
+        { type: QueryTypes.SELECT, replacements }
+      );
+    } catch (e) {
+      categoryRes = await sequelize.query(
+        `SELECT
+         SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE 'todo%' OR LOWER(COALESCE(s.label,'')) LIKE 'to do%' THEN 1 ELSE 0 END) as todo,
+         SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE '%in progress%' OR LOWER(COALESCE(s.label,'')) = 'in_progress' THEN 1 ELSE 0 END) as in_progress,
+         SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE 'done%' OR LOWER(COALESCE(s.label,'')) LIKE 'completed%' THEN 1 ELSE 0 END) as done,
+         SUM(CASE WHEN LOWER(COALESCE(s.label,'')) LIKE 'failed%' THEN 1 ELSE 0 END) as failed,
+         SUM(CASE WHEN STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') IS NOT NULL
+                 AND STR_TO_DATE(CONCAT(dd.date, ' ', dd.time), '%Y-%m-%d %H:%i:%s') < NOW()
+                 AND (s.label IS NULL OR LOWER(s.label) NOT IN ('done','completed')) THEN 1 ELSE 0 END) as overdue,
+         COUNT(*) as total
+       FROM Tasks t
+       LEFT JOIN statuses s ON t.status_id = s.status_id
+       LEFT JOIN Due_Date dd ON t.due_date_id = dd.due_date_id
+       WHERE ${accessWhere}`,
+        { type: QueryTypes.SELECT, replacements }
+      );
+    }
 
     const categoryCounts = (categoryRes && categoryRes[0]) ? categoryRes[0] : { todo:0, in_progress:0, done:0, failed:0, overdue:0, total:0 };
 

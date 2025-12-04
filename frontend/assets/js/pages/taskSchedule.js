@@ -111,6 +111,33 @@ async function loadTasks() {
       return copy;
     });
 
+    // If the current user is a project manager for any projects, also fetch all tasks
+    // from those projects and merge them so managers see all project tasks in their schedule.
+    try {
+      const mgrProjectIds = (metaCache.projects || []).filter(p => String(p.user_permission || '').toLowerCase() === 'manager').map(p => p.project_id).filter(Boolean);
+      if (mgrProjectIds.length) {
+        // fetch tasks for each managed project in parallel
+        const mgrFetches = mgrProjectIds.map(pid => taskApi.list(`project=${encodeURIComponent(pid)}&limit=1000`));
+        const mgrResults = await Promise.all(mgrFetches.map(p => p.catch(e => { console.warn('manager project tasks fetch failed', e); return null; })));
+        const mgrTasks = [];
+        mgrResults.forEach(r => {
+          if (!r) return;
+          if (Array.isArray(r)) mgrTasks.push(...r);
+          else if (Array.isArray(r.tasks)) mgrTasks.push(...r.tasks);
+          else if (Array.isArray(r.data)) mgrTasks.push(...r.data);
+        });
+        if (mgrTasks.length) {
+          // merge manager tasks with primary set, dedupe by task_id
+          const map = new Map();
+          normalized.forEach(t => { const id = String(t.task_id || t.id || ''); if (id) map.set(id, t); });
+          mgrTasks.forEach(t => { const id = String(t.task_id || t.id || ''); if (!id) return; if (!map.has(id)) map.set(id, t); });
+          normalized = Array.from(map.values());
+          // adjust total count for pagination display when possible
+          try { state.total = normalized.length; } catch (e) {}
+        }
+      }
+    } catch (e) { console.warn('Could not merge manager project tasks', e); }
+
     // client-side orphan filter (when user checks the Orphan tasks checkbox)
     if (state.filters.orphan) {
       normalized = normalized.filter(isOrphanTask);
