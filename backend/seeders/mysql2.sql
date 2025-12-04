@@ -220,3 +220,12 @@ INSERT INTO Project_Category (category_id, name) VALUES
 (UUID(), 'Shopping'),
 (UUID(), 'Family');
 
+ALTER TABLE Collaborator
+  ADD COLUMN role ENUM('member','manager') NOT NULL DEFAULT 'member';
+
+-- mark collaborators who are project owners as manager
+UPDATE collaborators c
+JOIN project p ON p.project_id = c.project_id
+SET c.role = 'manager'
+WHERE p.owner_id IS NOT NULL AND p.owner_id = c.user_id;
+

@@ -1,6 +1,7 @@
 import { taskApi } from '../api/taskApi.js';
 import { requireAuthRedirect } from '../utils/auth.js';
 import { apiRequest } from '../utils/request.js';
+import { authProfileApi } from '../api/authApi.js';
 
 requireAuthRedirect();
 
@@ -196,7 +197,8 @@ function renderTaskList(tasks) {
     let projectHtml = escapeHtml(projectName || '');
     if (projectInfo) {
       const isGroup = projectInfo.is_group || projectInfo.type === 'group' || projectInfo.team_id;
-      projectHtml += ` <span class="badge bg-${isGroup ? 'info' : 'secondary'} ms-1">${isGroup ? 'Group' : 'Individual'}</span>`;
+      // Show a group/team badge only when the project is a group/team project.
+      if (isGroup) projectHtml += ` <span class="badge bg-info ms-1">Group</span>`;
       if (projectInfo.user_permission) {
         const perm = String(projectInfo.user_permission || '').toLowerCase();
         const permColor = perm.includes('owner') ? 'primary' : perm.includes('write') || perm.includes('edit') ? 'warning' : perm.includes('read') ? 'success' : 'secondary';
@@ -362,9 +364,9 @@ function renderTableView(tasks) {
     const projInfo = lookupProjectInfoById(t.project_id || (t.Project && (t.Project.project_id || t.Project.id)));
     let projHtml = escapeHtml(projName || '');
     if (projInfo) {
-      // group vs individual indicator
+      // group indicator: show only when this is a group/team project
       const isGroup = projInfo.is_group || projInfo.type === 'group' || projInfo.team_id;
-      projHtml += ` <span class="badge bg-${isGroup ? 'info' : 'secondary'} ms-1">${isGroup ? 'Group' : 'Individual'}</span>`;
+      if (isGroup) projHtml += ` <span class="badge bg-info ms-1">Group</span>`;
       // user permission (if provided by backend in meta)
       if (projInfo.user_permission) {
         const perm = String(projInfo.user_permission || '').toLowerCase();
@@ -711,7 +713,18 @@ function showTasksForDate(dateStr, tasksForDay) {
     el.appendChild(item);
   });
 }
-document.addEventListener('DOMContentLoaded', loadTasks);
+// On load: determine user role and default to 'mine' for non-admins, then load tasks
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const me = await authProfileApi.me();
+    const isAdmin = me && me.role && String(me.role) === 'admin';
+    if (!isAdmin && (typeof state.filters.mine === 'undefined' || state.filters.mine === false)) {
+      state.filters.mine = true;
+      const cb = document.getElementById('filterMine'); if (cb) cb.checked = true;
+    }
+  } catch (e) { /* ignore profile errors and continue */ }
+  loadTasks();
+});
 
 // Initialize UI bindings
 document.addEventListener('DOMContentLoaded', () => {

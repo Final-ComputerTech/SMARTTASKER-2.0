@@ -1,4 +1,5 @@
 import { taskApi } from '../api/taskApi.js';
+import { authProfileApi } from '../api/authApi.js';
 import { requireAuthRedirect } from '../utils/auth.js';
 import { apiRequest, apiUpload } from '../utils/request.js';
 
@@ -47,6 +48,45 @@ async function loadTask() {
     } catch (e) { console.warn('Could not enrich task metadata', e); }
 
     renderTask(task);
+    // determine current user's permissions so we can hide/disable controls
+    try {
+      const me = await authProfileApi.me();
+      const reqUserId = me && me.user_id ? String(me.user_id) : null;
+      const isAdmin = me && me.role && String(me.role) === 'admin';
+      let canEdit = false; // upload files, add subtasks, edit
+      if (isAdmin) canEdit = true;
+      if (task.user_id && reqUserId && String(task.user_id) === reqUserId) canEdit = true;
+      if (!canEdit && task.project_id) {
+        try {
+          const proj = await apiRequest(`projects/${task.project_id}`, 'GET', null, true);
+          // project endpoint returns { project, tasks, members }
+          const project = proj && proj.project ? proj.project : proj;
+          // if current user is owner or listed as manager in members, allow edit
+          if (project && project.owner_id && String(project.owner_id) === reqUserId) canEdit = true;
+          const members = proj && proj.members ? proj.members : [];
+          if (!canEdit && Array.isArray(members) && members.find(m => String(m.user_id) === reqUserId && (m.user_permission === 'manager' || m.user_permission === 'owner' || m.user_permission === 'admin'))) canEdit = true;
+        } catch (e) { /* ignore project fetch errors */ }
+      }
+      // toggle attachment upload control
+      const attachInput = document.getElementById('attachmentInput');
+      const attachBtn = document.getElementById('uploadAttachmentsBtn');
+      if (attachInput) attachInput.disabled = !canEdit;
+      if (attachBtn) attachBtn.disabled = !canEdit;
+      // toggle subtask add control
+      const subInput = document.getElementById('subtaskInput');
+      const subBtn = document.getElementById('addSubtaskBtn');
+      if (subInput) subInput.disabled = !canEdit;
+      if (subBtn) subBtn.disabled = !canEdit;
+      // visually hide the controls for clarity when no permission
+      if (!canEdit) {
+        if (attachInput && attachInput.parentElement) attachInput.parentElement.style.opacity = '0.6';
+        if (subInput && subInput.parentElement) subInput.parentElement.style.opacity = '0.6';
+      } else {
+        if (attachInput && attachInput.parentElement) attachInput.parentElement.style.opacity = '';
+        if (subInput && subInput.parentElement) subInput.parentElement.style.opacity = '';
+      }
+    } catch (e) { console.warn('Could not determine user permissions', e); }
+
     await loadChanges(id);
     await loadComments(id);
     await loadReminders(id);
@@ -113,6 +153,32 @@ document.getElementById('refreshChangesBtn')?.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', loadTask);
+
+// Listen for assignment changes happening elsewhere (Project Detail page)
+document.addEventListener('task:assignment-changed', (ev) => {
+  try {
+    const detail = ev && ev.detail ? ev.detail : null;
+    if (!detail) return;
+    const currentId = getParam('id');
+    if (String(currentId) === String(detail.taskId)) {
+      // reload task to reflect new assignment
+      loadTask();
+    }
+  } catch (e) { console.warn('Error handling task:assignment-changed', e); }
+});
+
+// Cross-tab synchronization: listen for storage events when assignment changes occur in other tabs
+window.addEventListener('storage', (ev) => {
+  try {
+    if (!ev.key || ev.key !== 'task:assign') return;
+    const payload = ev.newValue ? JSON.parse(ev.newValue) : null;
+    if (!payload) return;
+    const currentId = getParam('id');
+    if (String(currentId) === String(payload.taskId)) {
+      loadTask();
+    }
+  } catch (e) { console.warn('Error handling storage task:assign', e); }
+});
 
 // ---------------- Conversations (comments) ----------------
 let _commentsPoll = null;

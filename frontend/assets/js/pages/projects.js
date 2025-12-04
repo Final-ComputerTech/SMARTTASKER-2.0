@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('projectModal');
   const save = document.getElementById('projSave');
   if (newBtn && modal) newBtn.addEventListener('click', () => { modal.dataset.editId = ''; document.getElementById('projName').value=''; document.getElementById('projDesc').value=''; document.getElementById('projectModalTitle').innerText = 'New Project'; showModal(modal); });
+  // Clear tasks textarea when opening new project modal
+  if (newBtn && modal) newBtn.addEventListener('click', () => { const t = document.getElementById('projTasksText'); if (t) t.value = ''; });
   // close buttons
   modal.querySelectorAll('[data-bs-dismiss]').forEach(b => b.addEventListener('click', () => hideModal(modal)));
   if (save) save.addEventListener('click', async () => {
@@ -88,14 +90,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const payload = { project_name: document.getElementById('projName').value.trim(), description: document.getElementById('projDesc').value.trim() };
     try {
       if (id) {
-        const updated = await projectApi.update(id, payload);
-        // notify other modules that a project was updated
-        try { document.dispatchEvent(new CustomEvent('project:updated', { detail: { project: updated } })); } catch (_) {}
-      } else {
-        const created = await projectApi.create(payload);
-        // notify other modules that a project was created
-        try { document.dispatchEvent(new CustomEvent('project:created', { detail: { project: created } })); } catch (_) {}
-      }
+          const updated = await projectApi.update(id, payload);
+          // notify other modules that a project was updated
+          try { document.dispatchEvent(new CustomEvent('project:updated', { detail: { project: updated } })); } catch (_) {}
+        } else {
+          // include tasks if provided (one per line)
+          const tasksText = (document.getElementById('projTasksText') && document.getElementById('projTasksText').value) || '';
+          const lines = tasksText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+          const tasksPayload = lines.map(t => ({ title: t }));
+          const created = await projectApi.create(Object.assign({}, payload, { tasks: tasksPayload }));
+          // notify other modules that a project was created
+          try { document.dispatchEvent(new CustomEvent('project:created', { detail: { project: created } })); } catch (_) {}
+        }
       hideModal(modal);
       loadProjects(); loadSummary();
     } catch (e) { alert('Save failed: ' + (e.message || e)); }

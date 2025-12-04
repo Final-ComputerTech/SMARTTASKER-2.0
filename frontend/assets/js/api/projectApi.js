@@ -11,3 +11,4 @@ projectApi.update = (id, payload) => apiRequest(`projects/${id}`, 'PUT', payload
 projectApi.delete = (id) => apiRequest(`projects/${id}`, 'DELETE', null, true);
 projectApi.addCollaborator = (projectId, payload) => apiRequest(`projects/${projectId}/collaborators`, 'POST', payload, true);
 projectApi.removeCollaborator = (projectId, userId) => apiRequest(`projects/${projectId}/collaborators/${userId}`, 'DELETE', null, true);
+projectApi.updateCollaborator = (projectId, userId, payload) => apiRequest(`projects/${projectId}/collaborators/${userId}`, 'PUT', payload, true);

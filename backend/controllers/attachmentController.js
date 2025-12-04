@@ -15,6 +15,25 @@ exports.listForTask = async (req, res) => {
 exports.uploadForTask = async (req, res) => {
   try {
     const { id } = req.params;
+    // permission: only admin, assigned user, or project manager (owner or collaborator.role==='manager') may upload
+    try {
+      const task = await require('../models/Task').findByPk(id);
+      if (!task) return res.status(404).json({ error: 'Task not found' });
+      if (req.user && req.user.role !== 'admin') {
+        const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+        let allowed = false;
+        if (task.user_id && String(task.user_id) === reqUserId) allowed = true;
+        if (!allowed && task.project_id) {
+          const proj = await require('../models/Project').findByPk(task.project_id);
+          if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) allowed = true;
+          if (!allowed) {
+            const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
+            if (coll && coll.role === 'manager') allowed = true;
+          }
+        }
+        if (!allowed) return res.status(403).json({ error: 'Forbidden' });
+      }
+    } catch (e) { return res.status(500).json({ error: e.message || 'Server error' }); }
     if (!req.files || req.files.length === 0) return res.status(400).json({ error: 'No files uploaded' });
     const created = [];
     for (const f of req.files) {

@@ -6,9 +6,11 @@ const { createProjectRules, updateProjectRules } = require('../validators/projec
 
 router.get('/', verifyToken(), projectController.getProjects);
 router.get('/summary', verifyToken(), projectController.summary);
-router.post('/', verifyToken(['admin','manager']), createProjectRules, projectController.createProject);
-router.post('/:id/collaborators', verifyToken(['admin','manager']), projectController.addCollaborator);
-router.delete('/:id/collaborators/:userId', verifyToken(['admin','manager']), projectController.removeCollaborator);
+// Allow any authenticated user to create a project; controller enforces owner assignment rules
+router.post('/', verifyToken(), createProjectRules, projectController.createProject);
+router.post('/:id/collaborators', verifyToken(), projectController.addCollaborator);
+router.delete('/:id/collaborators/:userId', verifyToken(), projectController.removeCollaborator);
+router.put('/:id/collaborators/:userId', verifyToken(), projectController.updateCollaborator);
 router.get('/:id', verifyToken(), projectController.getProjectById);
 router.put('/:id', verifyToken(['admin','manager']), updateProjectRules, projectController.updateProject);
 router.delete('/:id', verifyToken(['admin']), projectController.deleteProject);

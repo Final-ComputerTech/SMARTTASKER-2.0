@@ -42,6 +42,23 @@ exports.createTask = async (req, res) => {
       reminder_id: req.body.reminder_id || null,
       user_id: req.user.user_id
     };
+    // If creating a task inside a project, ensure the requester is a project manager (or admin)
+    if (payload.project_id) {
+      try {
+        const proj = await Project.findByPk(payload.project_id);
+        if (!proj) return res.status(404).json({ error: 'Project not found' });
+        const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+        const reqRole = req.user && req.user.role ? String(req.user.role) : null;
+        let isManager = false;
+        if (reqRole === 'admin') isManager = true;
+        if (!isManager) {
+          if (proj.owner_id && reqUserId && String(proj.owner_id) === reqUserId) isManager = true;
+          const coll = await require('../models/Collaborator').findOne({ where: { project_id: payload.project_id, user_id: reqUserId } });
+          if (coll && coll.role === 'manager') isManager = true;
+        }
+        if (!isManager) return res.status(403).json({ error: 'Forbidden: only project managers can create project tasks' });
+      } catch (e) { return res.status(500).json({ error: e.message || 'Server error' }); }
+    }
     const task = await Task.create(payload);
     // Log creation
     try {
@@ -84,8 +101,16 @@ exports.getTask = async (req, res) => {
     const offset = (page - 1) * limit;
     const where = {};
 
-    // default access: non-admin users see only their tasks
-    if (req.user.role !== 'admin') where.user_id = req.user.user_id;
+    // default access: non-admin users see their tasks and tasks inside projects they collaborate on
+    if (req.user.role !== 'admin') {
+      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+      // gather projects where user is a collaborator
+      const collRows = await require('../models/Collaborator').findAll({ where: { user_id: reqUserId } });
+      const collProjectIds = (collRows || []).map(c => c.project_id).filter(Boolean);
+      // default: tasks assigned to user OR tasks belonging to projects they're a collaborator/owner of
+      where[Op.or] = [{ user_id: req.user.user_id }];
+      if (collProjectIds.length) where[Op.or].push({ project_id: { [Op.in]: collProjectIds } });
+    }
     // explicit "mine" filter (overrides admin view)
     if (mine === 'true' || mine === '1') where.user_id = req.user.user_id;
 
@@ -196,7 +221,24 @@ exports.getTaskById = async (req, res) => {
     const { id } = req.params;
       const task = await Task.findByPk(id, { include: normalizeIncludes([User, Project, Priority, Status, DueDate, Reminder]) });
     if (!task) return res.status(404).json({ error: 'Task not found' });
-    if (req.user.role !== 'admin' && task.user_id !== req.user.user_id) return res.status(403).json({ error: 'Forbidden' });
+    // Allow admins, the assigned user, or any project collaborator/owner to view the task
+    if (req.user.role !== 'admin') {
+      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+      const isAssigned = task.user_id && String(task.user_id) === reqUserId;
+      let canView = false;
+      if (isAssigned) canView = true;
+      if (task.project_id && !canView) {
+        try {
+          const proj = await Project.findByPk(task.project_id);
+          if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) canView = true;
+          if (!canView) {
+            const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
+            if (coll) canView = true;
+          }
+        } catch (e) { /* ignore and keep canView false */ }
+      }
+      if (!canView) return res.status(403).json({ error: 'Forbidden' });
+    }
     // attach task_type for convenience
     const t = task.toJSON ? task.toJSON() : task;
     let task_type = 'standalone';
@@ -213,7 +255,24 @@ exports.updateTask = async (req, res) => {
     const { id } = req.params;
     const task = await Task.findByPk(id);
     if (!task) return res.status(404).json({ error: 'Task not found' });
-    if (req.user.role !== 'admin' && task.user_id !== req.user.user_id) return res.status(403).json({ error: 'Forbidden' });
+    // Allow admin, assigned user, or project manager (owner or collaborator with role 'manager') to edit
+    if (req.user.role !== 'admin') {
+      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+      const isAssigned = task.user_id && String(task.user_id) === reqUserId;
+      let canEdit = false;
+      if (isAssigned) canEdit = true;
+      if (task.project_id && !canEdit) {
+        try {
+          const proj = await Project.findByPk(task.project_id);
+          if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) canEdit = true;
+          if (!canEdit) {
+            const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
+            if (coll && coll.role === 'manager') canEdit = true;
+          }
+        } catch (e) { /* ignore */ }
+      }
+      if (!canEdit) return res.status(403).json({ error: 'Forbidden' });
+    }
     const trackedFields = ['title', 'description', 'project_id', 'priority_id', 'status_id', 'due_date_id', 'reminder_id'];
     const updates = {};
     trackedFields.forEach(k => { if (req.body[k] !== undefined) updates[k] = req.body[k]; });
@@ -239,7 +298,24 @@ exports.deleteTask = async (req, res) => {
     const { id } = req.params;
     const task = await Task.findByPk(id);
     if (!task) return res.status(404).json({ error: 'Task not found' });
-    if (req.user.role !== 'admin' && task.user_id !== req.user.user_id) return res.status(403).json({ error: 'Forbidden' });
+    // Allow admin, assigned user, or project manager to delete
+    if (req.user.role !== 'admin') {
+      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+      const isAssigned = task.user_id && String(task.user_id) === reqUserId;
+      let canDelete = false;
+      if (isAssigned) canDelete = true;
+      if (task.project_id && !canDelete) {
+        try {
+          const proj = await Project.findByPk(task.project_id);
+          if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) canDelete = true;
+          if (!canDelete) {
+            const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
+            if (coll && coll.role === 'manager') canDelete = true;
+          }
+        } catch (e) { /* ignore */ }
+      }
+      if (!canDelete) return res.status(403).json({ error: 'Forbidden' });
+    }
     try { await Changes.create({ task_id: id, user_id: req.user.user_id, field: 'deleted', old_value: task.title || null, new_value: null }); } catch (e) { console.warn('Could not log delete change', e.message || e); }
     await task.destroy();
     res.json({ success: true });
@@ -255,13 +331,31 @@ exports.assignUserToTask = async (req, res) => {
     const { user_id } = req.body;
     const task = await Task.findByPk(id);
     if (!task) return res.status(404).json({ error: 'Task not found' });
-    // permissions: allow admins or owner
-    if (req.user.role !== 'admin' && task.user_id !== req.user.user_id) return res.status(403).json({ error: 'Forbidden' });
+    // permissions: allow admins or project managers
+    try {
+      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+      const reqRole = req.user && req.user.role ? String(req.user.role) : null;
+      let isManager = false;
+      if (reqRole === 'admin') isManager = true;
+      if (!isManager && task.project_id) {
+        const proj = await Project.findByPk(task.project_id);
+        if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) isManager = true;
+        const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
+        if (coll && coll.role === 'manager') isManager = true;
+      }
+      if (!isManager) return res.status(403).json({ error: 'Forbidden' });
+    } catch (e) { return res.status(500).json({ error: e.message || 'Server error' }); }
     // avoid duplicates
     const exists = await TaskCollaborator.findOne({ where: { task_id: id, user_id } });
     if (exists) return res.status(200).json({ message: 'Already assigned' });
     const rec = await TaskCollaborator.create({ task_id: id, user_id });
-    res.status(201).json({ assigned: rec });
+    // Update task.user_id to reflect primary assignee so Task Detail shows correct Assigned to
+    try {
+      await task.update({ user_id });
+    } catch (e) { console.warn('Could not update task.user_id after assign', e && e.message ? e.message : e); }
+    // return assigned record and updated task for convenience
+    const updatedTask = await Task.findByPk(id, { include: [User] });
+    res.status(201).json({ assigned: rec, task: updatedTask });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -273,11 +367,31 @@ exports.unassignUserFromTask = async (req, res) => {
     const { id, userId } = req.params; // task id, user id
     const task = await Task.findByPk(id);
     if (!task) return res.status(404).json({ error: 'Task not found' });
-    if (req.user.role !== 'admin' && task.user_id !== req.user.user_id) return res.status(403).json({ error: 'Forbidden' });
+    // permissions: allow admins or project managers
+    try {
+      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+      const reqRole = req.user && req.user.role ? String(req.user.role) : null;
+      let isManager = false;
+      if (reqRole === 'admin') isManager = true;
+      if (!isManager && task.project_id) {
+        const proj = await Project.findByPk(task.project_id);
+        if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) isManager = true;
+        const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
+        if (coll && coll.role === 'manager') isManager = true;
+      }
+      if (!isManager) return res.status(403).json({ error: 'Forbidden' });
+    } catch (e) { return res.status(500).json({ error: e.message || 'Server error' }); }
     const rec = await TaskCollaborator.findOne({ where: { task_id: id, user_id: userId } });
     if (!rec) return res.status(404).json({ error: 'Assignment not found' });
     await rec.destroy();
-    res.json({ success: true });
+    // If the removed collaborator was the task.user_id, clear primary assignee
+    try {
+      if (task.user_id && String(task.user_id) === String(userId)) {
+        await task.update({ user_id: null });
+      }
+    } catch (e) { console.warn('Could not clear task.user_id after unassign', e && e.message ? e.message : e); }
+    const updatedTask = await Task.findByPk(id, { include: [User] });
+    res.json({ success: true, task: updatedTask });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

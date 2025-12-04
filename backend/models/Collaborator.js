@@ -6,7 +6,8 @@ const Collaborator = sequelize.define(
   {
     collaborator_id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
     project_id: { type: DataTypes.UUID, allowNull: false },
-    user_id: { type: DataTypes.UUID, allowNull: false }
+    user_id: { type: DataTypes.UUID, allowNull: false },
+    role: { type: DataTypes.ENUM('member','manager'), allowNull: false, defaultValue: 'member' }
   },
   { timestamps: true, tableName: 'collaborators', underscored: true }
 );

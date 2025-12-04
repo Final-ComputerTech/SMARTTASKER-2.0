@@ -18,8 +18,35 @@
       <div id="loginError" class="text-danger mb-3" style="min-height: 1.2em;"></div>
       <button type="submit" id="loginBtn" class="btn btn-primary w-100">Login</button>
     </form>
+    <div class="text-center mt-3">
+      <a href="#" id="openRegister">Don't have an account? Create one</a>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true" style="display:none;">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Register</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="registerForm">
+            <input type="text" id="regName" name="name" class="form-control mb-2" placeholder="Full name" required />
+            <input type="email" id="regEmail" name="email" class="form-control mb-2" placeholder="Email" required />
+            <input type="password" id="regPassword" name="password" class="form-control mb-2" placeholder="Password" required />
+            <div id="registerError" class="text-danger mb-2" style="min-height:1.2em"></div>
+            <div class="d-flex justify-content-end">
+              <button type="submit" class="btn btn-primary">Create account</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script type="module" src="assets/js/pages/login.js"></script>
+  <script type="module" src="assets/js/pages/register.js"></script>
 </body>
 </html>

@@ -37,12 +37,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const tasksText = document.getElementById('newProjectTasks')?.value || '';
       if (!name) { alert('Please enter a project name'); createBtn.disabled = false; return; }
       try {
-        const project = await projectApi.create({ project_name: name, description: desc });
-        // create tasks: one title per non-empty line
+        // Prepare tasks array: one title per non-empty line
         const lines = tasksText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-        for (const title of lines) {
-          try { await taskApi.create({ title, project_id: project.project_id }); } catch (e) { console.warn('Failed to create project task', title, e); }
-        }
+        const tasksPayload = lines.map(t => ({ title: t }));
+        // Send tasks together with project creation so backend can create them in a transaction
+        const res = await projectApi.create({ project_name: name, description: desc, tasks: tasksPayload });
+        const project = res.project || res;
         hideModal(modal);
         // notify other parts of the app to refresh
         try { document.dispatchEvent(new CustomEvent('project:created', { detail: { project } })); } catch (_) {}
