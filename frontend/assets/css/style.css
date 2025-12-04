@@ -165,6 +165,19 @@ body.layout {
 /* For lists inside cards, allow internal scrolling rather than growing the card */
 .card .scrollable { max-height: 320px; overflow-y: auto; }
 
+/* Project Detail helpers */
+.proj-desc-full.hidden { display: none; }
+.proj-desc-toggle { color: #3b82f6; cursor: pointer; margin-left: 6px; }
+.project-tasks-scroll { max-height: 360px; overflow-y: auto; padding-right: 8px; }
+.project-members-scroll { max-height: 300px; overflow-y: auto; padding-right: 8px; }
+.project-members-scroll.expanded { max-height: none; }
+.manager-only-note { margin-left: 0.5rem; color: #6b7280; font-size: 0.85em; }
+.member-avatar-sm { width: 36px; height: 36px; }
+.assignee-badge { min-width: 90px; display: inline-block; }
+.assign-select-inline { display: inline-block; width: auto; margin-left: 8px; }
+.role-select-width { width: 120px; }
+.newmember-role-select { width: 140px; margin-left: 8px; }
+
 /* Header */
 .main-header {
   display: flex;

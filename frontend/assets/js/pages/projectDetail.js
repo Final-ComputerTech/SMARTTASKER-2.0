@@ -20,7 +20,33 @@ async function loadProject() {
     const tasks = res.tasks || [];
     const members = res.members || [];
     document.getElementById('projTitle').innerText = project.project_name || 'Project';
-      document.getElementById('projMeta').innerHTML = `<div><strong>ID:</strong> ${project.project_id}</div><div>${project.description || ''}</div>`;
+      // Truncate long descriptions to avoid overflowing the page. Provide a Show more/Show less toggle.
+      try {
+        const metaEl = document.getElementById('projMeta');
+        const fullDesc = project.description || '';
+        const MAX_DESC = 220;
+        if (fullDesc.length > MAX_DESC) {
+          const short = fullDesc.slice(0, MAX_DESC).trim() + '...';
+          metaEl.innerHTML = `<div><strong>ID:</strong> ${project.project_id}</div><div><span id=\"_projDescShort\">${escapeHtml(short)}</span><span id=\"_projDescFull\" class=\"proj-desc-full hidden\">${escapeHtml(fullDesc)}</span> <a href=\"#\" id=\"_projDescToggle\" class=\"proj-desc-toggle\">Show more</a></div>`;
+          const toggle = document.getElementById('_projDescToggle');
+          toggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            const shortEl = document.getElementById('_projDescShort');
+            const fullEl = document.getElementById('_projDescFull');
+            if (fullEl.classList.contains('hidden')) {
+              fullEl.classList.remove('hidden');
+              shortEl.classList.add('hidden');
+              toggle.innerText = 'Show less';
+            } else {
+              fullEl.classList.add('hidden');
+              shortEl.classList.remove('hidden');
+              toggle.innerText = 'Show more';
+            }
+          });
+        } else {
+          metaEl.innerHTML = `<div><strong>ID:</strong> ${project.project_id}</div><div>${escapeHtml(fullDesc)}</div>`;
+        }
+      } catch (e) { document.getElementById('projMeta').innerHTML = `<div><strong>ID:</strong> ${project.project_id}</div><div>${project.description || ''}</div>`; }
 
       // small UI: add task form (remove existing to avoid duplicates on reload)
       const existingTasksHeader = document.getElementById('__projTasksHeader');
@@ -40,7 +66,7 @@ async function loadProject() {
       const memForm = document.createElement('div');
       memForm.id = '__projMemForm';
       memForm.className = 'mb-2';
-      memForm.innerHTML = `<div class="input-group input-group-sm"><input id="newMemberEmail" class="form-control" placeholder="Member email" /><select id="newMemberRole" class="form-select" style="width:140px;margin-left:8px;"><option value="member">Member</option><option value="manager">Manager</option></select><button id="addMemberBtn" class="btn btn-outline-primary">Add</button></div>`;
+      memForm.innerHTML = `<div class="input-group input-group-sm"><input id="newMemberEmail" class="form-control" placeholder="Member email" /><select id="newMemberRole" class="form-select newmember-role-select"><option value="member">Member</option><option value="manager">Manager</option></select><button id="addMemberBtn" class="btn btn-outline-primary">Add</button></div>`;
       if (memContainer) memContainer.parentNode.insertBefore(memForm, memContainer);
       // wire add task button (remove previous listeners by replacing the node)
       const addBtnOld = document.getElementById('addProjTaskBtn');
@@ -79,6 +105,8 @@ async function loadProject() {
 
     const tasksEl = document.getElementById('projTasks');
     if (!tasks || tasks.length === 0) tasksEl.innerHTML = '<div>No tasks</div>'; else {
+      // Make task list scrollable to avoid very long pages. Add a toggle to expand/collapse.
+      try { tasksEl.classList.add('project-tasks-scroll'); } catch (e) {}
       const tbl = document.createElement('table'); tbl.className = 'table table-sm';
       tbl.innerHTML = '<thead><tr><th>Title</th><th>Due</th><th>Status</th><th>Priority</th><th>Assignee</th></tr></thead>';
       const tbody = document.createElement('tbody');
@@ -94,7 +122,7 @@ async function loadProject() {
           // determine current assignee id (primary task.user_id preferred)
           const currentAssigneeId = t.user_id || (Array.isArray(t.TaskCollaborators) && t.TaskCollaborators[0] && t.TaskCollaborators[0].user_id) || null;
           const currentAssignee = members.find(m => String(m.user_id) === String(currentAssigneeId));
-          const badge = document.createElement('span'); badge.className = 'badge bg-secondary me-2'; badge.style.minWidth = '90px'; badge.style.display = 'inline-block';
+          const badge = document.createElement('span'); badge.className = 'badge bg-secondary me-2 assignee-badge';
           badge.innerText = currentAssignee ? (currentAssignee.name || currentAssignee.email || 'Member') : 'Unassigned';
           assignTd.appendChild(badge);
 
@@ -105,7 +133,7 @@ async function loadProject() {
           // clicking Change opens an inline select to choose a member or Unassigned
           changeBtn.addEventListener('click', () => {
             if (assignTd.querySelector('.assign-select')) return; // already open
-            const sel = document.createElement('select'); sel.className = 'form-select form-select-sm assign-select'; sel.style.display = 'inline-block'; sel.style.width = 'auto'; sel.style.marginLeft = '8px';
+            const sel = document.createElement('select'); sel.className = 'form-select form-select-sm assign-select assign-select-inline';
             const emptyOpt = document.createElement('option'); emptyOpt.value = ''; emptyOpt.innerText = 'Unassigned'; sel.appendChild(emptyOpt);
             members.forEach(m => { const o = document.createElement('option'); o.value = m.user_id; o.innerText = (m.name || m.email || m.user_id); if (currentAssigneeId && String(currentAssigneeId) === String(m.user_id)) o.selected = true; sel.appendChild(o); });
             const saveBtn = document.createElement('button'); saveBtn.className = 'btn btn-sm btn-primary ms-2'; saveBtn.type = 'button'; saveBtn.textContent = 'Save';
@@ -141,10 +169,12 @@ async function loadProject() {
 
     const memEl = document.getElementById('projMembers');
     if (!members || members.length === 0) memEl.innerHTML = '<div>No members</div>'; else {
+      // Keep members list compact and scrollable; provide Show all toggle for long lists
+      try { memEl.classList.add('project-members-scroll'); } catch (e) {}
       memEl.innerHTML = '';
       members.forEach(m => {
         const d = document.createElement('div'); d.className = 'd-flex align-items-center mb-2';
-        const avatar = document.createElement('img'); avatar.src = m.avatar || '/assets/icons/Profile.jpg'; avatar.style.width = '36px'; avatar.style.height = '36px'; avatar.className = 'rounded-circle me-2';
+        const avatar = document.createElement('img'); avatar.src = m.avatar || '/assets/icons/Profile.jpg'; avatar.className = 'rounded-circle me-2 member-avatar-sm';
         const permBadge = m.user_permission ? ` <span class="badge bg-${m.user_permission === 'manager' ? 'primary' : 'secondary'} ms-1">${escapeHtml(m.user_permission)}</span>` : '';
         const text = document.createElement('div'); text.innerHTML = `<div><strong>${escapeHtml(m.name)}</strong>${permBadge}</div><div class="small text-muted">${escapeHtml(m.email || '')}</div>`;
         const removeBtn = document.createElement('button'); removeBtn.className = 'btn btn-sm btn-link text-danger ms-auto'; removeBtn.textContent = 'Remove';
@@ -162,12 +192,43 @@ async function loadProject() {
           const ownerBadge = document.createElement('span'); ownerBadge.className = 'badge bg-warning text-dark ms-2'; ownerBadge.textContent = 'Owner';
           roleWrapper.appendChild(ownerBadge);
         } else {
-          const roleSel = document.createElement('select'); roleSel.className = 'form-select form-select-sm'; roleSel.style.width = '120px';
+          const roleSel = document.createElement('select'); roleSel.className = 'form-select form-select-sm role-select-width';
           const optMember = document.createElement('option'); optMember.value = 'member'; optMember.innerText = 'Member';
           const optManager = document.createElement('option'); optManager.value = 'manager'; optManager.innerText = 'Manager';
           roleSel.appendChild(optMember); roleSel.appendChild(optManager);
           try { roleSel.value = m.user_permission || 'member'; } catch (e) {}
           const saveRoleBtn = document.createElement('button'); saveRoleBtn.className = 'btn btn-sm btn-outline-success ms-2'; saveRoleBtn.type = 'button'; saveRoleBtn.textContent = 'Save';
+          // If the current viewer is not a project manager, disable role controls to avoid confusion.
+          // Determine current user id from token and allow manager controls if either
+          // the project says the viewer is manager or the members list marks them as manager.
+          let canManage = project && project.user_permission === 'manager';
+          try {
+            const token = localStorage.getItem('st_token');
+            if (token) {
+              const parts = token.split('.');
+              if (parts.length >= 2) {
+                // base64url -> base64
+                const payloadStr = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+                const json = JSON.parse(decodeURIComponent(escape(atob(payloadStr))));
+                const curId = String(json.user_id || json.userId || json.id || '');
+                const curRole = String(json.role || json.user_role || '').toLowerCase();
+                // site-level admin or manager should be allowed
+                if (curRole === 'admin' || curRole === 'manager') canManage = true;
+                if (!canManage && curId) {
+                  const found = (members || []).find(mm => String(mm.user_id) === curId);
+                  if (found && found.user_permission === 'manager') canManage = true;
+                }
+              }
+            }
+          } catch (e) { /* ignore token parse errors */ }
+          if (!canManage) {
+            roleSel.disabled = true;
+            saveRoleBtn.disabled = true;
+            saveRoleBtn.title = 'Only project managers can change member roles';
+            // show a subtle lock indicator (use CSS class)
+            const lock = document.createElement('span'); lock.className = 'manager-only-note'; lock.textContent = 'Manager only';
+            roleWrapper.appendChild(lock);
+          }
           saveRoleBtn.addEventListener('click', async () => {
             const newRole = roleSel.value;
             if (!newRole) return alert('Select a role');
@@ -192,6 +253,18 @@ async function loadProject() {
 
         d.appendChild(avatar); d.appendChild(text); d.appendChild(roleWrapper); d.appendChild(removeBtn); memEl.appendChild(d);
       });
+      // If there are many members, add a Show all button that toggles the maxHeight
+      try {
+        if ((members || []).length > 8) {
+          const showBtn = document.createElement('button'); showBtn.className = 'btn btn-sm btn-link'; showBtn.textContent = 'Show all members';
+          let expanded = false;
+          showBtn.addEventListener('click', () => {
+            expanded = !expanded;
+            if (expanded) { memEl.classList.add('expanded'); showBtn.textContent = 'Collapse members'; } else { memEl.classList.remove('expanded'); showBtn.textContent = 'Show all members'; }
+          });
+          memEl.parentNode && memEl.parentNode.appendChild(showBtn);
+        }
+      } catch (e) {}
     }
   } catch (e) {
     console.error('Could not load project detail', e);

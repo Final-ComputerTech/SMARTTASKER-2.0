@@ -3,6 +3,7 @@ const Project = require('../models/Project');
 const Task = require('../models/Task');
 const Collaborator = require('../models/Collaborator');
 const User = require('../models/User');
+const perms = require('../utils/permissions');
 
 exports.getProjects = async (req, res) => {
   try {
@@ -204,6 +205,17 @@ exports.getProjectById = async (req, res) => {
       if (userIds.length) {
         users = await User.findAll({ where: { user_id: userIds } });
       }
+      // Ensure project owner is included in members even if no collaborator row exists
+      if (project.owner_id && !userIds.find(u => String(u) === String(project.owner_id))) {
+        try {
+          const ownerUser = await User.findByPk(project.owner_id);
+          if (ownerUser) users.push(ownerUser);
+          // also add a synthetic collaborator entry so role merge below can pick up 'manager'
+          cols.push({ project_id: id, user_id: project.owner_id, role: 'manager' });
+        } catch (e) {
+          // ignore owner fetch failures
+        }
+      }
       // merge collaborator role into returned users for UI convenience
       members = (users || []).map(u => {
         const plain = u && u.toJSON ? u.toJSON() : u;
@@ -220,19 +232,63 @@ exports.getProjectById = async (req, res) => {
     try {
       members = (members || []).map(m => {
         const plain = m && m.toJSON ? m.toJSON() : m;
-        plain.user_permission = (plain.user_id && project.owner_id && String(plain.user_id) === String(project.owner_id)) ? 'manager' : 'member';
+        plain.user_permission = (plain.user_id && project.owner_id && String(plain.user_id) === String(project.owner_id)) ? 'manager' : (plain.user_permission || 'member');
         return plain;
       });
+      // Ensure owner is included (defensive): if owner_id exists but not in members, fetch and add
+      try {
+        const ownerIdStr = project.owner_id ? String(project.owner_id) : null;
+        const hasOwner = members.find(m => String(m.user_id) === ownerIdStr);
+        if (ownerIdStr && !hasOwner) {
+          try {
+            const Owner = require('../models/User');
+            const ownerUser = await Owner.findByPk(project.owner_id);
+            if (ownerUser) {
+              const op = ownerUser && ownerUser.toJSON ? ownerUser.toJSON() : ownerUser;
+              op.user_permission = 'manager';
+              members.unshift(op);
+            }
+          } catch (e) { console.debug('Could not fetch owner user for members augmentation', e && e.message ? e.message : e); }
+        }
+      } catch (e) { /* ignore */ }
     } catch (e) { /* ignore */ }
     // annotate project with current user's permission for convenience
     let projectOut = project && project.toJSON ? project.toJSON() : project;
     try {
       const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+      // log debug info to help troubleshoot missing owner/membership cases
+      if (process.env.NODE_ENV !== 'production') {
+        try {
+          console.debug('projectController.getProjectById debug:', {
+            reqUserId,
+            reqUserRole: req.user && req.user.role,
+            projectOwner: projectOut.owner_id,
+            members: (members || []).map(m => ({ user_id: m.user_id, user_permission: m.user_permission }))
+          });
+        } catch (e) { /* ignore logging errors */ }
+      }
       if (projectOut.owner_id && reqUserId && String(projectOut.owner_id) === reqUserId) projectOut.user_permission = 'manager';
-      else if (Array.isArray(members) && members.find(m => String(m.user_id) === reqUserId)) projectOut.user_permission = 'member';
-      else projectOut.user_permission = '';
+      else if (Array.isArray(members) && members.find(m => String(m.user_id) === reqUserId)) {
+        const found = members.find(m => String(m.user_id) === reqUserId);
+        projectOut.user_permission = found && found.user_permission ? found.user_permission : 'member';
+      } else projectOut.user_permission = '';
     } catch (e) { projectOut.user_permission = ''; }
-    res.json({ project: projectOut, tasks, members });
+    // Include `current_user` info so frontends don't have to decode JWTs.
+    const current_user = req.user ? { user_id: req.user.user_id, role: req.user.role } : null;
+    // If debug query flag is present, include a debug object to help diagnose membership/permission issues
+    if (req.query && String(req.query.debug) === '1') {
+      try {
+        const dbg = {
+          requestUser: req.user ? { user_id: req.user.user_id, role: req.user.role } : null,
+          projectOwner: projectOut.owner_id || null,
+          members: (members || []).map(m => ({ user_id: m.user_id, user_permission: m.user_permission }))
+        };
+        return res.json({ project: projectOut, tasks, members, _debug: dbg, current_user });
+      } catch (e) {
+        return res.json({ project: projectOut, tasks, members, current_user });
+      }
+    }
+    res.json({ project: projectOut, tasks, members, current_user });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
@@ -243,13 +299,13 @@ exports.updateProject = async (req, res) => {
     const { id } = req.params;
     const project = await Project.findByPk(id);
     if (!project) return res.status(404).json({ error: 'Project not found' });
-    // Only admin, manager (route may restrict), owner or collaborator with permissions should update — keep basic check for owner/admin
-    if (!(req.user && req.user.role === 'admin')) {
-      const userId = req.user ? req.user.user_id : null;
-      if (!userId) return res.status(401).json({ error: 'Unauthorized' });
-      const isOwner = project.owner_id && String(project.owner_id) === String(userId);
-      if (!isOwner) return res.status(403).json({ error: 'Forbidden' });
-    }
+    // Authorization: allow admin, project owner, or project-level manager collaborators to update
+    const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
+    if (!reqUserId) return res.status(401).json({ error: 'Unauthorized' });
+    try {
+      const allowed = await perms.isProjectManagerOrAdmin(req.user, id);
+      if (!allowed) return res.status(403).json({ error: 'Forbidden' });
+    } catch (e) { return res.status(500).json({ error: e && e.message ? e.message : 'Server error' }); }
     const updates = {};
     ['project_name','description','category_id','owner_id'].forEach(k => { if (req.body[k] !== undefined) updates[k] = req.body[k]; });
     await project.update(updates);
@@ -321,28 +377,11 @@ exports.addCollaborator = async (req, res) => {
     if (user_id) user = await User.findByPk(user_id);
     else if (email) user = await User.findOne({ where: { email: email.toLowerCase().trim() } });
     if (!user) return res.status(404).json({ error: 'User not found' });
-    // Authorization: only admin or project owner may add collaborators
+    // Authorization: only admin, owner, or project-level manager may add collaborators
     try {
-      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
-      const reqRole = req.user && req.user.role ? String(req.user.role) : null;
-      if (!(reqRole === 'admin' || (project.owner_id && reqUserId && String(project.owner_id) === reqUserId))) {
-        return res.status(403).json({ error: 'Forbidden' });
-      }
-    } catch (e) { /* continue to check below */ }
-    // Authorization: only admin or project manager may add collaborators
-    try {
-      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
-      const reqRole = req.user && req.user.role ? String(req.user.role) : null;
-      // check if requester is a manager in this project
-      let isManager = false;
-      if (reqRole === 'admin') isManager = true;
-      if (!isManager) {
-        const myColl = await Collaborator.findOne({ where: { project_id: id, user_id: reqUserId } });
-        if (myColl && myColl.role === 'manager') isManager = true;
-        if (project.owner_id && reqUserId && String(project.owner_id) === reqUserId) isManager = true;
-      }
-      if (!isManager) return res.status(403).json({ error: 'Forbidden' });
-    } catch (e) {}
+      const allowed = await perms.isProjectManagerOrAdmin(req.user, id);
+      if (!allowed) return res.status(403).json({ error: 'Forbidden' });
+    } catch (e) { return res.status(500).json({ error: e && e.message ? e.message : 'Server error' }); }
 
     // avoid duplicates
     const exists = await Collaborator.findOne({ where: { project_id: id, user_id: user.user_id } });
@@ -368,19 +407,11 @@ exports.removeCollaborator = async (req, res) => {
     const { id, userId } = req.params;
     const project = await Project.findByPk(id);
     if (!project) return res.status(404).json({ error: 'Project not found' });
-    // Authorization: only admin or project manager may remove collaborators
+    // Authorization: only admin, owner, or project-level manager may remove collaborators
     try {
-      const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
-      const reqRole = req.user && req.user.role ? String(req.user.role) : null;
-      let isManager = false;
-      if (reqRole === 'admin') isManager = true;
-      if (!isManager) {
-        const myColl = await Collaborator.findOne({ where: { project_id: id, user_id: reqUserId } });
-        if (myColl && myColl.role === 'manager') isManager = true;
-        if (project.owner_id && reqUserId && String(project.owner_id) === reqUserId) isManager = true;
-      }
-      if (!isManager) return res.status(403).json({ error: 'Forbidden' });
-    } catch (e) { /* ignore and continue */ }
+      const allowed = await perms.isProjectManagerOrAdmin(req.user, id);
+      if (!allowed) return res.status(403).json({ error: 'Forbidden' });
+    } catch (e) { return res.status(500).json({ error: e && e.message ? e.message : 'Server error' }); }
     const coll = await Collaborator.findOne({ where: { project_id: id, user_id: userId } });
     if (!coll) return res.status(404).json({ error: 'Collaborator not found' });
     await coll.destroy();
@@ -399,17 +430,13 @@ exports.updateCollaborator = async (req, res) => {
     const project = await Project.findByPk(id);
     if (!project) return res.status(404).json({ error: 'Project not found' });
 
-    // Authorization: only admin or project manager may update collaborator roles
+    // Authorization: only admin, owner, or project-level manager may update collaborator roles
     const reqUserId = req.user && req.user.user_id ? String(req.user.user_id) : null;
-    const reqRole = req.user && req.user.role ? String(req.user.role) : null;
-    let isManager = false;
-    if (reqRole === 'admin') isManager = true;
-    if (!isManager) {
-      const myColl = await Collaborator.findOne({ where: { project_id: id, user_id: reqUserId } });
-      if (myColl && myColl.role === 'manager') isManager = true;
-      if (project.owner_id && reqUserId && String(project.owner_id) === reqUserId) isManager = true;
-    }
-    if (!isManager) return res.status(403).json({ error: 'Forbidden' });
+    if (!reqUserId) return res.status(401).json({ error: 'Unauthorized' });
+    try {
+      const allowed = await perms.isProjectManagerOrAdmin(req.user, id);
+      if (!allowed) return res.status(403).json({ error: 'Forbidden' });
+    } catch (e) { return res.status(500).json({ error: e && e.message ? e.message : 'Server error' }); }
 
     // Prevent changing the project owner's role
     if (project.owner_id && String(project.owner_id) === String(userId)) {

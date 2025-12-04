@@ -50,21 +50,29 @@ async function loadTask() {
     renderTask(task);
     // determine current user's permissions so we can hide/disable controls
     try {
-      const me = await authProfileApi.me();
-      const reqUserId = me && me.user_id ? String(me.user_id) : null;
-      const isAdmin = me && me.role && String(me.role) === 'admin';
+      // Try to fetch profile info, but prefer server-provided `current_user` when available
+      let me = null;
+      try { me = await authProfileApi.me(); } catch (e) { /* ignore profile errors */ }
+      const reqUserIdFromProfile = me && me.user_id ? String(me.user_id) : null;
+      const isAdminFromProfile = me && me.role && String(me.role) === 'admin';
       let canEdit = false; // upload files, add subtasks, edit
-      if (isAdmin) canEdit = true;
-      if (task.user_id && reqUserId && String(task.user_id) === reqUserId) canEdit = true;
+      if (isAdminFromProfile) canEdit = true;
+      if (task.user_id && reqUserIdFromProfile && String(task.user_id) === reqUserIdFromProfile) canEdit = true;
       if (!canEdit && task.project_id) {
         try {
           const proj = await apiRequest(`projects/${task.project_id}`, 'GET', null, true);
-          // project endpoint returns { project, tasks, members }
+          // project endpoint returns { project, tasks, members, current_user }
           const project = proj && proj.project ? proj.project : proj;
-          // if current user is owner or listed as manager in members, allow edit
-          if (project && project.owner_id && String(project.owner_id) === reqUserId) canEdit = true;
+          // prefer `current_user` returned by server for permission checks
+          const serverUser = proj && proj.current_user ? proj.current_user : null;
+          const reqUserId = serverUser && serverUser.user_id ? String(serverUser.user_id) : reqUserIdFromProfile;
+          const isAdmin = serverUser && serverUser.role ? String(serverUser.role) === 'admin' : isAdminFromProfile;
+          // if current user is owner, allow edit
+          if (project && project.owner_id && reqUserId && String(project.owner_id) === reqUserId) canEdit = true;
           const members = proj && proj.members ? proj.members : [];
-          if (!canEdit && Array.isArray(members) && members.find(m => String(m.user_id) === reqUserId && (m.user_permission === 'manager' || m.user_permission === 'owner' || m.user_permission === 'admin'))) canEdit = true;
+          if (!canEdit && Array.isArray(members) && members.find(m => reqUserId && String(m.user_id) === reqUserId && (m.user_permission === 'manager' || m.user_permission === 'owner' || m.user_permission === 'admin'))) canEdit = true;
+          // also allow if server indicates admin
+          if (!canEdit && isAdmin) canEdit = true;
         } catch (e) { /* ignore project fetch errors */ }
       }
       // toggle attachment upload control

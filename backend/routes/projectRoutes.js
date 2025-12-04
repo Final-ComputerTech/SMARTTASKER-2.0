@@ -12,7 +12,8 @@ router.post('/:id/collaborators', verifyToken(), projectController.addCollaborat
 router.delete('/:id/collaborators/:userId', verifyToken(), projectController.removeCollaborator);
 router.put('/:id/collaborators/:userId', verifyToken(), projectController.updateCollaborator);
 router.get('/:id', verifyToken(), projectController.getProjectById);
-router.put('/:id', verifyToken(['admin','manager']), updateProjectRules, projectController.updateProject);
+// Allow any authenticated user to reach the controller; controller enforces project-level permissions
+router.put('/:id', verifyToken(), updateProjectRules, projectController.updateProject);
 router.delete('/:id', verifyToken(['admin']), projectController.deleteProject);
 
 module.exports = router;

@@ -16,12 +16,8 @@ exports.listForTask = async (req, res) => {
       if (isAssigned) canView = true;
       if (task.project_id && !canView) {
         try {
-          const proj = await Project.findByPk(task.project_id);
-          if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) canView = true;
-          if (!canView) {
-            const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
-            if (coll) canView = true;
-          }
+          const perms = require('../utils/permissions');
+          if (await perms.isProjectParticipant(req.user, task.project_id)) canView = true;
         } catch (e) { }
       }
       if (!canView) return res.status(403).json({ error: 'Forbidden' });
@@ -51,12 +47,8 @@ exports.createForTask = async (req, res) => {
       if (isAssigned) canComment = true;
       if (task.project_id && !canComment) {
         try {
-          const proj = await Project.findByPk(task.project_id);
-          if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) canComment = true;
-          if (!canComment) {
-            const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
-            if (coll) canComment = true;
-          }
+          const perms = require('../utils/permissions');
+          if (await perms.isProjectParticipant(req.user, task.project_id)) canComment = true;
         } catch (e) { }
       }
       if (!canComment) return res.status(403).json({ error: 'Forbidden' });

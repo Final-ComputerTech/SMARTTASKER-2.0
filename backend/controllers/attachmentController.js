@@ -24,12 +24,10 @@ exports.uploadForTask = async (req, res) => {
         let allowed = false;
         if (task.user_id && String(task.user_id) === reqUserId) allowed = true;
         if (!allowed && task.project_id) {
-          const proj = await require('../models/Project').findByPk(task.project_id);
-          if (proj && proj.owner_id && String(proj.owner_id) === reqUserId) allowed = true;
-          if (!allowed) {
-            const coll = await require('../models/Collaborator').findOne({ where: { project_id: task.project_id, user_id: reqUserId } });
-            if (coll && coll.role === 'manager') allowed = true;
-          }
+          try {
+            const perms = require('../utils/permissions');
+            if (await perms.isProjectManagerOrAdmin(req.user, task.project_id)) allowed = true;
+          } catch (e) { /* ignore */ }
         }
         if (!allowed) return res.status(403).json({ error: 'Forbidden' });
       }
