@@ -8,20 +8,40 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body class="login-page d-flex align-items-center justify-content-center">
+<body class="login-page">
 
-  <div class="login-box shadow rounded">
-    <h2 class="text-center mb-4 text-primary">Login</h2>
-    <form id="loginForm">
-      <input type="email" id="email" name="email" class="form-control mb-3" placeholder="Email" required>
-      <input type="password" id="password" name="password" class="form-control mb-3" placeholder="Password" required>
-      <div id="loginError" class="text-danger mb-3" style="min-height: 1.2em;"></div>
-      <button type="submit" id="loginBtn" class="btn btn-primary w-100">Login</button>
-    </form>
-    <div class="text-center mt-3">
-      <a href="#" id="openRegister">Don't have an account? Create one</a>
-    </div>
+  <div class="login-layout">
+    <aside class="login-branding">
+      <div class="brand-inner">
+        <img src="assets/icons/Profile.jpg" alt="Brand" class="brand-logo" />
+        <h1 class="brand-title">SmartTasker</h1>
+        <p class="brand-sub">Focus. Plan. Ship.</p>
+      </div>
+    </aside>
+
+    <main class="login-panel">
+      <div class="login-card">
+        <h2 class="card-title">Welcome back</h2>
+        <p class="card-sub">Sign in to continue to your workspace</p>
+        <form id="loginForm" class="card-form">
+          <input type="email" id="email" name="email" class="form-control mb-3" placeholder="Email" required>
+          <input type="password" id="password" name="password" class="form-control mb-3" placeholder="Password" required>
+          <div id="loginError" class="text-danger mb-3" style="min-height: 1.2em;"></div>
+          <button type="submit" id="loginBtn" class="btn primary-btn w-100">Login</button>
+        </form>
+
+        <div class="social-login mt-3">
+          <button class="btn social-btn outline" data-provider="google" id="social-google">Continue with Google</button>
+          <button class="btn social-btn outline" data-provider="github" id="social-github">Continue with GitHub</button>
+        </div>
+
+        <div class="card-footer mt-3">
+          <small>Don't have an account? <a href="#" id="openRegister">Sign up</a></small>
+        </div>
+      </div>
+    </main>
   </div>
+  <div class="login-footer">© 2025 SmartTasker — <a href="/" style="color:rgba(255,255,255,0.85)">Privacy</a></div>
 
   <!-- Register Modal -->
   <div class="modal fade" id="registerModal" tabindex="-1" aria-hidden="true" style="display:none;">

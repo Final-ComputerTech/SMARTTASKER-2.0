@@ -1,51 +1,123 @@
 /* ================= Login Page ================= */
+/* Login Page layout */
 body.login-page {
   min-height: 100vh;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg,#7fd7f2 0%, #47c6ed 40%, #071638 100%);
+  color: #0f172a;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f3f4f6;
+  align-items: stretch;
+}
+
+/* Decorative blobs */
+.login-page::before, .login-page::after {
+  content: '';
+  position: fixed;
+  z-index: 0;
+  filter: blur(60px);
+  opacity: 0.6;
+}
+.login-page::before {
+  width: 520px; height: 520px; right: -120px; top: -80px;
+  background: radial-gradient(circle at 20% 20%, rgba(99,102,241,0.35), rgba(59,130,246,0.12) 40%, transparent 60%);
+}
+.login-page::after {
+  width: 420px; height: 420px; left: -100px; bottom: -60px;
+  background: radial-gradient(circle at 80% 80%, rgba(16,185,129,0.20), rgba(34,197,94,0.06) 40%, transparent 60%);
+}
+
+/* Title */
+/* Left branding and right panel layout */
+.login-layout { display: grid; grid-template-columns: 1fr 1fr; width: 100%; max-width: 1200px; margin: auto; gap: 2rem; padding: 48px; z-index: 2; }
+.login-branding { display:flex; align-items:center; justify-content:center; }
+.brand-inner { color: #fff; text-align: left; padding: 48px; max-width: 520px; }
+.brand-logo { width: 84px; height:84px; border-radius:18px; box-shadow: 0 12px 40px rgba(2,6,23,0.6); object-fit:cover; }
+.brand-title { font-size: 44px; margin: 12px 0 6px; color: #fff; font-weight:700; }
+.brand-sub { color: rgba(255,255,255,0.85); font-size: 18px; margin:0 }
+
+/* Right panel */
+.login-panel { display:flex; align-items:center; justify-content:center; }
+.login-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(250,250,250,0.95));
+  padding: 36px;
+  border-radius: 20px; /* large rounded corners */
+  box-shadow: 0 30px 60px rgba(2,6,23,0.45); /* strong shadow */
+  width: 100%; max-width: 520px; z-index:3; position:relative;
+}
+
+/* Outer and inner image borders around the login card
+   - outer: `/assets/icons/background2.jpg` sits behind the card as an outer border
+   - inner: `/assets/icons/background.jpg` sits just inside the card edges as a subtle inner border
+   Ensure card children render above these pseudo-elements. */
+.login-card::before,
+.login-card::after { content: '' ; position: absolute; left: 0; top: 0; right: 0; bottom: 0; border-radius: inherit; pointer-events: none; }
+
+.login-card::before {
+  /* outer border */
+  inset: -14px; /* extend beyond the card edges */
+  border-radius: 26px;
+  background-image: url('/assets/icons/background2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+  opacity: 0.95;
+  box-shadow: 0 20px 50px rgba(2,6,23,0.25);
+}
+
+.login-card::after {
+  /* inner subtle border */
+  inset: 6px; /* sit slightly inset from the card edges */
+  border-radius: 14px;
   background-image: url('/assets/icons/background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
+  z-index: 2;
+  opacity: 0.16; /* keep it subtle so content remains readable */
+  mix-blend-mode: overlay;
 }
 
-/* Login Box */
-.login-box {
-  background-color: #fff;
-  padding: 3rem 2.5rem;        /* padding rộng hơn, box cao hơn */
-  border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  max-width: 420px;           /* rộng vừa đủ, đẹp trên desktop */
-  text-align: center;
-  box-sizing: border-box;
+/* Ensure card content sits above the decorative images */
+.login-card > * { position: relative; z-index: 4; }
+
+.card-title { font-size: 24px; margin:0 0 6px; color:#0b2540; font-weight:700 }
+.card-sub { color:#6b7280; margin:0 0 18px }
+
+/* form inputs */
+.card-form input.form-control {
+  padding: 12px 14px;
+  border-radius: 12px; /* 12px as requested */
+  border: 1px solid #e6e9ee;
+  background: #fbfdff;
+  box-shadow: none;
+}
+.card-form input.form-control:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 6px 24px rgba(37,99,235,0.12);
 }
 
-/* Title */
-.login-box h2 {
-  margin-bottom: 2rem;
-  font-weight: 600;
-  color: #3B82F6;             /* màu xanh chuẩn dashboard */
+/* primary button */
+.primary-btn {
+  background: linear-gradient(180deg,#0f172a,#0b3a7a);
+  color:#fff; border: none; padding: 12px; border-radius: 12px; font-weight:600;
 }
+.primary-btn:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(2,6,23,0.25); }
+
+/* social buttons outline */
+.social-login { display:flex; gap:10px; flex-direction:row; }
+.social-btn { flex:1; padding:10px 12px; border-radius:12px; background:transparent; border:1px solid rgba(15,23,42,0.08); color:#0b2540; }
+.social-btn.outline { border:1px solid #e2e8f0; }
+
+.card-footer { text-align:center; color:#6b7280 }
+
+/* small footer at page bottom */
+.login-footer { position:fixed; left:0; right:0; bottom:8px; text-align:center; color: rgba(255,255,255,0.6); font-size:12px; z-index:1 }
 
 /* Input Fields */
-.login-box input.form-control {
-  padding: 0.65rem 0.75rem;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  transition: border-color 0.3s, box-shadow 0.3s;
-  margin-bottom: 1.25rem;     /* khoảng cách giữa các input */
-}
-
-.login-box input.form-control:focus {
-  border-color: #3B82F6;
-  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
-}
+/* legacy inputs fallback - already styled above for card */
 
 /* Error Message */
 #loginError {
@@ -57,23 +129,15 @@ body.login-page {
 }
 
 /* Button */
-.login-box button#loginBtn {
-  padding: 0.75rem 0;
-  font-size: 1rem;
-  border-radius: 8px;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-.login-box button#loginBtn:hover {
-  background-color: #2563eb;
-  transform: translateY(-1px);
-}
+/* legacy login button fallback */
 
 /* Responsive for small screens */
-@media (max-width: 576px) {
-  .login-box {
-    padding: 2rem 1.5rem;
-  }
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .login-layout { grid-template-columns: 1fr; padding: 20px; gap: 12px; }
+  .login-branding { order: 2; display:none; }
+  .login-panel { order: 1; padding: 12px; }
+  .login-card { max-width: 720px; border-radius: 14px; padding: 20px }
 }
 /* ================= Dashboard Page ================= */
 
