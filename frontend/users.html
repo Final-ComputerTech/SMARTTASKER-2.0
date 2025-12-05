@@ -13,28 +13,70 @@
     <div id="header"></div>
     <section class="content-section mt-4">
       <h3>User Management</h3>
-      <div class="card p-3 mb-3">
-        <h5>Create User</h5>
-        <form id="createUserForm">
-          <div class="mb-2"><input id="u_name" class="form-control" placeholder="Name"></div>
-          <div class="mb-2"><input id="u_email" class="form-control" placeholder="Email"></div>
-          <div class="mb-2"><input id="u_password" type="password" class="form-control" placeholder="Password"></div>
-          <div class="mb-2">
-            <select id="u_role" class="form-control">
-              <option value="member">Member</option>
-              <option value="manager">Manager</option>
-              <option value="admin">Admin</option>
-            </select>
+      <div class="row mb-3">
+        <div class="col-12 col-lg-8 mb-3">
+          <div class="card p-3">
+            <h5>Create User</h5>
+            <form id="createUserForm">
+              <div class="mb-2"><input id="u_name" class="form-control" placeholder="Name"></div>
+              <div class="mb-2"><input id="u_email" class="form-control" placeholder="Email"></div>
+              <div class="mb-2"><input id="u_password" type="password" class="form-control" placeholder="Password"></div>
+              <div class="mb-2">
+                <select id="u_role" class="form-control">
+                  <option value="member">Member</option>
+                  <option value="manager">Manager</option>
+                  <option value="admin">Admin</option>
+                </select>
+              </div>
+              <button class="btn btn-primary">Create</button>
+            </form>
           </div>
-          <button class="btn btn-primary">Create</button>
-        </form>
+        </div>
+        <div class="col-12 col-lg-4 mb-3">
+          <div class="card p-3">
+            <h5>Stats</h5>
+            <div id="userStats">
+              <div>Total: <span id="stat_total">0</span></div>
+              <div>Admins: <span id="stat_admin">0</span></div>
+              <div>Managers: <span id="stat_manager">0</span></div>
+              <div>Members: <span id="stat_member">0</span></div>
+              <div>Suspended: <span id="stat_suspended">0</span></div>
+            </div>
+            <hr>
+            <h6>Search & Filter</h6>
+            <div class="mb-2"><input id="search_q" class="form-control" placeholder="Search name or email"></div>
+            <div class="mb-2">
+              <select id="filter_role" class="form-control">
+                <option value="">Any role</option>
+                <option value="admin">Admin</option>
+                <option value="manager">Manager</option>
+                <option value="member">Member</option>
+                <option value="suspended">Suspended</option>
+              </select>
+            </div>
+            <button id="applyFilters" class="btn btn-secondary btn-sm">Apply</button>
+          </div>
+        </div>
       </div>
-
       <h3>Existing Users</h3>
-      <table class="table table-sm" id="usersTable">
-        <thead><tr><th>Name</th><th>Email</th><th>Role</th></tr></thead>
-        <tbody></tbody>
-      </table>
+      <div class="card p-3">
+        <div class="table-responsive">
+          <table class="table table-sm" id="usersTable">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Role</th>
+                <th>Created</th>
+                <th>Last Login</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
     </section>
   </main>
 

@@ -16,9 +16,10 @@ const Auth = sequelize.define('Auth', {
   role: {
     type: DataTypes.STRING,
     defaultValue: "member",
-    validate: { isIn: { args: [["admin","manager","member"]], msg: "Invalid role" } }
+    validate: { isIn: { args: [["admin","manager","member","suspended"]], msg: "Invalid role" } }
   },
   last_login: DataTypes.DATE
+  ,last_password_change: DataTypes.DATE
 }, {
   // Password hashing is handled in the auth controller to avoid double-hashing.
 });

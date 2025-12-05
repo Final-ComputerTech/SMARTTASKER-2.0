@@ -1,6 +1,8 @@
 const User = require('../models/User.js');
 const Auth = require('../models/Auth.js');
+const Changes = require('../models/Changes.js');
 const bcrypt = require('bcrypt');
+const { Op } = require('sequelize');
 
 module.exports = {
   async createUser({name,email,password,role}) {
@@ -23,16 +25,89 @@ module.exports = {
     return pub;
   },
 
-  async getAllUsers() {
-    const users = await User.findAll();
+  // Supports optional filters: search (name/email), role, pagination
+  async getAllUsers({ search, role, page = 1, limit = 50 } = {}) {
+    const where = {};
+    if (search) {
+      where[Op.or] = [
+        { name: { [Op.like]: `%${search}%` } },
+        { email: { [Op.like]: `%${search}%` } }
+      ];
+    }
+
+    const offset = (Math.max(1, page) - 1) * limit;
+    const users = await User.findAll({ where, limit, offset, order: [['createdAt','DESC']] });
     const results = [];
     for (const u of users) {
       const auth = await Auth.findOne({ where: { user_id: u.user_id } });
       const pu = u.toPublicJSON();
       pu.role = auth ? auth.role : 'member';
+      pu.last_login = auth ? auth.last_login : null;
       results.push(pu);
     }
     return results;
+  },
+
+  async getStats() {
+    const total = await User.count();
+    const authRows = await Auth.findAll({ attributes: ['role'] });
+    const counts = { total, admin: 0, manager: 0, member: 0, suspended: 0 };
+    for (const a of authRows) {
+      const r = a.role || 'member';
+      if (counts[r] !== undefined) counts[r]++;
+    }
+    return counts;
+  },
+
+  async resetPassword(id, newPassword) {
+    const auth = await Auth.findOne({ where: { user_id: id } });
+    if (!auth) throw new Error('Auth record not found');
+    const hashed = await bcrypt.hash(newPassword, 10);
+    await auth.update({ password_hash: hashed, last_password_change: new Date() });
+    // record change
+    await Changes.create({ task_id: null, user_id: id, field: 'password', old_value: null, new_value: '***' });
+    return true;
+  },
+
+  // Generate a temporary password, set it for the user, and return the plaintext once
+  async generateTempPassword(id) {
+    const auth = await Auth.findOne({ where: { user_id: id } });
+    if (!auth) throw new Error('Auth record not found');
+    // generate a reasonably strong temporary password
+    const temp = Math.random().toString(36).slice(-10) + Math.random().toString(36).toUpperCase().slice(-2);
+    const hashed = await bcrypt.hash(temp, 10);
+    await auth.update({ password_hash: hashed, last_password_change: new Date() });
+    await Changes.create({ task_id: null, user_id: id, field: 'password_temp_generated', old_value: null, new_value: '***' });
+    return temp;
+  },
+
+  async setRole(id, role) {
+    const auth = await Auth.findOne({ where: { user_id: id } });
+    if (!auth) throw new Error('Auth record not found');
+    const old = auth.role;
+    await auth.update({ role });
+    await Changes.create({ task_id: null, user_id: id, field: 'role', old_value: old, new_value: role });
+    return true;
+  },
+
+  async suspendUser(id) {
+    return this.setRole(id, 'suspended');
+  },
+
+  async deleteUser(id) {
+    // Permanently delete user and auth
+    const user = await User.findByPk(id);
+    if (!user) throw new Error('User not found');
+    await Auth.destroy({ where: { user_id: id } });
+    await user.destroy();
+    await Changes.create({ task_id: null, user_id: id, field: 'deleted', old_value: null, new_value: 'true' });
+    return true;
+  },
+
+  async getLogs(id, { limit = 50 } = {}) {
+    // Return changes rows where user_id is the actor
+    const logs = await Changes.findAll({ where: { user_id: id }, limit, order: [['createdAt','DESC']] });
+    return logs;
   },
 
   async updateUser(id, {name,email,role}) {

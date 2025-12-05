@@ -5,7 +5,7 @@ const Changes = sequelize.define(
   'Changes',
   {
     change_id: { type: DataTypes.UUID, primaryKey: true, defaultValue: DataTypes.UUIDV4 },
-    task_id: { type: DataTypes.UUID, allowNull: false },
+    task_id: { type: DataTypes.UUID, allowNull: true },
     user_id: { type: DataTypes.UUID, allowNull: false },
     field: { type: DataTypes.STRING, allowNull: false },
     old_value: { type: DataTypes.STRING },
