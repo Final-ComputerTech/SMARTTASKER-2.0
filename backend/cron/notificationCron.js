@@ -4,38 +4,31 @@ const Task = require('../models/Task');
 const User = require('../models/User');
 const Reminder = require('../models/Reminder');
 const Notification = require('../models/Notification');
+const DueDate = require('../models/DueDate');
 const notificationService = require('../services/notificationService');
-const { Op } = require('sequelize');
+const { Op, QueryTypes } = require('sequelize');
+const sequelize = require('../config/db');
 
-// Cron job: check reminders table for reminders in the next 2 minutes
+// Cron job: check reminders and task due-dates for upcoming/due/overdue notifications
 cron.schedule('*/1 * * * *', async () => {
   try {
     const now = new Date();
-    const upcoming = new Date(now.getTime() + 2 * 60000); // next 2 minutes
+    const upcoming = new Date(now.getTime() + 2 * 60000); // next 2 minutes for explicit reminders
 
-    // Find reminders directly from Reminder model to avoid querying non-existent Task.due_date
-    const reminders = await Reminder.findAll({
-      where: {
-        reminder_at: { [Op.between]: [now, upcoming] }
-      }
-    });
-
+    // Handle explicit reminders (existing behavior)
+    const reminders = await Reminder.findAll({ where: { reminder_at: { [Op.between]: [now, upcoming] } } });
     let processed = 0;
     for (const rem of reminders) {
       try {
         const task = await Task.findByPk(rem.task_id, { include: [{ model: User }] });
         if (!task) continue;
-
-        // Persist an in-app notification for the task owner
+        const userId = task.user_id || (task.User && task.User.user_id);
+        const title = `Reminder: ${task.title || 'Task'}`;
         try {
-          const userId = task.user_id || (task.User && task.User.user_id);
-          const message = `Reminder: ${task.title || 'Task'}`;
-          await Notification.create({ user_id: userId, task_id: task.task_id, message });
+          await Notification.create({ user_id: userId, task_id: task.task_id, title, message: title, type: 'reminder', severity: 'info' });
         } catch (createErr) {
           console.error('Failed to create DB notification', createErr.message || createErr);
         }
-
-        // Send email notification (if SMTP configured)
         await notificationService.sendTaskReminder(task);
         processed++;
       } catch (innerErr) {
@@ -43,7 +36,71 @@ cron.schedule('*/1 * * * *', async () => {
       }
     }
 
-    console.log(`${processed} notifications processed at ${now} (reminders found: ${reminders.length})`);
+    // Now scan tasks for due-related notifications
+    // thresholds (ms)
+    const NEARING_MS = (process.env.NOTIF_NEARING_HOURS ? parseInt(process.env.NOTIF_NEARING_HOURS,10) : 24) * 3600000; // default 24h
+    const DUE_SOON_MS = (process.env.NOTIF_DUE_SOON_MIN ? parseInt(process.env.NOTIF_DUE_SOON_MIN,10) : 5) * 60000; // default 5 minutes
+
+    const soonLimit = new Date(now.getTime() + NEARING_MS);
+    const dueSoonLimit = new Date(now.getTime() + DUE_SOON_MS);
+
+    const tasks = await Task.findAll({ include: [{ model: DueDate }, { model: User }, { model: Reminder }] });
+    for (const task of tasks) {
+      try {
+        const due = task.DueDate && task.DueDate.due_date ? new Date(task.DueDate.due_date) : null;
+        if (!due) continue;
+        const userId = task.user_id || (task.User && task.User.user_id);
+
+        // Skip tasks without an owner/user
+        if (!userId) continue;
+
+        // Overdue
+        if (due.getTime() < now.getTime()) {
+          // avoid spamming: only create if not created in last 24h
+          const cutoff = new Date(now.getTime() - 24 * 3600000);
+          const existsRows = await sequelize.query(
+            `SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1`,
+            { type: QueryTypes.SELECT, replacements: { taskId: task.task_id, userId, cutoff } }
+          );
+          if (!existsRows || existsRows.length === 0) {
+            const title = `Overdue: ${task.title || 'Task'}`;
+            await Notification.create({ user_id: userId, task_id: task.task_id, title, message: title, type: 'overdue', severity: 'urgent' });
+          }
+          continue;
+        }
+
+        // Due now (within DUE_SOON_MS)
+        if (due.getTime() <= dueSoonLimit.getTime()) {
+          const cutoff = new Date(now.getTime() - 60 * 60000); // don't repeat if created in last 60min
+          const existsRows = await sequelize.query(
+            `SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'due' AND user_id = :userId AND created_at > :cutoff LIMIT 1`,
+            { type: QueryTypes.SELECT, replacements: { taskId: task.task_id, userId, cutoff } }
+          );
+          if (!existsRows || existsRows.length === 0) {
+            const title = `Due now: ${task.title || 'Task'}`;
+            await Notification.create({ user_id: userId, task_id: task.task_id, title, message: title, type: 'due', severity: 'critical' });
+          }
+          continue;
+        }
+
+        // Nearing due (within NEARING_MS)
+        if (due.getTime() <= soonLimit.getTime()) {
+          const cutoff = new Date(now.getTime() - 24 * 3600000);
+          const existsRows = await sequelize.query(
+            `SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1`,
+            { type: QueryTypes.SELECT, replacements: { taskId: task.task_id, userId, cutoff } }
+          );
+          if (!existsRows || existsRows.length === 0) {
+            const title = `Nearing due: ${task.title || 'Task'}`;
+            await Notification.create({ user_id: userId, task_id: task.task_id, title, message: title, type: 'nearing_due', severity: 'warning' });
+          }
+        }
+      } catch (e) {
+        console.error('Error processing task due notifications', task.task_id, e.message || e);
+      }
+    }
+
+    console.log(`${processed} reminders processed at ${now} (reminders found: ${reminders.length})`);
   } catch (error) {
     console.error('Error in notification cron:', error);
   }

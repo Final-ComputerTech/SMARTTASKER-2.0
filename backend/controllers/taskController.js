@@ -8,7 +8,7 @@ const Reminder = require('../models/Reminder');
 const Attachment = require('../models/Attachment');
 const Changes = require('../models/Changes');
 const Notification = require('../models/Notification');
-const { Op } = require('sequelize');
+const { Op, QueryTypes } = require('sequelize');
 const TaskCollaborator = require('../models/TaskCollaborator');
 
 // Helper: normalize include entries so Sequelize always receives objects of form { model, as?, where?, required? }
@@ -137,13 +137,28 @@ exports.getTask = async (req, res) => {
     const dueWhere = {};
     if (from) dueWhere.due_date = { ...(dueWhere.due_date || {}), [Op.gte]: new Date(from) };
     if (to) dueWhere.due_date = { ...(dueWhere.due_date || {}), [Op.lte]: new Date(to) };
+
+    // Align overdue semantics with dashboard: compute overdue task IDs using the same
+    // UNIX_TIMESTAMP-based SQL (modern-first, legacy-fallback) and then filter tasks
+    // by those IDs. This avoids timezone/precision mismatch between Sequelize Date objects
+    // and MySQL NOW().
+    let precomputedOverdueIds = null;
     if (overdue === 'true' || overdue === '1') {
-      dueWhere.due_date = { ...(dueWhere.due_date || {}), [Op.lt]: new Date() };
-    }
-    if (Object.keys(dueWhere).length > 0) {
-      includes.push({ model: DueDate, where: dueWhere, required: overdue === 'true' || overdue === '1' });
-    } else {
+      const overdueService = require('../services/overdueService');
+      const over = await overdueService.getOverdueTaskIds({});
+      precomputedOverdueIds = over.ids || [];
+      if (!precomputedOverdueIds || precomputedOverdueIds.length === 0) {
+        return res.json({ total: 0, page: parseInt(page, 10), pageSize: 0, tasks: [] });
+      }
+      // Apply the precomputed ID filter and include DueDate for association data
+      where.task_id = { [Op.in]: precomputedOverdueIds };
       includes.push(DueDate);
+    } else {
+      if (Object.keys(dueWhere).length > 0) {
+        includes.push({ model: DueDate, where: dueWhere, required: false });
+      } else {
+        includes.push(DueDate);
+      }
     }
 
     // attachments filter: require tasks that have at least one attachment
@@ -260,18 +275,55 @@ exports.updateTask = async (req, res) => {
       }
       if (!canEdit) return res.status(403).json({ error: 'Forbidden' });
     }
-    const trackedFields = ['title', 'description', 'project_id', 'priority_id', 'status_id', 'due_date_id', 'reminder_id'];
+    // We'll collect updates and change entries. Handle `due_date` (ISO string) specially
+    // because creates/updates must touch the DueDate row rather than a simple task column.
     const updates = {};
-    trackedFields.forEach(k => { if (req.body[k] !== undefined) updates[k] = req.body[k]; });
-    // Prepare change entries
     const changeEntries = [];
+
+    // If a raw `due_date` was supplied (ISO string), create or update the DueDate row
+    if (req.body.due_date !== undefined && req.body.due_date !== null && req.body.due_date !== '') {
+      try {
+        // load existing due row if present
+        let oldDue = null;
+        if (task.due_date_id) {
+          try { oldDue = await DueDate.findByPk(task.due_date_id); } catch (e) { oldDue = null; }
+        }
+        if (task.due_date_id) {
+          // update existing due row
+          try {
+            await DueDate.update({ due_date: req.body.due_date }, { where: { due_date_id: task.due_date_id } });
+            const oldVal = oldDue ? (oldDue.due_date ? String(oldDue.due_date) : null) : null;
+            const newVal = String(req.body.due_date);
+            if (oldVal !== newVal) changeEntries.push({ task_id: id, user_id: req.user.user_id, field: 'due_date', old_value: oldVal, new_value: newVal });
+          } catch (e) { console.warn('Could not update existing DueDate for task', id, e && e.message ? e.message : e); }
+        } else {
+          // create a new due row and set due_date_id on the task
+          try {
+            const dueRec = await DueDate.create({ task_id: id, due_date: req.body.due_date });
+            updates.due_date_id = dueRec.due_date_id;
+            changeEntries.push({ task_id: id, user_id: req.user.user_id, field: 'due_date', old_value: null, new_value: String(req.body.due_date) });
+          } catch (e) { console.warn('Could not create DueDate for task', id, e && e.message ? e.message : e); }
+        }
+      } catch (e) {
+        console.warn('due_date handling in updateTask failed', e && e.message ? e.message : e);
+      }
+    }
+
+    // Track simple scalar fields (these map directly to Task columns)
+    const trackedFields = ['title', 'description', 'project_id', 'priority_id', 'status_id', 'due_date_id', 'reminder_id'];
+    trackedFields.forEach(k => { if (req.body[k] !== undefined) updates[k] = req.body[k]; });
+
+    // Build changeEntries for any direct task column updates (exclude due_date which we handled above)
     for (const k of Object.keys(updates)) {
+      if (k === 'due_date_id') continue; // due_date changes already recorded above when creating/updating DueDate
       const oldVal = task[k] === undefined || task[k] === null ? null : String(task[k]);
       const newVal = updates[k] === undefined || updates[k] === null ? null : String(updates[k]);
       if (oldVal !== newVal) changeEntries.push({ task_id: id, user_id: req.user.user_id, field: k, old_value: oldVal, new_value: newVal });
     }
+
+    // Apply updates to the task row
     await task.update(updates);
-    // Save change entries
+    // Persist change entries
     try { for (const ce of changeEntries) await Changes.create(ce); } catch (e) { console.warn('Could not write change entries', e.message || e); }
       const updated = await Task.findByPk(id, { include: normalizeIncludes([User, Project, Priority, Status, DueDate, Reminder, { model: Attachment, as: 'Attachments' }]) });
     res.json(updated);

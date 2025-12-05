@@ -4,7 +4,16 @@ export const taskApi = {
   list: (params = '') => apiRequest(`tasks?${params}`, 'GET', null, true),
   get: (id) => apiRequest(`tasks/${id}`, 'GET', null, true),
   changes: (id) => apiRequest(`tasks/${id}/changes`, 'GET', null, true),
-  create: (payload) => apiRequest('tasks', 'POST', payload, true),
+  create: async (payload) => {
+    const res = await apiRequest('tasks', 'POST', payload, true);
+    try {
+      const key = 'task:created';
+      const payloadBroadcast = JSON.stringify({ task_id: res && res.task_id ? res.task_id : null, ts: Date.now() });
+      localStorage.setItem(key, payloadBroadcast);
+      setTimeout(() => { try { localStorage.removeItem(key); } catch (e) {} }, 200);
+    } catch (e) { /* ignore */ }
+    return res;
+  },
   update: (id, payload) => apiRequest(`tasks/${id}`, 'PUT', payload, true),
   delete: (id) => apiRequest(`tasks/${id}`, 'DELETE', null, true),
   // for calendar:

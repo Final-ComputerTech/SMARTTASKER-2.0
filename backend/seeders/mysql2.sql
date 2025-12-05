@@ -229,3 +229,36 @@ JOIN project p ON p.project_id = c.project_id
 SET c.role = 'manager'
 WHERE p.owner_id IS NOT NULL AND p.owner_id = c.user_id;
 
+SELECT t.task_id, t.title, d.date, s.name
+FROM Task t
+LEFT JOIN Due_Date d ON t.due_date_id = d.due_date_id
+LEFT JOIN Status s ON t.status_id = s.status_id
+WHERE d.date IS NOT NULL
+  AND d.date < NOW()
+  AND (s.name IS NULL OR LOWER(s.name) NOT IN ('done','completed'))
+ORDER BY d.date;
+
+
+-- 13. Bảng Notifications (optional seed for UI)
+CREATE TABLE IF NOT EXISTS `notifications` (
+    notification_id CHAR(36) PRIMARY KEY,
+    user_id CHAR(36) NULL,
+    title VARCHAR(255) NULL,
+    message VARCHAR(255) NULL,
+    description TEXT NULL,
+    `type` VARCHAR(100) NULL,
+    severity VARCHAR(50) NULL,
+    is_read TINYINT(1) NOT NULL DEFAULT 0,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Insert a sample notification
+INSERT INTO `notifications` (notification_id, user_id, title, message, description, `type`, severity, is_read)
+VALUES (UUID(), (SELECT user_id FROM User LIMIT 1), 'Welcome to SmartTasker', 'Your account is ready', 'Welcome! This is a sample notification.', 'info', 'info', 0);
+
+USE smarttasker_2_0;
+SHOW COLUMNS FROM notifications;
+SELECT COUNT(*) AS cnt FROM notifications;
+SELECT notification_id, title, message, is_read, created_at FROM notifications LIMIT 10;
+

@@ -1,0 +1,1253 @@
+[dotenv@17.2.3] injecting env (7) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[notificationController] module loaded
+[sequelize] Executing (default): SHOW TABLES
+[sequelize] Executing (default): SHOW COLUMNS FROM `attachments` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `attachments` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `attachments` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `attachments` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `attachments` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to attachments
+[sequelize] Executing (default): SHOW COLUMNS FROM `Auths` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Auths` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Auths` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Auths` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `Auths` ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to Auths
+[sequelize] Executing (default): SHOW COLUMNS FROM `changes` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `changes` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `changes` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `changes` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `changes` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to changes
+[sequelize] Executing (default): SHOW COLUMNS FROM `collaborators` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `collaborators` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `collaborators` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `collaborators` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `collaborators` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to collaborators
+[sequelize] Executing (default): SHOW COLUMNS FROM `columns_priv` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `columns_priv` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `columns_priv` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `columns_priv` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `component` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `component` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `component` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `component` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `conversations` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `conversations` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `conversations` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `conversations` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `conversations` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to conversations
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H1` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H1` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H1` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H1` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H2` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H2` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H2` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H2` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H3` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H3` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H3` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_H3` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_M1` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_M1` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_M1` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_M1` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_M2` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_M2` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_M2` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUST_M2` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUSTOMER` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUSTOMER` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUSTOMER` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `CUSTOMER` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `db` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `db` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `db` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `db` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `default_roles` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `default_roles` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `default_roles` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `default_roles` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `due_dates` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `due_dates` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `due_dates` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `due_dates` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `due_dates` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to due_dates
+[sequelize] Executing (default): SHOW COLUMNS FROM `EMP` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `EMP` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `EMP` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `EMP` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `EMPLOYEE` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `EMPLOYEE` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `EMPLOYEE` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `EMPLOYEE` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `engine_cost` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `engine_cost` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `engine_cost` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `engine_cost` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `func` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `func` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `func` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `func` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `general_log` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `general_log` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `general_log` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `general_log` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `global_grants` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `global_grants` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `global_grants` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `global_grants` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `gtid_executed` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `gtid_executed` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `gtid_executed` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `gtid_executed` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_category` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_category` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_category` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_category` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_keyword` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_keyword` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_keyword` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_keyword` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_relation` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_relation` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_relation` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_relation` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_topic` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_topic` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_topic` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `help_topic` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `innodb_index_stats` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `innodb_index_stats` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `innodb_index_stats` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `innodb_index_stats` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `innodb_index_stats` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+[sequelize] Executing (default): SHOW COLUMNS FROM `innodb_table_stats` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `innodb_table_stats` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `innodb_table_stats` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `innodb_table_stats` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `innodb_table_stats` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+[sequelize] Executing (default): SHOW COLUMNS FROM `INVOICE` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `INVOICE` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `INVOICE` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `INVOICE` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `LINE` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `LINE` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `LINE` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `LINE` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `ndb_binlog_index` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `ndb_binlog_index` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `ndb_binlog_index` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `ndb_binlog_index` LIKE 'updated_at'
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SHOW COLUMNS FROM `notifications` LIKE 'createdAt'
+    at ensureTimestampColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:103:48)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:184:5
+[sequelize] Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'createdAt'
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'createdAt'
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ensureTimestampColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:103:32)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:184:5
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SHOW COLUMNS FROM `notifications` LIKE 'updatedAt'
+    at ensureTimestampColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:104:48)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:184:5
+[sequelize] Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'updatedAt'
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'updatedAt'
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ensureTimestampColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:104:32)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:184:5
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SHOW COLUMNS FROM `notifications` LIKE 'created_at'
+    at ensureTimestampColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:105:49)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:184:5
+[sequelize] Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'created_at'
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'created_at'
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ensureTimestampColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:105:33)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:184:5
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SHOW COLUMNS FROM `notifications` LIKE 'updated_at'
+    at ensureTimestampColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:106:49)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:184:5
+[sequelize] Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'updated_at'
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'updated_at'
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ensureTimestampColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:106:33)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:184:5
+[sequelize] Executing (default): ALTER TABLE `notifications` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to notifications
+[sequelize] Executing (default): SHOW COLUMNS FROM `password_history` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `password_history` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `password_history` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `password_history` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `plugin` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `plugin` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `plugin` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `plugin` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `priorities` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `priorities` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `priorities` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `priorities` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `priorities` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to priorities
+[sequelize] Executing (default): SHOW COLUMNS FROM `procs_priv` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `procs_priv` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `procs_priv` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `procs_priv` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `PRODUCT` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `PRODUCT` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `PRODUCT` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `PRODUCT` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Projects` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Projects` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Projects` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Projects` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `Projects` ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to Projects
+[sequelize] Executing (default): SHOW COLUMNS FROM `proxies_priv` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `proxies_priv` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `proxies_priv` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `proxies_priv` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `reminders` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `reminders` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `reminders` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `reminders` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `reminders` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to reminders
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_asynchronous_connection_failover` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_asynchronous_connection_failover` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_asynchronous_connection_failover` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_asynchronous_connection_failover` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_asynchronous_connection_failover_managed` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_asynchronous_connection_failover_managed` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_asynchronous_connection_failover_managed` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_asynchronous_connection_failover_managed` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_group_configuration_version` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_group_configuration_version` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_group_configuration_version` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_group_configuration_version` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_group_member_actions` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_group_member_actions` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_group_member_actions` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `replication_group_member_actions` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `role_edges` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `role_edges` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `role_edges` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `role_edges` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `server_cost` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `server_cost` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `server_cost` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `server_cost` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `servers` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `servers` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `servers` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `servers` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_master_info` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_master_info` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_master_info` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_master_info` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_relay_log_info` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_relay_log_info` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_relay_log_info` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_relay_log_info` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_worker_info` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_worker_info` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_worker_info` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slave_worker_info` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slow_log` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slow_log` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slow_log` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `slow_log` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `statuses` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `statuses` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `statuses` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `statuses` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `statuses` ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to statuses
+[sequelize] Executing (default): SHOW COLUMNS FROM `tables_priv` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `tables_priv` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `tables_priv` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `tables_priv` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `TaskCollaborators` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `TaskCollaborators` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `TaskCollaborators` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `TaskCollaborators` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `TaskCollaborators` ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to TaskCollaborators
+[sequelize] Executing (default): SHOW COLUMNS FROM `Tasks` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Tasks` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Tasks` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Tasks` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `Tasks` ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to Tasks
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_leap_second` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_leap_second` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_leap_second` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_leap_second` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_name` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_name` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_name` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_name` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_transition` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_transition` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_transition` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_transition` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_transition_type` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_transition_type` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_transition_type` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `time_zone_transition_type` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `user` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `user` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `user` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `user` LIKE 'updated_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Users` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Users` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Users` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `Users` LIKE 'updated_at'
+[sequelize] Executing (default): ALTER TABLE `Users` ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+Added timestamp columns to Users
+[sequelize] Executing (default): SHOW COLUMNS FROM `VENDOR` LIKE 'createdAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `VENDOR` LIKE 'updatedAt'
+[sequelize] Executing (default): SHOW COLUMNS FROM `VENDOR` LIKE 'created_at'
+[sequelize] Executing (default): SHOW COLUMNS FROM `VENDOR` LIKE 'updated_at'
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SHOW COLUMNS FROM `notifications` LIKE 'type'
+    at ensureNotificationColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:140:36)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:185:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+[sequelize] Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'type'
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SHOW COLUMNS FROM `notifications` LIKE 'type'
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async ensureNotificationColumns (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:140:20)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:185:5
+[sequelize] Executing (default): SELECT `priority_id`, `label`, `level` FROM `priorities` AS `Priority`;
+[sequelize] Executing (default): SELECT `status_id`, `label` FROM `statuses` AS `Status`;
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Users' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `Users`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Users' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `name` `name` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `email` `email` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `avatar` `avatar` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `bio` `bio` TEXT;
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `gender` `gender` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `dob` `dob` DATE;
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `phone` `phone` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `address` `address` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `timezone` `timezone` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `Users` CHANGE `language` `language` VARCHAR(255);
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'Users' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'created_at') OR (TABLE_NAME = 'Users' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'created_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `Users` DROP `created_at`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'Users' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updated_at') OR (TABLE_NAME = 'Users' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updated_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `Users` DROP `updated_at`;
+[sequelize] Executing (default): SHOW INDEX FROM `Users`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Auths' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `Auths`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Auths' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Auths' AND constraint_name = 'auths_ibfk_1' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `Auths` DROP FOREIGN KEY `auths_ibfk_1`;
+[sequelize] Executing (default): ALTER TABLE `Auths` ADD FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+[sequelize] Executing (default): ALTER TABLE `Auths` CHANGE `password_hash` `password_hash` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Auths` CHANGE `role` `role` VARCHAR(255) DEFAULT 'member';
+[sequelize] Executing (default): ALTER TABLE `Auths` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Auths` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Auths` CHANGE `last_login` `last_login` DATETIME;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'Auths' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'created_at') OR (TABLE_NAME = 'Auths' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'created_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `Auths` DROP `created_at`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'Auths' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updated_at') OR (TABLE_NAME = 'Auths' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updated_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `Auths` DROP `updated_at`;
+[sequelize] Executing (default): SHOW INDEX FROM `Auths`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Projects' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `Projects`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Projects' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Projects` CHANGE `project_name` `project_name` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Projects` CHANGE `description` `description` TEXT;
+[sequelize] Executing (default): ALTER TABLE `Projects` CHANGE `category_id` `category_id` CHAR(36) BINARY;
+[sequelize] Executing (default): ALTER TABLE `Projects` CHANGE `owner_id` `owner_id` CHAR(36) BINARY;
+[sequelize] Executing (default): ALTER TABLE `Projects` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Projects` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'Projects' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'created_at') OR (TABLE_NAME = 'Projects' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'created_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `Projects` DROP `created_at`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'Projects' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updated_at') OR (TABLE_NAME = 'Projects' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updated_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `Projects` DROP `updated_at`;
+[sequelize] Executing (default): SHOW INDEX FROM `Projects`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'priorities' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `priorities`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'priorities' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `priorities` CHANGE `label` `label` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `priorities` CHANGE `level` `level` INTEGER NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'priorities' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'priorities' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `priorities` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'priorities' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'priorities' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `priorities` DROP `updatedAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'priorities' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'created_at') OR (TABLE_NAME = 'priorities' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'created_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `priorities` DROP `created_at`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'priorities' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updated_at') OR (TABLE_NAME = 'priorities' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updated_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `priorities` DROP `updated_at`;
+[sequelize] Executing (default): SHOW INDEX FROM `priorities`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'statuses' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `statuses`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'statuses' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `statuses` CHANGE `label` `label` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'statuses' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'statuses' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `statuses` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'statuses' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'statuses' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `statuses` DROP `updatedAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'statuses' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'created_at') OR (TABLE_NAME = 'statuses' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'created_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `statuses` DROP `created_at`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'statuses' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updated_at') OR (TABLE_NAME = 'statuses' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updated_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `statuses` DROP `updated_at`;
+[sequelize] Executing (default): SHOW INDEX FROM `statuses`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'due_dates' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `due_dates`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'due_dates' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `due_dates` CHANGE `task_id` `task_id` CHAR(36) BINARY NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `due_dates` CHANGE `due_date` `due_date` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `due_dates` CHANGE `created_at` `created_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `due_dates` CHANGE `updated_at` `updated_at` DATETIME NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'due_dates' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'due_dates' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `due_dates` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'due_dates' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'due_dates' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `due_dates` DROP `updatedAt`;
+[sequelize] Executing (default): SHOW INDEX FROM `due_dates`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'reminders' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `reminders`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'reminders' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `reminders` CHANGE `task_id` `task_id` CHAR(36) BINARY NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `reminders` CHANGE `reminder_at` `reminder_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `reminders` CHANGE `created_at` `created_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `reminders` CHANGE `updated_at` `updated_at` DATETIME NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'reminders' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'reminders' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `reminders` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'reminders' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'reminders' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `reminders` DROP `updatedAt`;
+[sequelize] Executing (default): SHOW INDEX FROM `reminders`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'Tasks' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `Tasks`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'Tasks' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Tasks` CHANGE `title` `title` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Tasks` CHANGE `description` `description` TEXT;
+[sequelize] Executing (default): ALTER TABLE `Tasks` CHANGE `attachment` `attachment` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `Tasks` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `Tasks` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Tasks' AND constraint_name = 'tasks_ibfk_907' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `Tasks` DROP FOREIGN KEY `tasks_ibfk_907`;
+[sequelize] Executing (default): ALTER TABLE `Tasks` ADD FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Tasks' AND constraint_name = 'tasks_ibfk_908' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `Tasks` DROP FOREIGN KEY `tasks_ibfk_908`;
+[sequelize] Executing (default): ALTER TABLE `Tasks` ADD FOREIGN KEY (`project_id`) REFERENCES `Projects` (`project_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Tasks' AND constraint_name = 'tasks_ibfk_909' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `Tasks` DROP FOREIGN KEY `tasks_ibfk_909`;
+[sequelize] Executing (default): ALTER TABLE `Tasks` ADD FOREIGN KEY (`priority_id`) REFERENCES `priorities` (`priority_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Tasks' AND constraint_name = 'tasks_ibfk_910' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `Tasks` DROP FOREIGN KEY `tasks_ibfk_910`;
+[sequelize] Executing (default): ALTER TABLE `Tasks` ADD FOREIGN KEY (`status_id`) REFERENCES `statuses` (`status_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Tasks' AND constraint_name = 'tasks_ibfk_911' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `Tasks` DROP FOREIGN KEY `tasks_ibfk_911`;
+[sequelize] Executing (default): ALTER TABLE `Tasks` ADD FOREIGN KEY (`due_date_id`) REFERENCES `due_dates` (`due_date_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='Tasks' AND constraint_name = 'tasks_ibfk_912' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `Tasks` DROP FOREIGN KEY `tasks_ibfk_912`;
+[sequelize] Executing (default): ALTER TABLE `Tasks` ADD FOREIGN KEY (`reminder_id`) REFERENCES `reminders` (`reminder_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'Tasks' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'created_at') OR (TABLE_NAME = 'Tasks' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'created_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `Tasks` DROP `created_at`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'Tasks' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updated_at') OR (TABLE_NAME = 'Tasks' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updated_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `Tasks` DROP `updated_at`;
+[sequelize] Executing (default): SHOW INDEX FROM `Tasks`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'attachments' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `attachments`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'attachments' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='attachments' AND constraint_name = 'attachments_ibfk_1' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `attachments` DROP FOREIGN KEY `attachments_ibfk_1`;
+[sequelize] Executing (default): ALTER TABLE `attachments` ADD FOREIGN KEY (`task_id`) REFERENCES `Tasks` (`task_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+[sequelize] Executing (default): ALTER TABLE `attachments` CHANGE `filename` `filename` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `attachments` CHANGE `filepath` `filepath` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `attachments` CHANGE `mime` `mime` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `attachments` CHANGE `size` `size` INTEGER;
+[sequelize] Executing (default): ALTER TABLE `attachments` CHANGE `uploaded_by` `uploaded_by` CHAR(36) BINARY;
+[sequelize] Executing (default): ALTER TABLE `attachments` CHANGE `created_at` `created_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `attachments` CHANGE `updated_at` `updated_at` DATETIME NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'attachments' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'attachments' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `attachments` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'attachments' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'attachments' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `attachments` DROP `updatedAt`;
+[sequelize] Executing (default): SHOW INDEX FROM `attachments`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'changes' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `changes`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'changes' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `changes` CHANGE `task_id` `task_id` CHAR(36) BINARY NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `changes` CHANGE `user_id` `user_id` CHAR(36) BINARY NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `changes` CHANGE `field` `field` VARCHAR(255) NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `changes` CHANGE `old_value` `old_value` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `changes` CHANGE `new_value` `new_value` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `changes` CHANGE `created_at` `created_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `changes` CHANGE `updated_at` `updated_at` DATETIME NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'changes' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'changes' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `changes` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'changes' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'changes' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `changes` DROP `updatedAt`;
+[sequelize] Executing (default): SHOW INDEX FROM `changes`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'notifications' AND TABLE_SCHEMA = 'mysql'
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SHOW FULL COLUMNS FROM `notifications`;
+    at MySQLQueryInterface.describeTable (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query-interface.js:166:41)
+    at Notification.sync (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/model.js:948:29)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Sequelize.sync (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:377:9)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:187:5
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `notifications`;
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SHOW FULL COLUMNS FROM `notifications`;
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async MySQLQueryInterface.describeTable (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query-interface.js:166:20)
+    at async Promise.all (index 0)
+    at async Notification.sync (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/model.js:947:26)
+    at async Sequelize.sync (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:377:9)
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'notifications' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='notifications' AND constraint_name = 'notifications_ibfk_255' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `notifications` DROP FOREIGN KEY `notifications_ibfk_255`;
+[sequelize] Executing (default): ALTER TABLE `notifications` ADD FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='notifications' AND constraint_name = 'notifications_ibfk_256' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `notifications` DROP FOREIGN KEY `notifications_ibfk_256`;
+[sequelize] Executing (default): ALTER TABLE `notifications` ADD FOREIGN KEY (`task_id`) REFERENCES `Tasks` (`task_id`) ON DELETE SET NULL ON UPDATE CASCADE;
+[sequelize] Executing (default): ALTER TABLE `notifications` CHANGE `message` `message` TEXT NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `notifications` CHANGE `created_at` `created_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `notifications` CHANGE `updated_at` `updated_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `notifications` CHANGE `title` `title` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `notifications` CHANGE `description` `description` TEXT;
+[sequelize] Executing (default): ALTER TABLE `notifications` CHANGE `type` `type` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `notifications` CHANGE `severity` `severity` VARCHAR(255);
+[sequelize] Executing (default): ALTER TABLE `notifications` CHANGE `is_read` `is_read` TINYINT(1) NOT NULL DEFAULT false;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'notifications' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'notifications' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `notifications` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'notifications' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'notifications' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `notifications` DROP `updatedAt`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SHOW INDEX FROM `notifications`
+    at MySQLQueryInterface.showIndex (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query-interface.js:254:33)
+    at Notification.sync (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/model.js:988:55)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Sequelize.sync (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:377:9)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:187:5
+[sequelize] Executing (default): SHOW INDEX FROM `notifications`
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SHOW INDEX FROM `notifications`
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async MySQLQueryInterface.showIndex (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query-interface.js:254:12)
+    at async Notification.sync (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/model.js:988:29)
+    at async Sequelize.sync (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:377:9)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/server.js:187:5
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'TaskCollaborators' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `TaskCollaborators`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'TaskCollaborators' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='TaskCollaborators' AND constraint_name = 'taskcollaborators_ibfk_1' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `TaskCollaborators` DROP FOREIGN KEY `taskcollaborators_ibfk_1`;
+[sequelize] Executing (default): ALTER TABLE `TaskCollaborators` ADD FOREIGN KEY (`task_id`) REFERENCES `Tasks` (`task_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+[sequelize] Executing (default): ALTER TABLE `TaskCollaborators` CHANGE `user_id` `user_id` CHAR(36) BINARY NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `TaskCollaborators` CHANGE `createdAt` `createdAt` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `TaskCollaborators` CHANGE `updatedAt` `updatedAt` DATETIME NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'TaskCollaborators' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'created_at') OR (TABLE_NAME = 'TaskCollaborators' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'created_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `TaskCollaborators` DROP `created_at`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'TaskCollaborators' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updated_at') OR (TABLE_NAME = 'TaskCollaborators' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updated_at' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `TaskCollaborators` DROP `updated_at`;
+[sequelize] Executing (default): SHOW INDEX FROM `TaskCollaborators`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'conversations' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `conversations`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'conversations' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `conversations` CHANGE `task_id` `task_id` CHAR(36) BINARY NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_CATALOG AS constraintCatalog, CONSTRAINT_NAME AS constraintName, CONSTRAINT_SCHEMA AS constraintSchema, CONSTRAINT_TYPE AS constraintType, TABLE_NAME AS tableName, TABLE_SCHEMA AS tableSchema from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE table_name='conversations' AND constraint_name = 'conversations_ibfk_1' AND TABLE_SCHEMA = 'mysql';
+[sequelize] Executing (default): ALTER TABLE `conversations` DROP FOREIGN KEY `conversations_ibfk_1`;
+[sequelize] Executing (default): ALTER TABLE `conversations` ADD FOREIGN KEY (`user_id`) REFERENCES `Users` (`user_id`) ON DELETE NO ACTION ON UPDATE CASCADE;
+[sequelize] Executing (default): ALTER TABLE `conversations` CHANGE `message` `message` TEXT NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `conversations` CHANGE `created_at` `created_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `conversations` CHANGE `updated_at` `updated_at` DATETIME NOT NULL;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'conversations' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'conversations' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `conversations` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'conversations' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'conversations' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `conversations` DROP `updatedAt`;
+[sequelize] Executing (default): SHOW INDEX FROM `conversations`
+[sequelize] Executing (default): SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_NAME = 'collaborators' AND TABLE_SCHEMA = 'mysql'
+[sequelize] Executing (default): SHOW FULL COLUMNS FROM `collaborators`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE where TABLE_NAME = 'collaborators' AND CONSTRAINT_NAME!='PRIMARY' AND CONSTRAINT_SCHEMA='mysql' AND REFERENCED_TABLE_NAME IS NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `collaborators` CHANGE `project_id` `project_id` CHAR(36) BINARY NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `collaborators` CHANGE `user_id` `user_id` CHAR(36) BINARY NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `collaborators` CHANGE `created_at` `created_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `collaborators` CHANGE `updated_at` `updated_at` DATETIME NOT NULL;
+[sequelize] Executing (default): ALTER TABLE `collaborators` CHANGE `role` `role` ENUM('member', 'manager') NOT NULL DEFAULT 'member';
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'collaborators' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'createdAt') OR (TABLE_NAME = 'collaborators' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'createdAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `collaborators` DROP `createdAt`;
+[sequelize] Executing (default): SELECT CONSTRAINT_NAME as constraint_name,CONSTRAINT_NAME as constraintName,CONSTRAINT_SCHEMA as constraintSchema,CONSTRAINT_SCHEMA as constraintCatalog,TABLE_NAME as tableName,TABLE_SCHEMA as tableSchema,TABLE_SCHEMA as tableCatalog,COLUMN_NAME as columnName,REFERENCED_TABLE_SCHEMA as referencedTableSchema,REFERENCED_TABLE_SCHEMA as referencedTableCatalog,REFERENCED_TABLE_NAME as referencedTableName,REFERENCED_COLUMN_NAME as referencedColumnName FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE (REFERENCED_TABLE_NAME = 'collaborators' AND REFERENCED_TABLE_SCHEMA = 'mysql' AND REFERENCED_COLUMN_NAME = 'updatedAt') OR (TABLE_NAME = 'collaborators' AND TABLE_SCHEMA = 'mysql' AND COLUMN_NAME = 'updatedAt' AND REFERENCED_TABLE_NAME IS NOT NULL)
+[sequelize] Executing (default): ALTER TABLE `collaborators` DROP `updatedAt`;
+[sequelize] Executing (default): SHOW INDEX FROM `collaborators`
+Database synced
+Server running on port 3000
+[sequelize] Executing (default): SELECT `reminder_id`, `task_id`, `reminder_at`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `reminders` AS `Reminder` WHERE `Reminder`.`reminder_at` BETWEEN '2025-12-05 00:23:00' AND '2025-12-05 00:25:00';
+[sequelize] Executing (default): SELECT `Task`.`task_id`, `Task`.`title`, `Task`.`description`, `Task`.`attachment`, `Task`.`createdAt`, `Task`.`updatedAt`, `Task`.`user_id`, `Task`.`project_id`, `Task`.`priority_id`, `Task`.`status_id`, `Task`.`due_date_id`, `Task`.`reminder_id`, `DueDate`.`due_date_id` AS `DueDate.due_date_id`, `DueDate`.`task_id` AS `DueDate.task_id`, `DueDate`.`due_date` AS `DueDate.due_date`, `DueDate`.`created_at` AS `DueDate.createdAt`, `DueDate`.`updated_at` AS `DueDate.updatedAt`, `User`.`user_id` AS `User.user_id`, `User`.`name` AS `User.name`, `User`.`email` AS `User.email`, `User`.`avatar` AS `User.avatar`, `User`.`bio` AS `User.bio`, `User`.`gender` AS `User.gender`, `User`.`dob` AS `User.dob`, `User`.`phone` AS `User.phone`, `User`.`address` AS `User.address`, `User`.`timezone` AS `User.timezone`, `User`.`language` AS `User.language`, `User`.`createdAt` AS `User.createdAt`, `User`.`updatedAt` AS `User.updatedAt`, `Reminder`.`reminder_id` AS `Reminder.reminder_id`, `Reminder`.`task_id` AS `Reminder.task_id`, `Reminder`.`reminder_at` AS `Reminder.reminder_at`, `Reminder`.`created_at` AS `Reminder.createdAt`, `Reminder`.`updated_at` AS `Reminder.updatedAt` FROM `Tasks` AS `Task` LEFT OUTER JOIN `due_dates` AS `DueDate` ON `Task`.`due_date_id` = `DueDate`.`due_date_id` LEFT OUTER JOIN `Users` AS `User` ON `Task`.`user_id` = `User`.`user_id` LEFT OUTER JOIN `reminders` AS `Reminder` ON `Task`.`reminder_id` = `Reminder`.`reminder_id`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:23:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+0 reminders processed at Fri Dec 05 2025 07:23:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[sequelize] Executing (default): SELECT `reminder_id`, `task_id`, `reminder_at`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `reminders` AS `Reminder` WHERE `Reminder`.`reminder_at` BETWEEN '2025-12-05 00:24:00' AND '2025-12-05 00:26:00';
+[sequelize] Executing (default): SELECT `Task`.`task_id`, `Task`.`title`, `Task`.`description`, `Task`.`attachment`, `Task`.`createdAt`, `Task`.`updatedAt`, `Task`.`user_id`, `Task`.`project_id`, `Task`.`priority_id`, `Task`.`status_id`, `Task`.`due_date_id`, `Task`.`reminder_id`, `DueDate`.`due_date_id` AS `DueDate.due_date_id`, `DueDate`.`task_id` AS `DueDate.task_id`, `DueDate`.`due_date` AS `DueDate.due_date`, `DueDate`.`created_at` AS `DueDate.createdAt`, `DueDate`.`updated_at` AS `DueDate.updatedAt`, `User`.`user_id` AS `User.user_id`, `User`.`name` AS `User.name`, `User`.`email` AS `User.email`, `User`.`avatar` AS `User.avatar`, `User`.`bio` AS `User.bio`, `User`.`gender` AS `User.gender`, `User`.`dob` AS `User.dob`, `User`.`phone` AS `User.phone`, `User`.`address` AS `User.address`, `User`.`timezone` AS `User.timezone`, `User`.`language` AS `User.language`, `User`.`createdAt` AS `User.createdAt`, `User`.`updatedAt` AS `User.updatedAt`, `Reminder`.`reminder_id` AS `Reminder.reminder_id`, `Reminder`.`task_id` AS `Reminder.task_id`, `Reminder`.`reminder_at` AS `Reminder.reminder_at`, `Reminder`.`created_at` AS `Reminder.createdAt`, `Reminder`.`updated_at` AS `Reminder.updatedAt` FROM `Tasks` AS `Task` LEFT OUTER JOIN `due_dates` AS `DueDate` ON `Task`.`due_date_id` = `DueDate`.`due_date_id` LEFT OUTER JOIN `Users` AS `User` ON `Task`.`user_id` = `User`.`user_id` LEFT OUTER JOIN `reminders` AS `Reminder` ON `Task`.`reminder_id` = `Reminder`.`reminder_id`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:24:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+0 reminders processed at Fri Dec 05 2025 07:24:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[sequelize] Executing (default): SELECT `reminder_id`, `task_id`, `reminder_at`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `reminders` AS `Reminder` WHERE `Reminder`.`reminder_at` BETWEEN '2025-12-05 00:25:00' AND '2025-12-05 00:27:00';
+[sequelize] Executing (default): SELECT `Task`.`task_id`, `Task`.`title`, `Task`.`description`, `Task`.`attachment`, `Task`.`createdAt`, `Task`.`updatedAt`, `Task`.`user_id`, `Task`.`project_id`, `Task`.`priority_id`, `Task`.`status_id`, `Task`.`due_date_id`, `Task`.`reminder_id`, `DueDate`.`due_date_id` AS `DueDate.due_date_id`, `DueDate`.`task_id` AS `DueDate.task_id`, `DueDate`.`due_date` AS `DueDate.due_date`, `DueDate`.`created_at` AS `DueDate.createdAt`, `DueDate`.`updated_at` AS `DueDate.updatedAt`, `User`.`user_id` AS `User.user_id`, `User`.`name` AS `User.name`, `User`.`email` AS `User.email`, `User`.`avatar` AS `User.avatar`, `User`.`bio` AS `User.bio`, `User`.`gender` AS `User.gender`, `User`.`dob` AS `User.dob`, `User`.`phone` AS `User.phone`, `User`.`address` AS `User.address`, `User`.`timezone` AS `User.timezone`, `User`.`language` AS `User.language`, `User`.`createdAt` AS `User.createdAt`, `User`.`updatedAt` AS `User.updatedAt`, `Reminder`.`reminder_id` AS `Reminder.reminder_id`, `Reminder`.`task_id` AS `Reminder.task_id`, `Reminder`.`reminder_at` AS `Reminder.reminder_at`, `Reminder`.`created_at` AS `Reminder.createdAt`, `Reminder`.`updated_at` AS `Reminder.updatedAt` FROM `Tasks` AS `Task` LEFT OUTER JOIN `due_dates` AS `DueDate` ON `Task`.`due_date_id` = `DueDate`.`due_date_id` LEFT OUTER JOIN `Users` AS `User` ON `Task`.`user_id` = `User`.`user_id` LEFT OUTER JOIN `reminders` AS `Reminder` ON `Task`.`reminder_id` = `Reminder`.`reminder_id`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:25:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+0 reminders processed at Fri Dec 05 2025 07:25:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[sequelize] Executing (default): SELECT `reminder_id`, `task_id`, `reminder_at`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `reminders` AS `Reminder` WHERE `Reminder`.`reminder_at` BETWEEN '2025-12-05 00:26:00' AND '2025-12-05 00:28:00';
+[sequelize] Executing (default): SELECT `Task`.`task_id`, `Task`.`title`, `Task`.`description`, `Task`.`attachment`, `Task`.`createdAt`, `Task`.`updatedAt`, `Task`.`user_id`, `Task`.`project_id`, `Task`.`priority_id`, `Task`.`status_id`, `Task`.`due_date_id`, `Task`.`reminder_id`, `DueDate`.`due_date_id` AS `DueDate.due_date_id`, `DueDate`.`task_id` AS `DueDate.task_id`, `DueDate`.`due_date` AS `DueDate.due_date`, `DueDate`.`created_at` AS `DueDate.createdAt`, `DueDate`.`updated_at` AS `DueDate.updatedAt`, `User`.`user_id` AS `User.user_id`, `User`.`name` AS `User.name`, `User`.`email` AS `User.email`, `User`.`avatar` AS `User.avatar`, `User`.`bio` AS `User.bio`, `User`.`gender` AS `User.gender`, `User`.`dob` AS `User.dob`, `User`.`phone` AS `User.phone`, `User`.`address` AS `User.address`, `User`.`timezone` AS `User.timezone`, `User`.`language` AS `User.language`, `User`.`createdAt` AS `User.createdAt`, `User`.`updatedAt` AS `User.updatedAt`, `Reminder`.`reminder_id` AS `Reminder.reminder_id`, `Reminder`.`task_id` AS `Reminder.task_id`, `Reminder`.`reminder_at` AS `Reminder.reminder_at`, `Reminder`.`created_at` AS `Reminder.createdAt`, `Reminder`.`updated_at` AS `Reminder.updatedAt` FROM `Tasks` AS `Task` LEFT OUTER JOIN `due_dates` AS `DueDate` ON `Task`.`due_date_id` = `DueDate`.`due_date_id` LEFT OUTER JOIN `Users` AS `User` ON `Task`.`user_id` = `User`.`user_id` LEFT OUTER JOIN `reminders` AS `Reminder` ON `Task`.`reminder_id` = `Reminder`.`reminder_id`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:26:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+0 reminders processed at Fri Dec 05 2025 07:26:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[sequelize] Executing (default): SELECT `reminder_id`, `task_id`, `reminder_at`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `reminders` AS `Reminder` WHERE `Reminder`.`reminder_at` BETWEEN '2025-12-05 00:27:00' AND '2025-12-05 00:29:00';
+[sequelize] Executing (default): SELECT `Task`.`task_id`, `Task`.`title`, `Task`.`description`, `Task`.`attachment`, `Task`.`createdAt`, `Task`.`updatedAt`, `Task`.`user_id`, `Task`.`project_id`, `Task`.`priority_id`, `Task`.`status_id`, `Task`.`due_date_id`, `Task`.`reminder_id`, `DueDate`.`due_date_id` AS `DueDate.due_date_id`, `DueDate`.`task_id` AS `DueDate.task_id`, `DueDate`.`due_date` AS `DueDate.due_date`, `DueDate`.`created_at` AS `DueDate.createdAt`, `DueDate`.`updated_at` AS `DueDate.updatedAt`, `User`.`user_id` AS `User.user_id`, `User`.`name` AS `User.name`, `User`.`email` AS `User.email`, `User`.`avatar` AS `User.avatar`, `User`.`bio` AS `User.bio`, `User`.`gender` AS `User.gender`, `User`.`dob` AS `User.dob`, `User`.`phone` AS `User.phone`, `User`.`address` AS `User.address`, `User`.`timezone` AS `User.timezone`, `User`.`language` AS `User.language`, `User`.`createdAt` AS `User.createdAt`, `User`.`updatedAt` AS `User.updatedAt`, `Reminder`.`reminder_id` AS `Reminder.reminder_id`, `Reminder`.`task_id` AS `Reminder.task_id`, `Reminder`.`reminder_at` AS `Reminder.reminder_at`, `Reminder`.`created_at` AS `Reminder.createdAt`, `Reminder`.`updated_at` AS `Reminder.updatedAt` FROM `Tasks` AS `Task` LEFT OUTER JOIN `due_dates` AS `DueDate` ON `Task`.`due_date_id` = `DueDate`.`due_date_id` LEFT OUTER JOIN `Users` AS `User` ON `Task`.`user_id` = `User`.`user_id` LEFT OUTER JOIN `reminders` AS `Reminder` ON `Task`.`reminder_id` = `Reminder`.`reminder_id`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:27:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+0 reminders processed at Fri Dec 05 2025 07:27:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[sequelize] Executing (default): SELECT `reminder_id`, `task_id`, `reminder_at`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `reminders` AS `Reminder` WHERE `Reminder`.`reminder_at` BETWEEN '2025-12-05 00:28:00' AND '2025-12-05 00:30:00';
+[sequelize] Executing (default): SELECT `Task`.`task_id`, `Task`.`title`, `Task`.`description`, `Task`.`attachment`, `Task`.`createdAt`, `Task`.`updatedAt`, `Task`.`user_id`, `Task`.`project_id`, `Task`.`priority_id`, `Task`.`status_id`, `Task`.`due_date_id`, `Task`.`reminder_id`, `DueDate`.`due_date_id` AS `DueDate.due_date_id`, `DueDate`.`task_id` AS `DueDate.task_id`, `DueDate`.`due_date` AS `DueDate.due_date`, `DueDate`.`created_at` AS `DueDate.createdAt`, `DueDate`.`updated_at` AS `DueDate.updatedAt`, `User`.`user_id` AS `User.user_id`, `User`.`name` AS `User.name`, `User`.`email` AS `User.email`, `User`.`avatar` AS `User.avatar`, `User`.`bio` AS `User.bio`, `User`.`gender` AS `User.gender`, `User`.`dob` AS `User.dob`, `User`.`phone` AS `User.phone`, `User`.`address` AS `User.address`, `User`.`timezone` AS `User.timezone`, `User`.`language` AS `User.language`, `User`.`createdAt` AS `User.createdAt`, `User`.`updatedAt` AS `User.updatedAt`, `Reminder`.`reminder_id` AS `Reminder.reminder_id`, `Reminder`.`task_id` AS `Reminder.task_id`, `Reminder`.`reminder_at` AS `Reminder.reminder_at`, `Reminder`.`created_at` AS `Reminder.createdAt`, `Reminder`.`updated_at` AS `Reminder.updatedAt` FROM `Tasks` AS `Task` LEFT OUTER JOIN `due_dates` AS `DueDate` ON `Task`.`due_date_id` = `DueDate`.`due_date_id` LEFT OUTER JOIN `Users` AS `User` ON `Task`.`user_id` = `User`.`user_id` LEFT OUTER JOIN `reminders` AS `Reminder` ON `Task`.`reminder_id` = `Reminder`.`reminder_id`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:28:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+0 reminders processed at Fri Dec 05 2025 07:28:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[sequelize] Executing (default): SELECT `reminder_id`, `task_id`, `reminder_at`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `reminders` AS `Reminder` WHERE `Reminder`.`reminder_at` BETWEEN '2025-12-05 00:29:00' AND '2025-12-05 00:31:00';
+[sequelize] Executing (default): SELECT `Task`.`task_id`, `Task`.`title`, `Task`.`description`, `Task`.`attachment`, `Task`.`createdAt`, `Task`.`updatedAt`, `Task`.`user_id`, `Task`.`project_id`, `Task`.`priority_id`, `Task`.`status_id`, `Task`.`due_date_id`, `Task`.`reminder_id`, `DueDate`.`due_date_id` AS `DueDate.due_date_id`, `DueDate`.`task_id` AS `DueDate.task_id`, `DueDate`.`due_date` AS `DueDate.due_date`, `DueDate`.`created_at` AS `DueDate.createdAt`, `DueDate`.`updated_at` AS `DueDate.updatedAt`, `User`.`user_id` AS `User.user_id`, `User`.`name` AS `User.name`, `User`.`email` AS `User.email`, `User`.`avatar` AS `User.avatar`, `User`.`bio` AS `User.bio`, `User`.`gender` AS `User.gender`, `User`.`dob` AS `User.dob`, `User`.`phone` AS `User.phone`, `User`.`address` AS `User.address`, `User`.`timezone` AS `User.timezone`, `User`.`language` AS `User.language`, `User`.`createdAt` AS `User.createdAt`, `User`.`updatedAt` AS `User.updatedAt`, `Reminder`.`reminder_id` AS `Reminder.reminder_id`, `Reminder`.`task_id` AS `Reminder.task_id`, `Reminder`.`reminder_at` AS `Reminder.reminder_at`, `Reminder`.`created_at` AS `Reminder.createdAt`, `Reminder`.`updated_at` AS `Reminder.updatedAt` FROM `Tasks` AS `Task` LEFT OUTER JOIN `due_dates` AS `DueDate` ON `Task`.`due_date_id` = `DueDate`.`due_date_id` LEFT OUTER JOIN `Users` AS `User` ON `Task`.`user_id` = `User`.`user_id` LEFT OUTER JOIN `reminders` AS `Reminder` ON `Task`.`reminder_id` = `Reminder`.`reminder_id`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:29:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+0 reminders processed at Fri Dec 05 2025 07:29:00 GMT+0700 (Indochina Time) (reminders found: 0)
+[sequelize] Executing (default): SELECT `reminder_id`, `task_id`, `reminder_at`, `created_at` AS `createdAt`, `updated_at` AS `updatedAt` FROM `reminders` AS `Reminder` WHERE `Reminder`.`reminder_at` BETWEEN '2025-12-05 00:30:00' AND '2025-12-05 00:32:00';
+[sequelize] Executing (default): SELECT `Task`.`task_id`, `Task`.`title`, `Task`.`description`, `Task`.`attachment`, `Task`.`createdAt`, `Task`.`updatedAt`, `Task`.`user_id`, `Task`.`project_id`, `Task`.`priority_id`, `Task`.`status_id`, `Task`.`due_date_id`, `Task`.`reminder_id`, `DueDate`.`due_date_id` AS `DueDate.due_date_id`, `DueDate`.`task_id` AS `DueDate.task_id`, `DueDate`.`due_date` AS `DueDate.due_date`, `DueDate`.`created_at` AS `DueDate.createdAt`, `DueDate`.`updated_at` AS `DueDate.updatedAt`, `User`.`user_id` AS `User.user_id`, `User`.`name` AS `User.name`, `User`.`email` AS `User.email`, `User`.`avatar` AS `User.avatar`, `User`.`bio` AS `User.bio`, `User`.`gender` AS `User.gender`, `User`.`dob` AS `User.dob`, `User`.`phone` AS `User.phone`, `User`.`address` AS `User.address`, `User`.`timezone` AS `User.timezone`, `User`.`language` AS `User.language`, `User`.`createdAt` AS `User.createdAt`, `User`.`updatedAt` AS `User.updatedAt`, `Reminder`.`reminder_id` AS `Reminder.reminder_id`, `Reminder`.`task_id` AS `Reminder.task_id`, `Reminder`.`reminder_at` AS `Reminder.reminder_at`, `Reminder`.`created_at` AS `Reminder.createdAt`, `Reminder`.`updated_at` AS `Reminder.updatedAt` FROM `Tasks` AS `Task` LEFT OUTER JOIN `due_dates` AS `DueDate` ON `Task`.`due_date_id` = `DueDate`.`due_date_id` LEFT OUTER JOIN `Users` AS `User` ON `Task`.`user_id` = `User`.`user_id` LEFT OUTER JOIN `reminders` AS `Reminder` ON `Task`.`reminder_id` = `Reminder`.`reminder_id`;
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '8d4bf489-f880-475f-88c4-e326cdd2e8ec' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = '973cfa91-5ade-4d36-b5d2-360f1cfffb07' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'aab5670b-6dbf-4b18-9680-aaee32a0f9e9' AND type = 'nearing_due' AND user_id = '90345447-fbc2-4dd9-b2a6-c89bd23e18e3' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'overdue' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'bb0fc97a-82fc-4c42-af42-eacc6c08c32d' AND type = 'overdue' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:61:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize-query-monitor] about to run SQL touching notifications/read:
+SELECT 1 FROM notifications WHERE task_id = :taskId AND type = 'nearing_due' AND user_id = :userId AND created_at > :cutoff LIMIT 1
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:46
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+[sequelize] Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+[sequelize-notify-sql] captured notification SQL:
+Executing (default): SELECT 1 FROM notifications WHERE task_id = 'f93a8fa0-4c50-41bc-ae3c-5a5ba4e7ba1e' AND type = 'nearing_due' AND user_id = '313bccf2-c869-11f0-817f-0242ac120002' AND created_at > '2025-12-04 07:30:00' LIMIT 1
+    at Sequelize.log (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:552:15)
+    at Query._logQuery (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/abstract/query.js:268:22)
+    at Query.run (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/dialects/mysql/query.js:47:27)
+    at /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/sequelize/lib/sequelize.js:315:28
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async /Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/cron/notificationCron.js:89:30
+    at async Timeout._onTimeout (/Users/hoc/Documents/Ky_5/Computer_Technology/Final/SMARTTASKER-2.0/backend/node_modules/node-cron/dist/cjs/scheduler/runner.js:70:44)
+0 reminders processed at Fri Dec 05 2025 07:30:00 GMT+0700 (Indochina Time) (reminders found: 0)

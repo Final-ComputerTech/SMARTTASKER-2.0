@@ -7,7 +7,43 @@ async function loadComponent(id, url) {
     try {
       const resp = await fetch(url);
       const html = await resp.text();
-      el.innerHTML = html;
+
+      // Create a template to parse the fetched HTML so we can execute scripts (including nested ones)
+      const tpl = document.createElement('template');
+      tpl.innerHTML = html.trim();
+
+      // Find all script elements inside the parsed content (nested or top-level)
+      const scriptNodes = Array.from(tpl.content.querySelectorAll('script'));
+
+      // Remove scripts from the template so they don't get appended as inert nodes
+      scriptNodes.forEach(s => { if (s.parentNode) s.parentNode.removeChild(s); });
+
+      // Clear existing content and append parsed nodes (scripts removed)
+      el.innerHTML = '';
+      Array.from(tpl.content.childNodes).forEach(node => el.appendChild(node.cloneNode(true)));
+
+      // Execute scripts: recreate them so browser runs them
+      for (const s of scriptNodes) {
+        try {
+          const newScript = document.createElement('script');
+          // copy attributes (e.g., src, type)
+          for (const attr of Array.from(s.attributes || [])) newScript.setAttribute(attr.name, attr.value);
+          if (s.src) {
+            // external script — append and wait for load (best-effort)
+            await new Promise((resolve) => {
+              newScript.addEventListener('load', resolve);
+              newScript.addEventListener('error', resolve);
+              el.appendChild(newScript);
+            }).catch(()=>{});
+          } else {
+            // inline script: set textContent then append
+            newScript.textContent = s.textContent;
+            el.appendChild(newScript);
+          }
+        } catch (e) {
+          console.debug('componentLoader: script execution failed', e);
+        }
+      }
       // If we just loaded the header, try to set its title from page content
       try {
         if (id === 'header') {

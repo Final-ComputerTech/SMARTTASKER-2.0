@@ -13,6 +13,14 @@ function iconForNotification(n) {
   return '🔔';
 }
 
+function colorForSeverity(n) {
+  const sev = (n.severity || '').toString().toLowerCase();
+  if (sev === 'urgent' || sev === 'critical') return '#dc3545'; // red
+  if (sev === 'warning') return '#fd7e14'; // orange
+  if (sev === 'info') return '#0dcaf0'; // cyan
+  return '#6c757d'; // gray
+}
+
 function formatTimeAgo(dateStr) {
   const d = new Date(dateStr);
   const diff = Date.now() - d.getTime();
@@ -70,6 +78,8 @@ function renderNotifications(list) {
       const row = document.createElement('li');
       row.className = `list-group-item d-flex justify-content-between align-items-start ${n.read ? 'bg-white' : 'bg-light fw-bold'}`;
       const icon = iconForNotification(n);
+      const borderColor = colorForSeverity(n);
+      row.style.borderLeft = `4px solid ${borderColor}`;
       row.innerHTML = `
         <div class="me-2">${icon}</div>
         <div class="flex-grow-1">

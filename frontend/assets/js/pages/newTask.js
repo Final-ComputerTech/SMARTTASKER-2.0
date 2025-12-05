@@ -191,6 +191,14 @@ import { apiRequest } from '../utils/request.js';
       const created = await taskApi.create(payload);
       // dispatch event for other modules to react
       document.dispatchEvent(new CustomEvent('task:created', { detail: created }));
+      // Broadcast via localStorage so other tabs/windows can pick up the change
+      try {
+        const key = 'task:created';
+        const payloadBroadcast = JSON.stringify({ task_id: created && created.task_id ? created.task_id : null, ts: Date.now() });
+        localStorage.setItem(key, payloadBroadcast);
+        // remove shortly after so storage events fire but we don't retain stale state
+        setTimeout(() => { try { localStorage.removeItem(key); } catch (e) {} }, 200);
+      } catch (e) { /* ignore */ }
       closeModal();
       alert('Task created');
     } catch (err) {

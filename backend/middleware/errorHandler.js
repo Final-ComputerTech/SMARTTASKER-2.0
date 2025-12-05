@@ -22,12 +22,20 @@ const errorHandler = (err, req, res, next) => {
   err.message = err.message || 'Internal Server Error';
 
   // Log error
+  const extra = {};
+  try {
+    if (err.sql) extra.sql = err.sql;
+    if (err.sqlMessage) extra.sqlMessage = err.sqlMessage;
+    if (err.parent && err.parent.sql) extra.parentSql = err.parent.sql;
+    if (err.parent && err.parent.sqlMessage) extra.parentSqlMessage = err.parent.sqlMessage;
+  } catch (e) {}
   console.error(`[${new Date().toISOString()}] Error:`, {
     message: err.message,
     statusCode: err.statusCode,
     path: req.path,
     method: req.method,
-    stack: err.stack
+    stack: err.stack,
+    ...extra
   });
 
   // Validation Error

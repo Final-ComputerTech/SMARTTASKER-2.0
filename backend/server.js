@@ -72,30 +72,82 @@ app.use(notFoundHandler);
 // Global Error Handler (must come last)
 app.use(errorHandler);
 
+// Global process-level handlers to catch and log SQL errors not reaching express error middleware
+process.on('unhandledRejection', (reason, p) => {
+  try {
+    console.error('UnhandledRejection at:', p, 'reason:', reason && (reason.stack || reason));
+    if (reason && reason.sql) console.error('SQL:', reason.sql);
+    if (reason && reason.parent && reason.parent.sql) console.error('Parent SQL:', reason.parent.sql);
+  } catch (e) {}
+});
+process.on('uncaughtException', (err) => {
+  try {
+    console.error('UncaughtException:', err && (err.stack || err));
+    if (err && err.sql) console.error('SQL:', err.sql);
+    if (err && err.parent && err.parent.sql) console.error('Parent SQL:', err.parent.sql);
+  } catch (e) {}
+});
+
 const PORT = process.env.PORT || 3000;
 
 // Ensure timestamp columns exist with safe defaults to avoid MySQL strict-mode errors
 async function ensureTimestampColumns() {
-  const tables = ['Users', 'Auths', 'Tasks', 'Notifications'];
-  for (const table of tables) {
-    try {
-      const [rows] = await sequelize.query(`SHOW COLUMNS FROM \`${table}\` LIKE 'createdAt'`);
-      if (!rows || rows.length === 0) {
-        // Add createdAt and updatedAt with safe defaults
-        await sequelize.query(`ALTER TABLE \`${table}\` \
-          ADD COLUMN \`createdAt\` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP, \
-          ADD COLUMN \`updatedAt\` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP`);
-        console.log(`Added timestamp columns to ${table}`);
-      }
-    } catch (e) {
-      // If table doesn't exist yet, ignore error and continue
-      // Log unexpected errors for visibility
-      if (e && e.original && e.original.errno) {
-        // MySQL error - likely table missing; skip
-      } else {
-        console.warn(`Could not ensure timestamps for ${table}:`, e.message || e);
+  try {
+    // Get a list of existing tables in the connected database
+    const [tables] = await sequelize.query("SHOW TABLES");
+    const tableNames = tables.map(r => Object.values(r)[0]);
+
+    // For each existing table, ensure both camelCase and underscored timestamp columns exist
+    for (const table of tableNames) {
+      try {
+        const [hasCreatedAt] = await sequelize.query(`SHOW COLUMNS FROM \`${table}\` LIKE 'createdAt'`);
+        const [hasUpdatedAt] = await sequelize.query(`SHOW COLUMNS FROM \`${table}\` LIKE 'updatedAt'`);
+        const [hasCreated_at] = await sequelize.query(`SHOW COLUMNS FROM \`${table}\` LIKE 'created_at'`);
+        const [hasUpdated_at] = await sequelize.query(`SHOW COLUMNS FROM \`${table}\` LIKE 'updated_at'`);
+
+        const alters = [];
+        if (!hasCreatedAt || hasCreatedAt.length === 0) {
+          alters.push("ADD COLUMN `createdAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+        if (!hasUpdatedAt || hasUpdatedAt.length === 0) {
+          alters.push("ADD COLUMN `updatedAt` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
+        }
+        if (!hasCreated_at || hasCreated_at.length === 0) {
+          alters.push("ADD COLUMN `created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP");
+        }
+        if (!hasUpdated_at || hasUpdated_at.length === 0) {
+          alters.push("ADD COLUMN `updated_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP");
+        }
+
+        if (alters.length > 0) {
+          // Build a safe ALTER TABLE statement adding only missing columns
+          const stmt = `ALTER TABLE \`${table}\` ${alters.join(', ')}`;
+          await sequelize.query(stmt);
+          console.log(`Added timestamp columns to ${table}`);
+        }
+      } catch (e) {
+        // Best-effort only — if a table is a view or special, skip
       }
     }
+  } catch (e) {
+    console.warn('Could not read tables to ensure timestamps:', e.message || e);
+  }
+}
+
+// Ensure notifications table has optional classification columns
+async function ensureNotificationColumns() {
+  try {
+    const [rows] = await sequelize.query("SHOW COLUMNS FROM `notifications` LIKE 'type'");
+    if (!rows || rows.length === 0) {
+      await sequelize.query('ALTER TABLE `notifications` '
+        + 'ADD COLUMN `title` VARCHAR(255) NULL, '
+        + 'ADD COLUMN `description` TEXT NULL, '
+        + 'ADD COLUMN `type` VARCHAR(100) NULL, '
+        + 'ADD COLUMN `severity` VARCHAR(50) NULL');
+      console.log('Added notification classification columns to notifications');
+    }
+  } catch (e) {
+    // ignore if notifications table doesn't exist yet or other benign error
   }
 }
 
@@ -130,10 +182,19 @@ async function ensureCoreMeta() {
 (async () => {
   try {
     await ensureTimestampColumns();
+    await ensureNotificationColumns();
     await ensureCoreMeta();
     await sequelize.sync({ alter: true });
     console.log('Database synced');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+    const server = app.listen(PORT, () => {
+      try {
+        const addr = server.address();
+        // addr.address may be '::' for IPv6 or '0.0.0.0' when bound to all interfaces
+        console.log(`Server listening on ${addr.address || '0.0.0.0'}:${addr.port}`);
+      } catch (e) {
+        console.log(`Server running on port ${PORT}`);
+      }
+    });
   } catch (err) {
     console.error(err);
   }
