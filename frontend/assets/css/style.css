@@ -4,7 +4,11 @@ body.login-page {
   min-height: 100vh;
   margin: 0;
   font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg,#7fd7f2 0%, #47c6ed 40%, #071638 100%);
+  /* Use the provided background image with a subtle gradient overlay for readability */
+  background-image: linear-gradient(135deg, rgba(127,215,242,0.55), rgba(71,198,237,0.28) 40%, rgba(243, 244, 246, 0.55)), url('/assets/icons/background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: #0f172a;
   display: flex;
   align-items: stretch;
