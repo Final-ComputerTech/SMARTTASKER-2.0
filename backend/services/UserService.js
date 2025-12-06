@@ -128,6 +128,9 @@ module.exports = {
       if (actor.user_id === id) throw new Error('Forbidden');
     }
     // if no actor provided default to admin-like behavior (allow)
+    // Delete related notifications first to avoid FK constraint errors
+    const Notification = require('../models/Notification');
+    await Notification.destroy({ where: { user_id: id } });
     await Auth.destroy({ where: { user_id: id } });
     await user.destroy();
     await Changes.create({ task_id: null, user_id: id, field: 'deleted', old_value: null, new_value: 'true' });
