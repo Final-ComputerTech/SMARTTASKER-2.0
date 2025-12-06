@@ -65,6 +65,16 @@ cron.schedule('*/1 * * * *', async () => {
           if (!existsRows || existsRows.length === 0) {
             const title = `Overdue: ${task.title || 'Task'}`;
             await Notification.create({ user_id: userId, task_id: task.task_id, title, message: title, type: 'overdue', severity: 'urgent' });
+            // Send an email for overdue tasks (dev: skips if SMTP not configured)
+            try {
+              const to = task?.User?.email || process.env.NOTIFY_EMAIL || process.env.EMAIL_FROM;
+              const subject = title;
+              const html = `<p>Your task <strong>${(task && task.title) || ''}</strong> is overdue.</p><p>Please review it in SMARTTASKER.</p>`;
+              await notificationService.sendEmail(to, subject, html);
+              console.log(`Sent overdue email to ${to} for task ${task.task_id}`);
+            } catch (emailErr) {
+              console.warn('Failed to send overdue email', emailErr && (emailErr.message || emailErr));
+            }
           }
           continue;
         }
