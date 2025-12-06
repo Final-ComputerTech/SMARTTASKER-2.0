@@ -4,8 +4,10 @@ const projectController = require('../controllers/projectController');
 const { verifyToken } = require('../middleware/authMiddleware');
 const { createProjectRules, updateProjectRules } = require('../validators/projectValidator');
 
-// Public list of projects (used for client-side filters). Individual project details remain protected.
-router.get('/', projectController.getProjects);
+const { parseTokenOptional } = require('../middleware/authMiddleware');
+// Public list of projects (used for client-side filters). If the client sends a token,
+// `parseTokenOptional` will set `req.user` so the controller can return a filtered list.
+router.get('/', parseTokenOptional(), projectController.getProjects);
 router.get('/summary', verifyToken(), projectController.summary);
 // Allow any authenticated user to create a project; controller enforces owner assignment rules
 router.post('/', verifyToken(), createProjectRules, projectController.createProject);

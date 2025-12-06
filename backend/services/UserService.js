@@ -5,14 +5,20 @@ const bcrypt = require('bcrypt');
 const { Op } = require('sequelize');
 
 module.exports = {
-  async createUser({name,email,password,role}) {
+  async createUser({name,email,password,role}, actor = null) {
     const existing = await User.findOne({ where: { email } });
     if (existing) throw new Error("Email already exists");
+
+    // Managers cannot create admin/manager accounts
+    if (actor && actor.role === 'manager') {
+      if (role === 'admin' || role === 'manager') throw new Error('Forbidden');
+    }
 
     const user = await User.create({ name, email });
     // Hash password before storing in Auth
     const hashed = await bcrypt.hash(password, 10);
-    await Auth.create({ user_id: user.user_id, password_hash: hashed, role });
+    const assignedRole = role || 'member';
+    await Auth.create({ user_id: user.user_id, password_hash: hashed, role: assignedRole });
     return user.toPublicJSON();
   },
 
@@ -82,22 +88,41 @@ module.exports = {
   },
 
   async setRole(id, role) {
+    // actor: optional { user_id, role }
+    const actor = arguments.length > 2 ? arguments[2] : null;
     const auth = await Auth.findOne({ where: { user_id: id } });
     if (!auth) throw new Error('Auth record not found');
     const old = auth.role;
+    // Managers cannot change roles of admins or other managers, nor assign admin/manager roles
+    if (actor && actor.role === 'manager') {
+      if (old === 'admin' || old === 'manager') throw new Error('Forbidden');
+      if (role === 'admin' || role === 'manager') throw new Error('Forbidden');
+    }
     await auth.update({ role });
     await Changes.create({ task_id: null, user_id: id, field: 'role', old_value: old, new_value: role });
     return true;
   },
 
   async suspendUser(id) {
-    return this.setRole(id, 'suspended');
+    const actor = arguments.length > 1 ? arguments[1] : null;
+    // reuse setRole permission checks
+    return this.setRole(id, 'suspended', actor);
   },
 
   async deleteUser(id) {
-    // Permanently delete user and auth
+    // actor: optional { user_id, role }
+    const actor = arguments.length > 1 ? arguments[1] : null;
     const user = await User.findByPk(id);
     if (!user) throw new Error('User not found');
+    const auth = await Auth.findOne({ where: { user_id: id } });
+    const targetRole = auth ? auth.role : 'member';
+    // Only admin can delete admins or other managers. Managers may delete members only.
+    if (actor && actor.role === 'manager') {
+      if (targetRole === 'admin' || targetRole === 'manager') throw new Error('Forbidden');
+      // prevent manager deleting themselves
+      if (actor.user_id === id) throw new Error('Forbidden');
+    }
+    // if no actor provided default to admin-like behavior (allow)
     await Auth.destroy({ where: { user_id: id } });
     await user.destroy();
     await Changes.create({ task_id: null, user_id: id, field: 'deleted', old_value: null, new_value: 'true' });
@@ -105,17 +130,34 @@ module.exports = {
   },
 
   async getLogs(id, { limit = 50 } = {}) {
-    // Return changes rows where user_id is the actor
+    // actor: optional { user_id, role }
+    const actor = arguments.length > 2 ? arguments[2] : null;
+    const auth = await Auth.findOne({ where: { user_id: id } });
+    const targetRole = auth ? auth.role : 'member';
+    // Managers cannot view logs for admins or other managers
+    if (actor && actor.role === 'manager') {
+      if (targetRole === 'admin' || targetRole === 'manager') throw new Error('Forbidden');
+    }
     const logs = await Changes.findAll({ where: { user_id: id }, limit, order: [['createdAt','DESC']] });
     return logs;
   },
 
   async updateUser(id, {name,email,role}) {
+    // actor: optional third argument
+    const actor = arguments.length > 2 ? arguments[2] : null;
     const user = await User.findByPk(id);
     if(!user) throw new Error("User not found");
+    const auth = await Auth.findOne({ where: { user_id:id } });
+    const currentRole = auth ? auth.role : 'member';
+    // Managers cannot edit admins or other managers
+    if (actor && actor.role === 'manager') {
+      if (currentRole === 'admin' || currentRole === 'manager') throw new Error('Forbidden');
+      // also prevent manager from changing role to admin/manager
+      if (role === 'admin' || role === 'manager') throw new Error('Forbidden');
+    }
     await user.update({ name, email });
     if(role){
-      const auth = await Auth.findOne({ where: { user_id:id } });
+      if (!auth) throw new Error('Auth record not found');
       await auth.update({ role });
     }
     return user.toPublicJSON();

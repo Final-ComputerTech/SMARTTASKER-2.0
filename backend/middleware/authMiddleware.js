@@ -29,3 +29,26 @@ exports.verifyToken = (roles = []) => {
     }
   };
 };
+
+// Parse token if present but do not reject when missing/invalid.
+exports.parseTokenOptional = () => {
+  return (req, res, next) => {
+    const raw = req.headers['authorization'];
+    if (!raw) return next();
+    const token = raw.split(' ')[1];
+    if (!token) return next();
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.user = decoded;
+      if (process.env.NODE_ENV !== 'production') {
+        try { console.log('[auth] parseTokenOptional decoded:', decoded); } catch (e) {}
+      }
+    } catch (err) {
+      // don't reject; just continue without req.user
+      if (process.env.NODE_ENV !== 'production') {
+        try { console.log('[auth] parseTokenOptional invalid token:', err && err.message); } catch (e) {}
+      }
+    }
+    next();
+  };
+};

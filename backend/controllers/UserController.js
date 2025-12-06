@@ -3,9 +3,13 @@ const userService = require('../services/UserService.js');
 module.exports = {
   create: async (req,res) => {
     try{
-      const user = await userService.createUser(req.body);
+      // Pass the actor so service can enforce manager restrictions
+      const user = await userService.createUser(req.body, req.user);
       res.status(201).json({ message:"User created", user });
-    }catch(err){ res.status(400).json({ error: err.message }); }
+    }catch(err){
+      if (err && err.message === 'Forbidden') return res.status(403).json({ error: err.message });
+      res.status(400).json({ error: err.message });
+    }
   },
 
   getAll: async (req,res) => {
@@ -26,9 +30,12 @@ module.exports = {
 
   update: async (req,res) => {
     try{
-      const user = await userService.updateUser(req.params.id, req.body);
+      const user = await userService.updateUser(req.params.id, req.body, req.user);
       res.json({ message: 'User updated', user });
-    }catch(err){ res.status(400).json({ error: err.message }); }
+    }catch(err){
+      if (err && err.message === 'Forbidden') return res.status(403).json({ error: err.message });
+      res.status(400).json({ error: err.message });
+    }
   },
 
   resetPassword: async (req,res) => {
@@ -42,28 +49,42 @@ module.exports = {
   setRole: async (req,res) => {
     try{
       const { role } = req.body;
-      await userService.setRole(req.params.id, role);
+      await userService.setRole(req.params.id, role, req.user);
       res.json({ message: 'Role updated' });
-    }catch(err){ res.status(400).json({ error: err.message }); }
+    }catch(err){
+      if (err && err.message === 'Forbidden') return res.status(403).json({ error: err.message });
+      res.status(400).json({ error: err.message });
+    }
   },
 
   suspend: async (req,res) => {
     try{
-      await userService.suspendUser(req.params.id);
+      await userService.suspendUser(req.params.id, req.user);
       res.json({ message: 'User suspended' });
-    }catch(err){ res.status(400).json({ error: err.message }); }
+    }catch(err){
+      if (err && err.message === 'Forbidden') return res.status(403).json({ error: err.message });
+      res.status(400).json({ error: err.message });
+    }
   },
 
   remove: async (req,res) => {
     try{
-      await userService.deleteUser(req.params.id);
+      await userService.deleteUser(req.params.id, req.user);
       res.json({ message: 'User deleted' });
-    }catch(err){ res.status(400).json({ error: err.message }); }
+    }catch(err){
+      if (err && err.message === 'Forbidden') return res.status(403).json({ error: err.message });
+      res.status(400).json({ error: err.message });
+    }
   },
 
   logs: async (req,res) => {
-    const logs = await userService.getLogs(req.params.id, req.query);
-    res.json(logs);
+    try{
+      const logs = await userService.getLogs(req.params.id, req.query, req.user);
+      res.json(logs);
+    }catch(err){
+      if (err && err.message === 'Forbidden') return res.status(403).json({ error: err.message });
+      res.status(400).json({ error: err.message });
+    }
   }
   ,
   generateTemp: async (req,res) => {
