@@ -18,12 +18,17 @@ module.exports = {
     try{
       const user = await userService.getUserById(req.params.id);
       res.json(user);
-
-  }
-  ,
+    } catch (err) { res.status(404).json({ error: err.message }); } },
   stats: async (req,res) => {
     const stats = await userService.getStats();
     res.json(stats);
+  },
+
+  update: async (req,res) => {
+    try{
+      const user = await userService.updateUser(req.params.id, req.body);
+      res.json({ message: 'User updated', user });
+    }catch(err){ res.status(400).json({ error: err.message }); }
   },
 
   resetPassword: async (req,res) => {

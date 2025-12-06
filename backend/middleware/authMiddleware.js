@@ -2,6 +2,12 @@ const jwt = require('jsonwebtoken');
 
 exports.verifyToken = (roles = []) => {
   return (req, res, next) => {
+    // Dev-only: log the raw Authorization header to help debug missing/ malformed tokens
+    if (process.env.NODE_ENV !== 'production') {
+      try {
+        console.log('[auth] incoming Authorization header:', req.headers['authorization']);
+      } catch (e) { /* ignore logging errors */ }
+    }
     const token = req.headers['authorization']?.split(' ')[1];
     if (!token) return res.status(401).json({ error: 'No token provided' });
     try {

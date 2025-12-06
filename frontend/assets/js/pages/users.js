@@ -1,5 +1,5 @@
 import { userApi } from '../api/userApi.js';
-import { requireAuthRedirect } from '../utils/auth.js';
+import { requireAuthRedirect, getUserFromToken } from '../utils/auth.js';
 
 requireAuthRedirect();
 
@@ -148,7 +148,15 @@ function attachRowHandlers() {
 
 document.addEventListener('DOMContentLoaded', () => {
   loadUsers();
-  refreshStats();
+  // Only fetch admin stats if the logged-in user is an admin.
+  const me = getUserFromToken();
+  if (me && me.role === 'admin') {
+    refreshStats();
+  } else {
+    // hide the stats card for non-admins to avoid 403 calls
+    const statsEl = document.getElementById('userStats');
+    if (statsEl) statsEl.style.display = 'none';
+  }
   const form = document.getElementById('createUserForm');
   form.addEventListener('submit', async (e) => {
     e.preventDefault();

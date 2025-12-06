@@ -12,19 +12,19 @@ const metaCache = { priorities: null, statuses: null, projects: null };
 async function ensureMetaCache() {
   try {
     if (!metaCache.priorities) {
-      const p = await apiRequest('meta/priorities', 'GET');
+      const p = await apiRequest('meta/priorities', 'GET', null, false);
       metaCache.priorities = Array.isArray(p) ? p : (p.data || p || []);
     }
   } catch (e) { metaCache.priorities = []; console.warn('Could not load priorities for mapping', e); }
   try {
     if (!metaCache.statuses) {
-      const s = await apiRequest('meta/statuses', 'GET');
+      const s = await apiRequest('meta/statuses', 'GET', null, false);
       metaCache.statuses = Array.isArray(s) ? s : (s.data || s || []);
     }
   } catch (e) { metaCache.statuses = []; console.warn('Could not load statuses for mapping', e); }
   try {
     if (!metaCache.projects) {
-      const pr = await apiRequest('projects', 'GET');
+      const pr = await apiRequest('projects', 'GET', null, false);
       metaCache.projects = Array.isArray(pr) ? pr : (pr.data || pr || []);
     }
   } catch (e) { metaCache.projects = []; console.warn('Could not load projects for mapping', e); }
@@ -846,7 +846,7 @@ document.addEventListener('project:created', () => {
 async function loadFilterOptions() {
   try {
     // priorities/statuses via meta endpoints
-    const pri = await apiRequest('meta/priorities', 'GET');
+    const pri = await apiRequest('meta/priorities', 'GET', null, false);
     const priorities = Array.isArray(pri) ? pri : (pri.data || pri || []);
     const selP = document.getElementById('filterPriority');
     const bulkPr = document.getElementById('bulkPrioritySelect');
@@ -891,7 +891,7 @@ async function loadFilterOptions() {
     }
   } catch (e) { console.warn('Could not load filter priorities', e); }
   try {
-    const st = await apiRequest('meta/statuses', 'GET');
+    const st = await apiRequest('meta/statuses', 'GET', null, false);
     const statuses = Array.isArray(st) ? st : (st.data || st || []);
     const selS = document.getElementById('filterStatus');
     const bulkSt = document.getElementById('bulkStatusSelect');
@@ -936,7 +936,7 @@ async function loadFilterOptions() {
     }
   } catch (e) { console.warn('Could not load filter statuses', e); }
   try {
-    const pr = await apiRequest('projects', 'GET');
+    const pr = await apiRequest('projects', 'GET', null, false);
     const projects = Array.isArray(pr) ? pr : (pr.data || pr || []);
     // populate metaCache.projects so task rendering can lookup project names
     if (Array.isArray(projects) && projects.length) metaCache.projects = projects;

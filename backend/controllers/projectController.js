@@ -7,10 +7,16 @@ const perms = require('../utils/permissions');
 
 exports.getProjects = async (req, res) => {
   try {
-    // Admins see all projects
+    // If requester is not authenticated, return a minimal public list used for filters.
+    // Authenticated users receive richer results annotated with their permissions.
+    if (!req.user) {
+      const projects = await Project.findAll({ attributes: ['project_id', 'project_name'] });
+      return res.json((projects || []).map(p => p && p.toJSON ? p.toJSON() : p));
+    }
+
+    // Admins see all projects with manager-level visibility
     if (req.user && req.user.role === 'admin') {
       const projects = await Project.findAll();
-      // annotate admin view: admin has manager-level visibility
       const annotated = (projects || []).map(p => {
         const plain = p && p.toJSON ? p.toJSON() : p;
         plain.user_permission = 'manager';
@@ -18,9 +24,9 @@ exports.getProjects = async (req, res) => {
       });
       return res.json(annotated);
     }
+
     // Non-admins: return projects the user owns or where they're a collaborator
-    const userId = req.user ? req.user.user_id : null;
-    if (!userId) return res.status(401).json({ error: 'Unauthorized' });
+    const userId = req.user.user_id;
     const collRows = await Collaborator.findAll({ where: { user_id: userId } });
     const collProjectIds = (collRows || []).map(c => c.project_id).filter(Boolean);
     const projects = await Project.findAll({ where: { [Op.or]: [{ owner_id: userId }, { project_id: { [Op.in]: collProjectIds.length ? collProjectIds : ['__none__'] } }] } });
