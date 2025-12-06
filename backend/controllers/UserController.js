@@ -89,8 +89,11 @@ module.exports = {
   ,
   generateTemp: async (req,res) => {
     try{
-      const temp = await userService.generateTempPassword(req.params.id);
+      const temp = await userService.generateTempPassword(req.params.id, req.user);
       res.json({ temp });
-    }catch(err){ res.status(400).json({ error: err.message }); }
+    }catch(err){
+      if (err && err.message === 'Forbidden') return res.status(403).json({ error: err.message });
+      res.status(400).json({ error: err.message });
+    }
   }
 };

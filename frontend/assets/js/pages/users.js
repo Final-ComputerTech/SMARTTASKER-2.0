@@ -17,9 +17,12 @@ async function refreshStats() {
 }
 
 function buildActionButtons(u) {
+  const me = getUserFromToken();
+  const showTemp = me && me.role === 'admin';
   return `
     <button class="btn btn-sm btn-outline-primary btn-edit" data-id="${u.user_id}">Edit</button>
     <button class="btn btn-sm btn-outline-warning btn-suspend" data-id="${u.user_id}">Suspend</button>
+    ${showTemp ? `<button class="btn btn-sm btn-outline-secondary btn-temp" data-id="${u.user_id}">Temp PW</button>` : ''}
     <button class="btn btn-sm btn-outline-danger btn-delete" data-id="${u.user_id}">Delete</button>
     <button class="btn btn-sm btn-outline-dark btn-logs" data-id="${u.user_id}">Logs</button>
   `;
@@ -143,6 +146,22 @@ function attachRowHandlers() {
       const logs = await userApi.logs(id);
       alert('Logs:\n' + logs.map(l => `${l.field} @ ${l.createdAt}`).join('\n'));
     } catch (e) { alert('Could not load logs: ' + (e.message || e)); }
+  }));
+
+  // Temp password handler
+  document.querySelectorAll('.btn-temp').forEach(b => b.addEventListener('click', async (ev) => {
+    const id = ev.currentTarget.dataset.id;
+    if (!confirm('Generate a temporary password for this user?')) return;
+    try {
+      const res = await userApi.generateTemp(id);
+      const temp = res && res.temp ? res.temp : res;
+      try {
+        await navigator.clipboard.writeText(temp);
+        alert('Temporary password copied to clipboard:\n' + temp);
+      } catch (e) {
+        alert('Temporary password:\n' + temp + '\n(Clipboard copy failed)');
+      }
+    } catch (e) { alert('Temp password generation failed: ' + (e.message || e)); }
   }));
 }
 

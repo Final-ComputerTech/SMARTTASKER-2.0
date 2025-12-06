@@ -15,6 +15,7 @@ router.put('/:id', verifyToken(['admin','manager','member']), userController.upd
 // Keep delete and other destructive operations admin-only.
 router.post('/:id/role', verifyToken(['admin','manager']), userController.setRole);
 router.post('/:id/suspend', verifyToken(['admin','manager']), userController.suspend);
+// Only admins may generate temporary passwords.
 router.post('/:id/generate-temp', verifyToken(['admin']), userController.generateTemp);
 // Allow managers to delete non-admin/member users and view logs for members.
 router.delete('/:id', verifyToken(['admin','manager']), userController.remove);

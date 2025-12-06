@@ -76,9 +76,14 @@ module.exports = {
   },
 
   // Generate a temporary password, set it for the user, and return the plaintext once
-  async generateTempPassword(id) {
+  async generateTempPassword(id, actor = null) {
     const auth = await Auth.findOne({ where: { user_id: id } });
     if (!auth) throw new Error('Auth record not found');
+    const targetRole = auth.role || 'member';
+    // Managers are not allowed to generate temp passwords for admins or other managers
+    if (actor && actor.role === 'manager') {
+      if (targetRole === 'admin' || targetRole === 'manager') throw new Error('Forbidden');
+    }
     // generate a reasonably strong temporary password
     const temp = Math.random().toString(36).slice(-10) + Math.random().toString(36).toUpperCase().slice(-2);
     const hashed = await bcrypt.hash(temp, 10);
